@@ -8,7 +8,7 @@ using System.Data.Entity;
 
 namespace InstutiteOfFineArt.Core.Model
 {
-    class InstutiteFineArtDbContext : IdentityDbContext<User>
+    public class InstutiteFineArtDbContext : IdentityDbContext<User>
     {
         public InstutiteFineArtDbContext()
            : base("DefaultConnection", throwIfV1Schema: false)
