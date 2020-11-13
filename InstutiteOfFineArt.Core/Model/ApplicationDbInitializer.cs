@@ -26,7 +26,7 @@ namespace InstutiteOfFineArt.Core.Model
             var roleManager = role.FindByName("Manager");
             if (roleManager == null)
             {
-                roleStaff = new IdentityRole("Manager");
+                roleManager = new IdentityRole("Manager");
                 role.Create(roleManager);
             }
             var roleAdministrator = role.FindByName("Administrator");
@@ -61,7 +61,7 @@ namespace InstutiteOfFineArt.Core.Model
                 user3 = new User { UserName = "kienadmin@example.com", Email = "kienadmin@example.com" };
                 userManager.Create(user3, password);
                 userManager.SetLockoutEnabled(user3.Id, false);
-                userManager.AddToRole(user3.Id, roleStaff.Name);
+                userManager.AddToRole(user3.Id, roleAdministrator.Name);
             }
             var user4 = userManager.FindByName("kienmanager@example.com");
             if (user4 == null)
@@ -69,17 +69,71 @@ namespace InstutiteOfFineArt.Core.Model
                 user4 = new User { UserName = "kienmanager@example.com", Email = "kienmanager@example.com" };
                 userManager.Create(user4, password);
                 userManager.SetLockoutEnabled(user4.Id, false);
-                userManager.AddToRole(user4.Id, roleStaff.Name);
+                userManager.AddToRole(user4.Id, roleManager.Name);
             }
 
 
-            Competition competition = new Competition() { Name = "Instutite Fine Art", StartDate = new DateTime(2020, 11, 02), EndDate = new DateTime(2020, 12, 04) };
-
-            Post post = new Post() { 
-            
-                
+            Competition competition = new Competition()
+            {
+                Name = "Instutite Fine Art",
+                StartDate = new DateTime(2020, 11, 02),
+                EndDate = new DateTime(2020, 12, 04),
+                Posts = new List<Post>
+                {
+                    new Post
+                    {
+                        Title = "C# is a simple & powerful object-oriented programming language developed by Microsoft.",
+                        PostContent = "C# is a simple & powerful object-oriented programming language developed by Microsoft. C# can be used to create various types of applications, such as web, windows, console applications, or other types of applications using Visual studio.",
+                        Published = true,
+                        CreatedTime = DateTime.Now,
+                        UpdatedTime = DateTime.Now,
+                        User= user,
+                        Mark=4,
+                        Price=1000,
+                        PriceCustomer=800,
+                        IsSold=true,
+                        IsPaid=true
+                    },
+                    new Post
+                    {
+                        Title = "ASP.NET is a free web framework for building websites and web applications on .NET Framework using HTML, CSS, and JavaScript.",
+                        PostContent = "ASP.NET MVC 5 is a web framework based on Mode-View-Controller (MVC) architecture. Developers can build dynamic web applications using ASP.NET MVC framework that enables a clean separation of concerns, fast development, and TDD friendly.",
+                        Published = true,
+                        CreatedTime = DateTime.Now,
+                        UpdatedTime = DateTime.Now,
+                        User= user,
+                        Mark=3,
+                        Price=500,
+                        PriceCustomer=500,
+                        IsSold=true,
+                        IsPaid=true
+                    }
+                }
             };
-
+            Awards awards = new Awards
+            {
+                Name = "Awards Instutite Fine Art ",
+                Ranking = 1,
+                Posts = competition.Posts,
+                Competition = competition
+            };
+            UserClass userClass = new UserClass
+            {
+                Name = "MVC"
+            };
+            UserClass userClass2 = new UserClass
+            {
+                Name = "Painting"
+            };
+            UserClass userClass3 = new UserClass
+            {
+                Name = "C#"
+            };
+            user.UserClass = userClass;
+            user2.UserClass = userClass;
+            user3.UserClass = userClass2;
+            user4.UserClass = userClass3;
+            user.Posts = competition.Posts;
             InitializeIdentityForEF(context);
             context.SaveChanges();
             base.Seed(context);

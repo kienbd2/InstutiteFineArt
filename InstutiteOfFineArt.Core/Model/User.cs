@@ -11,6 +11,8 @@ namespace InstutiteOfFineArt.Core.Model
 {
     public class User : IdentityUser
     {
+        public virtual IList<Post> Posts { get; set; }
+        public virtual UserClass UserClass { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType

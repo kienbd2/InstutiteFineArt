@@ -39,13 +39,13 @@ namespace InstutiteOfFineArt.Core.Model
         //[UIHint("_DisplayDatetime")]
 
         public DateTime UpdatedTime { get; set; }
+        public virtual User User { get; set; }
 
-
-        public int Mark { get; set; }
+        public decimal Mark { get; set; }
         public decimal Price { get; set; }
         public decimal PriceCustomer { get; set; }
 
-        public bool IsSpain { get; set; }
+        public bool IsPaid { get; set; }
         public bool IsSold { get; set; }
     }
 }
