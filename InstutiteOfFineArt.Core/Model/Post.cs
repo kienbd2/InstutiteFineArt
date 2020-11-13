@@ -35,13 +35,17 @@ namespace InstutiteOfFineArt.Core.Model
         [Display(Name = "Posted On")]
         //[DataType(DataType.Date)]
         //[DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime PostedOn { get; set; }
+        public DateTime CreatedTime { get; set; }
         //[UIHint("_DisplayDatetime")]
 
-        public DateTime? Modified { get; set; }
+        public DateTime UpdatedTime { get; set; }
 
 
-        public int? RateCount { get; set; }
-        public int? TotalRate { get; set; }
+        public int Mark { get; set; }
+        public decimal Price { get; set; }
+        public decimal PriceCustomer { get; set; }
+
+        public bool IsSpain { get; set; }
+        public bool IsSold { get; set; }
     }
 }
