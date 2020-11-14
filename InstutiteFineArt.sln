@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstutiteFineArt", "Instuti
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstutiteOfFineArt.Core", "InstutiteOfFineArt.Core\InstutiteOfFineArt.Core.csproj", "{00B15434-2461-4658-BACB-0DEF2B36ABA5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstutiteOfFineArt.DAL", "InstutiteOfFineArt.DAL\InstutiteOfFineArt.DAL.csproj", "{BCFFDD1A-058F-44FD-A09F-15BD905CF433}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{00B15434-2461-4658-BACB-0DEF2B36ABA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{00B15434-2461-4658-BACB-0DEF2B36ABA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{00B15434-2461-4658-BACB-0DEF2B36ABA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCFFDD1A-058F-44FD-A09F-15BD905CF433}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCFFDD1A-058F-44FD-A09F-15BD905CF433}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCFFDD1A-058F-44FD-A09F-15BD905CF433}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCFFDD1A-058F-44FD-A09F-15BD905CF433}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

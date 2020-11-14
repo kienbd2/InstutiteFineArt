@@ -12,6 +12,6 @@ namespace InstutiteOfFineArt.Core.Model
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
-        public virtual User User { get; set; }
+        public virtual IList<User> Users { get; set; }
     }
 }

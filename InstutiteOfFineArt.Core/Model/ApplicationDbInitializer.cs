@@ -30,7 +30,7 @@ namespace InstutiteOfFineArt.Core.Model
                 role.Create(roleManager);
             }
             var roleAdministrator = role.FindByName("Administrator");
-            if (role == null)
+            if (roleAdministrator == null)
             {
                 roleAdministrator = new IdentityRole("Administrator");
                 role.Create(roleAdministrator);
@@ -110,6 +110,7 @@ namespace InstutiteOfFineArt.Core.Model
                     }
                 }
             };
+            context.Competitions.Add(competition);
             Awards awards = new Awards
             {
                 Name = "Awards Instutite Fine Art ",
@@ -117,17 +118,30 @@ namespace InstutiteOfFineArt.Core.Model
                 Posts = competition.Posts,
                 Competition = competition
             };
+            context.Awards.Add(awards);
             UserClass userClass = new UserClass
             {
-                Name = "MVC"
+                Name = "MVC",
+                Users =new List<User>
+                {
+                    user,user2
+                }
             };
             UserClass userClass2 = new UserClass
             {
-                Name = "Painting"
+                Name = "Painting",
+                Users = new List<User>
+                {
+                    user3
+                }
             };
             UserClass userClass3 = new UserClass
             {
-                Name = "C#"
+                Name = "C#",
+                Users = new List<User>
+                {
+                    user4
+                }
             };
             user.UserClass = userClass;
             user2.UserClass = userClass;
