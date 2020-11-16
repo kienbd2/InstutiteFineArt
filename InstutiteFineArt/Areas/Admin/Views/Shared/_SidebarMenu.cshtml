@@ -1,0 +1,42 @@
+﻿ <!-- menu profile quick info -->
+<div class="profile clearfix">
+    <div class="profile_pic">
+        <img src="~/App_Themes/CMS/production/images/img.jpg" alt="..." class="img-circle profile_img">
+    </div>
+    <div class="profile_info">
+        <span>Xin Chào,</span>
+       
+    </div>
+</div>
+<!-- /menu profile quick info -->
+
+<br />
+
+<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+    <div class="menu_section">
+
+        <ul class="nav side-menu">
+            <li>
+                <a href="/Home/Index"><i class="fa fa-home"></i> Home</a>
+
+            </li>
+            <li>
+                <a><i class="fa fa-building-o"></i> Manager Paintings <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li>@Html.ActionLink("Paintings Created", "Index", "Post")</li>
+                    <li> @Html.ActionLink("Create Paintin", "Create", "Post")</li>
+                </ul>
+            </li>
+            <li>
+                <a><i class="fa fa-fire"></i> Chiến dịch khuyến mãi <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a href="CampaignsList.html">Các chiến dịch</a></li>
+                    <li><a href="AddCampaigns.html">Thêm mới chiến dịch</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+
+</div>
+

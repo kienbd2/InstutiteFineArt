@@ -1,0 +1,174 @@
+﻿@model InstutiteOfFineArt.Core.Model.Post
+@{
+    ViewBag.Title = "Create";
+}
+
+<link href="~/App_Themes/CMS/build/css/style.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" />
+<link href="~/App_Themes/Upload/css/fileinput.css" media="all" rel="stylesheet" type="text/css" />
+<link href="~/App_Themes/Upload/themes/explorer-fas/theme.css" media="all" rel="stylesheet" type="text/css" />
+<style type="text/css">
+    #map {
+        width: 100%;
+        height: 400px;
+    }
+
+
+    label.error {
+        color: red;
+    }
+</style>
+
+@if (TempData["message"] != null)
+{
+    if (TempData["message"] as string == "Create Success")
+    {
+        <p class="alert alert-success">@TempData["message"]</p>
+    }
+    else
+    {
+        <p class="alert alert-danger">@TempData["message"]</p>
+    }
+
+}
+<!-- page content -->
+
+<div class="">
+    <h3 style="text-align: center;">Vui lòng nhập thông tin căn hộ của bạn</h3>
+
+    <div class="row">
+        <!-- form input mask -->
+        <div class="col-md-12 col-sm-12  ">
+            <div class="x_panel">
+                <div class="x_title">
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <form class="" action="" id="data" method="post" enctype="multipart/form-data">
+                        <fieldset>
+                            <div class="field item form-group">
+                                <label class="col-form-label col-md-2 col-sm-2  ">Tên căn hộ mới</label>
+                                <div class="col-md-9 col-sm-9">
+                                    <input class="form-control" data-validate-length-range="255" data-validate-words="2" name="name" id="name"
+                                           placeholder="Vui lòng nhập tên căn hộ mới." required />
+                                </div>
+                            </div>
+                            <div class="field item form-group">
+                                <label class="control-label col-md-2 col-sm-2">Chọn loại căn hộ</label>
+                                <div class="col-md-9 col-sm-9 ">
+                                    <select class="form-control" id="apartment_type" name="apartment_type">
+                                        <option value="1">Biệt thự</option>
+                                        <option value="2">Studio</option>
+                                        <option value="3">Chung cư</option>
+                                        <option value="4">Nhà riêng</option>
+                                        <option value="5">Home stay</option>
+                                        <option value="6">Khách sạn</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="field item form-group">
+                                <label class="col-form-label col-md-2 col-sm-2  ">Mô tả</label>
+                                <div class="col-md-9 col-sm-9">
+                                    @Html.TextAreaFor(m => m.PostContent, new { @class = "form-control", @id = "postContentId", @placeholder = "Mô tả căn hộ của bạn" })
+                                </div>
+                            </div>
+                           
+                            <div class="field item form-group">
+                                <label class="col-form-label col-md-2 col-sm-2 ">Images</label>
+                                <div class="col-md-9 col-sm-9">
+                                    <input id="file-1" type="file" name="file" multiple class="file" data-overwrite-initial="false" data-min-file-count="2" data-theme="fas">
+                                </div>
+                            </div>
+                          
+                            <div class="ln_solid">
+                                <div class="form-group">
+                                    <div class="col-md-6 offset-md-3">
+                                        <input type='submit' class="btn btn-primary" id="btnSave" value="Đăng phòng" />
+                                        @Html.ActionLink("Quay lại", "Index", null, new { @class = "btn btn-success" })
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- /form input mask -->
+
+    </div>
+</div><!-- /.docs-toggles -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+@section scripts{
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyAWX9wvYc5A0RwrT_pMQfV9uw_YxIela_0" type="text/javascript"></script>
+    <script>
+
+        $("#file-1").fileinput({
+            theme: 'fas',
+            uploadUrl: '#', // you must set a valid URL here else you will get an error
+            allowedFileExtensions: ['jpg', 'png', 'gif'],
+            overwriteInitial: false,
+            maxFileSize: 1000,
+            maxFilesNum: 10,
+            //allowedFileTypes: ['image', 'video', 'flash'],
+            slugCallback: function (filename) {
+                return filename.replace('(', '_').replace(']', '_');
+            }
+        });
+
+        $(".btn-warning").on('click', function () {
+            var $el = $("#file-4");
+            if ($el.attr('disabled')) {
+                $el.fileinput('enable');
+            } else {
+                $el.fileinput('disable');
+            }
+        });
+        $(".btn-info").on('click', function () {
+            $("#file-4").fileinput('refresh', { previewClass: 'bg-info' });
+        });
+
+        $(document).ready(function () {
+            $("#test-upload").fileinput({
+                'theme': 'fas',
+                'showPreview': false,
+                'allowedFileExtensions': ['jpg', 'png', 'gif'],
+                'elErrorContainer': '#errorBlock'
+            });
+            $("#kv-explorer").fileinput({
+                'theme': 'explorer-fas',
+                'uploadUrl': '#',
+                overwriteInitial: false,
+                initialPreviewAsData: true,
+                initialPreview: [
+                    "http://lorempixel.com/1920/1080/nature/1",
+                    "http://lorempixel.com/1920/1080/nature/2",
+                    "http://lorempixel.com/1920/1080/nature/3"
+                ],
+                initialPreviewConfig: [
+                    { caption: "nature-1.jpg", size: 329892, width: "120px", url: "{$url}", key: 1 },
+                    { caption: "nature-2.jpg", size: 872378, width: "120px", url: "{$url}", key: 2 },
+                    { caption: "nature-3.jpg", size: 632762, width: "120px", url: "{$url}", key: 3 }
+                ]
+            });
+            /*
+             $("#test-upload").on('fileloaded', function(event, file, previewId, index) {
+             alert('i = ' + index + ', id = ' + previewId + ', file = ' + file.name);
+             });
+             */
+        });
+    </script>
+
+    <script src="~/ckeditor/ckeditor.js"></script>
+
+    <script>
+
+        CKEDITOR.replace("postContentId");
+
+    </script>
+}
+
