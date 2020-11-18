@@ -17,11 +17,12 @@ namespace InstutiteFineArt.Areas.Admin.Controllers
             _postRepository = new PostRepository();
         }
         // GET: Admin/Post
+        [Authorize(Roles = "Student")]
         public ActionResult Index()
         {
             var userID = User.Identity.GetUserId();
-            var a = _postRepository.FindAll(filter:x=>x.User.Id==userID).ToList();
-            return View();
+            var lstPost = _postRepository.FindAll(filter:x=>x.User.Id==userID);
+            return View(lstPost);
         }
         public ActionResult Create()
         {

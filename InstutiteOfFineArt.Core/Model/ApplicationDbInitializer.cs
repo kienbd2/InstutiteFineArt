@@ -6,7 +6,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace InstutiteOfFineArt.Core.Model
 {
-    public class ApplicationDbInitializer : CreateDatabaseIfNotExists<InstutiteFineArtDbContext>
+    public class ApplicationDbInitializer : DropCreateDatabaseIfModelChanges<InstutiteFineArtDbContext>
     {
         protected override void Seed(InstutiteFineArtDbContext context)
         {

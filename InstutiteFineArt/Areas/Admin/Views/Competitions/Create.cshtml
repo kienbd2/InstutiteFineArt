@@ -1,0 +1,80 @@
+﻿@model InstutiteOfFineArt.Core.Model.Competition
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<div class="">
+    <h3 style="text-align: center;">Vui lòng nhập thông tin căn hộ của bạn</h3>
+
+    <div class="row">
+        <!-- form input mask -->
+        <div class="col-md-12 col-sm-12  ">
+            <div class="x_panel">
+                <div class="x_title">
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <form class="" action="" id="data" method="post" enctype="multipart/form-data">
+                        <fieldset>
+                            <div class="field item form-group">
+                                <label class="col-form-label col-md-2 col-sm-2  ">Tên căn hộ mới</label>
+                                <div class="col-md-9 col-sm-9">
+                                    <input class="form-control" data-validate-length-range="255" data-validate-words="2" name="name" id="name"
+                                           placeholder="Vui lòng nhập tên căn hộ mới." required />
+                                </div>
+                            </div>
+                            <div class="field item form-group">
+                                <label class="control-label col-md-2 col-sm-2">Chọn loại căn hộ</label>
+                                <div class="col-md-9 col-sm-9 ">
+                                    <select class="form-control" id="apartment_type" name="apartment_type">
+                                        <option value="1">Biệt thự</option>
+                                        <option value="2">Studio</option>
+                                        <option value="3">Chung cư</option>
+                                        <option value="4">Nhà riêng</option>
+                                        <option value="5">Home stay</option>
+                                        <option value="6">Khách sạn</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="field item form-group">
+                                <label class="col-form-label col-md-2 col-sm-2  ">Mô tả</label>
+                                <div class="col-md-9 col-sm-9">
+                                    @Html.TextAreaFor(m => m.Description, new { @class = "form-control", @id = "postContentId", @placeholder = "Mô tả căn hộ của bạn" })
+                                </div>
+                            </div>
+
+                            <div class="field item form-group">
+                                <label class="col-form-label col-md-2 col-sm-2 ">Images</label>
+                                <div class="col-md-9 col-sm-9">
+                                    @Html.EditorFor(m=>m.StartDate)
+                                </div>
+                            </div>
+
+                            <div class="ln_solid">
+                                <div class="form-group">
+                                    <div class="col-md-6 offset-md-3">
+                                        <input type='submit' class="btn btn-primary" id="btnSave" value="Đăng phòng" />
+                                        @Html.ActionLink("Quay lại", "Index", null, new { @class = "btn btn-success" })
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- /form input mask -->
+
+    </div>
+</div><!-- /.docs-toggles -->
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

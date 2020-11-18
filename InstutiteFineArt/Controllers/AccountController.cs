@@ -431,7 +431,7 @@ namespace IdentitySample.Controllers
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "Home", new { area = "Admin" });
+            return RedirectToAction("Index", "HomeAdmin", new { area = "Admin" });
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult
