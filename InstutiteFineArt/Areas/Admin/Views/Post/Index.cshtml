@@ -1,61 +1,65 @@
 ﻿
 @model IEnumerable<InstutiteOfFineArt.Core.Model.Post>
 @{var stt = 1;}
-    <div class="x_content">
+<div class="x_content">
 
-        <div class="clearfix"></div>
-        <h3 style="text-align: center;">List painings created</h3>
-        <div class="clearfix"></div>
-        <div class="row">
-            <div class="col-md-12 col-sm-12 ">
-                <div class="x_panel">
-                    <div class="x_content">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="card-box table-responsive">
+    <div class="clearfix"></div>
+    <h3 style="text-align: center;">List painings created</h3>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 ">
+            <div class="x_panel">
+                <div class="x_content">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card-box table-responsive">
 
-                                    <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
-                                        <thead>
+                                <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>STT</th>
+                                            <th>Title</th>
+                                            <th>Mark</th>
+                                            <th>Price</th>
+                                            <th>Price Customer</th>
+                                            <th>Paid</th>
+                                            <th>Sold</th>
+                                            <th>Created Time</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        @foreach (var item in Model)
+                                        {
                                             <tr>
-                                                <th>STT</th>
-                                                <th>Title</th>
-                                                <th>Mark</th>
-                                                <th>Price</th>
-                                                <th>Price Customer</th>
-                                                <th>Paid</th>
-                                                <th>Sold</th>
-                                                <th>Created Time</th>
+                                                <td>@(stt++)</td>
+                                                <td>@item.Title</td>
+                                                <td>@item.Mark</td>
+                                                <td>@item.Price</td>
+                                                <td>@item.PriceCustomer</td>
+                                                <td>@item.IsPaid</td>
+                                                <td>@item.IsSold</td>
+                                                <td>@item.CreatedTime.ToString("HH:mm dd/MM/yyyy")</td>
+                                                <td>
+                                                    @Html.ActionLink("Edit", "Edit", new { id = item.PostId }, new { @class = "btn btn-success btn-active" })
+                                                    
+                                                </td>
+
                                             </tr>
-                                        </thead>
-                                        <tbody>
+                                        }
 
-                                            @foreach (var item in Model)
-                                            {
-                                                <tr>
-                                                    <td>@(stt++)</td>
-                                                    <td>@item.Title</td>
-                                                    <td>@item.Mark</td>
-                                                    <td>@item.Price</td>
-                                                    <td>@item.PriceCustomer</td>
-                                                    <td>@item.IsPaid</td>
-                                                    <td>@item.IsSold</td>
-                                                    <td>@item.CreatedTime.ToString("HH:mm dd/MM/yyyy")</td>
-
-                                                </tr>
-                                            }
-
-                                        </tbody>
-                                    </table>
+                                    </tbody>
+                                </table>
 
 
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-
     </div>
+
+
+</div>
 

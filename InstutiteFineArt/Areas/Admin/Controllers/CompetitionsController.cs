@@ -4,20 +4,27 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using InstutiteOfFineArt.Core.Model;
+using InstutiteOfFineArt.DAL.Repository;
 
 namespace InstutiteFineArt.Areas.Admin.Controllers
 {
     public class CompetitionsController : Controller
     {
-        private InstutiteFineArtDbContext db = new InstutiteFineArtDbContext();
+        private readonly CompetitionRepository _competitionRepository;
+        public CompetitionsController()
+        {
+            _competitionRepository = new CompetitionRepository();
+        }
 
         // GET: Admin/Competitions
         public ActionResult Index()
         {
-            return View(db.Competitions.ToList());
+            var lstCompetition = _competitionRepository.GetAll().ToList() ;
+            return View(lstCompetition);
         }
 
         // GET: Admin/Competitions/Details/5
@@ -27,7 +34,7 @@ namespace InstutiteFineArt.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Competition competition = db.Competitions.Find(id);
+            Competition competition = _competitionRepository.Find(x => x.CompetitionId == id);
             if (competition == null)
             {
                 return HttpNotFound();
@@ -45,17 +52,21 @@ namespace InstutiteFineArt.Areas.Admin.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,StartDate,EndDate")] Competition competition)
+        [ValidateInput(false)]
+        //[ValidateAntiForgeryToken]
+        public ActionResult Create(Competition competition)
         {
             if (ModelState.IsValid)
             {
-                db.Competitions.Add(competition);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (competition.StartDate < DateTime.Now)
+                {
+                    return Json(new { result = true, mess = "Start time should not be less than current date" });
+                }
+                _competitionRepository.Add(competition);
+                return Json(new { result = true, mess = "Create Success", url = "/Admin/Competitions/Index" });
             }
 
-            return View(competition);
+            return Json(new { result = false, mess = "Create not Success", url = "/Admin/Competitions/Index" });
         }
 
         // GET: Admin/Competitions/Edit/5
@@ -65,7 +76,7 @@ namespace InstutiteFineArt.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Competition competition = db.Competitions.Find(id);
+            Competition competition = _competitionRepository.Find(x => x.CompetitionId == id);
             if (competition == null)
             {
                 return HttpNotFound();
@@ -82,8 +93,7 @@ namespace InstutiteFineArt.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(competition).State = EntityState.Modified;
-                db.SaveChanges();
+                _competitionRepository.Update(competition);
                 return RedirectToAction("Index");
             }
             return View(competition);
@@ -96,7 +106,7 @@ namespace InstutiteFineArt.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Competition competition = db.Competitions.Find(id);
+            Competition competition = _competitionRepository.Find(x => x.CompetitionId == id);
             if (competition == null)
             {
                 return HttpNotFound();
@@ -109,19 +119,14 @@ namespace InstutiteFineArt.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Competition competition = db.Competitions.Find(id);
-            db.Competitions.Remove(competition);
-            db.SaveChanges();
+            Competition competition = _competitionRepository.Find(x => x.CompetitionId == id);
+            if (competition == null)
+            {
+                return HttpNotFound();
+            }
+            _competitionRepository.Detete(competition);
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
     }
 }

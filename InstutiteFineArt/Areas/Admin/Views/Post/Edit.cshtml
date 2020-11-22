@@ -1,0 +1,230 @@
+﻿@model InstutiteOfFineArt.Core.Model.Post
+@using InstutiteOfFineArt.Core.Model
+@{
+    ViewBag.Title = "Edit";
+}
+@{
+    var lstCompetition = ViewBag.Competitions as List<Competition>;
+    var lstImages = ViewBag.Images as List<string>;
+}
+
+<style type="text/css">
+
+    label.error {
+        color: red;
+    }
+</style>
+
+@if (TempData["message"] != null)
+{
+    if (TempData["message"] as string == "Create Success")
+    {
+        <p class="alert alert-success">@TempData["message"]</p>
+    }
+    else
+    {
+        <p class="alert alert-danger">@TempData["message"]</p>
+    }
+
+}
+<!-- page content -->
+
+<div class="">
+    <h3 style="text-align: center;">Please enter post information</h3>
+
+    <div class="row">
+        <!-- form input mask -->
+        <div class="col-md-12 col-sm-12  ">
+            <div class="x_panel">
+                <div class="x_title">
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <form class="" action="" id="data" method="post" enctype="multipart/form-data">
+                        <fieldset>
+                            <div class="field item form-group">
+                                <label class="col-form-label col-md-2 col-sm-2  ">Title</label>
+                                <div class="col-md-9 col-sm-9">
+                                    @Html.EditorFor(x => x.Title, new { htmlAttributes = new { @class = "form-control", required = "required", @placeholder = "Please enter title post" } })
+                                    @*<input class="form-control" data-validate-length-range="255" data-validate-words="2" name="Title" id="Title"
+                                        placeholder="Please enter title post" required />*@
+                                </div>
+                            </div>
+                            <div class="field item form-group">
+                                <label class="control-label col-md-2 col-sm-2">Select Competitions</label>
+                                <div class="col-md-9 col-sm-9 ">
+                                    <select class="form-control" id="competition" name="competition">
+                                        @foreach (var item in lstCompetition)
+                                        {
+                                            <option value="@item.CompetitionId">@item.Name</option>
+                                        }
+
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="field item form-group">
+                                <label class="col-form-label col-md-2 col-sm-2">Desciption</label>
+                                <div class="col-md-9 col-sm-9">
+                                    @Html.TextAreaFor(m => m.PostContent, new { @class = "form-control", @id = "postContentId", @placeholder = "Mô tả căn hộ của bạn" })
+                                </div>
+                            </div>
+
+                            <div class="field item form-group">
+                                <label class="col-form-label col-md-2 col-sm-2 ">Images</label>
+                                <div class="col-md-9 col-sm-9">
+                                    <input class="file-1" type="file" multiple>
+                                </div>
+                            </div>
+
+                            <div class="ln_solid">
+                                <div class="form-group">
+                                    <div class="col-md-6 offset-md-3">
+                                        <input type='submit' class="btn btn-primary" id="btnSave" value="Đăng phòng" />
+                                        @Html.ActionLink("Quay lại", "Index", null, new { @class = "btn btn-success" })
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- /form input mask -->
+
+    </div>
+</div><!-- /.docs-toggles -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script>
+    
+</script>
+
+@section scripts{
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyAWX9wvYc5A0RwrT_pMQfV9uw_YxIela_0" type="text/javascript"></script>
+    <script>
+
+        //$(".file-1").fileinput({
+        //    theme: 'fas',
+        //    uploadUrl: '#', // you must set a valid URL here else you will get an error
+        //    allowedFileExtensions: ['jpg', 'png', 'gif'],
+        //    overwriteInitial: false,
+        //    maxFileSize: 1000,
+        //    maxFilesNum: 10,
+        //    //allowedFileTypes: ['image', 'video', 'flash'],
+        //    slugCallback: function (filename) {
+        //        return filename.replace('(', '_').replace(']', '_');
+        //    }
+        //});
+
+        $(".btn-warning").on('click', function () {
+            var $el = $("#file-4");
+            if ($el.attr('disabled')) {
+                $el.fileinput('enable');
+            } else {
+                $el.fileinput('disable');
+            }
+        });
+        $(".btn-info").on('click', function () {
+            $("#file-4").fileinput('refresh', { previewClass: 'bg-info' });
+        });
+        $(".file-1").fileinput({
+            theme: 'fas',
+            showUpload: false,
+            showCaption: false,
+            browseClass: "btn btn-primary btn-lg",
+            fileType: "any",
+            previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+            overwriteInitial: false,
+            initialPreviewAsData: true,
+            initialPreview: [
+                @lstImages
+              
+            ],
+            initialPreviewConfig: [
+                { caption: "transport-1.jpg", size: 329892, width: "120px", url: "{$url}", key: 1 },
+                { caption: "transport-2.jpg", size: 872378, width: "120px", url: "{$url}", key: 2 },
+                { caption: "transport-3.jpg", size: 632762, width: "120px", url: "{$url}", key: 3 }
+            ]
+        });
+
+       
+    </script>
+    <script>
+        $(document).ready(function () {
+            var competition = $('#Competition option:selected').val();
+            $("#data").validate({
+                rules: {
+                    Title: "required",
+                    Description: {
+                        required: true,
+                        maxlength: 1000
+                    },
+                    Competition: {
+                        required: true,
+                    }
+                },
+                messages: {
+                    Title: "Please enter title post",
+                    Description: "Please enter description",
+                    Competition: {
+                        required: "Please enter Competition",
+                    }
+                }
+
+            });
+
+            $(document).on('submit', '#data', function (e) {
+                e.preventDefault();
+
+
+                if ($("#data").valid()) {
+                    var form = $('#data')[0];
+
+                    var dataModel = new FormData(form);
+                    dataModel.append("competition", competition);
+                    if (confirm('Are you sure you want to create this?')) {
+                        $.ajax({
+                            type: "POST",
+                            enctype: 'multipart/form-data',
+                            url: "/Admin/Post/Create",
+                            data: dataModel,
+                            contentType: false, // Not to set any content header
+                            processData: false, // Not to process data
+                            success: function (response) {
+                                if (response.result) {
+                                    alert(response.mess);
+                                    window.location.href = response.url;
+                                }
+                                else {
+                                    alert(response.mess);
+                                    $("#message").removeClass("loader");
+                                }
+
+
+                            },
+                            error: function (response) {
+                                alert(response.mess);
+                                $("#message").removeClass("loader");
+                            }
+                        });
+                    }
+
+                }
+
+            });
+        });
+
+    </script>
+
+    <script src="~/ckeditor/ckeditor.js"></script>
+
+    <script>
+
+        CKEDITOR.replace("postContentId");
+
+    </script>
+}
+

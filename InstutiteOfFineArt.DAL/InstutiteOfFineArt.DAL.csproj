@@ -60,8 +60,9 @@
     <Compile Include="GenericRepository.cs" />
     <Compile Include="IGenericRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\IPostRepository.cs" />
+    <Compile Include="Repository\CompetitionRepository.cs" />
     <Compile Include="Repository\PostRepository.cs" />
+    <Compile Include="Repository\UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\InstutiteOfFineArt.Core\InstutiteOfFineArt.Core.csproj">

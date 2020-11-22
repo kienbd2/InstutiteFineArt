@@ -78,6 +78,8 @@ namespace InstutiteOfFineArt.Core.Model
                 Name = "Instutite Fine Art",
                 StartDate = new DateTime(2020, 11, 02),
                 EndDate = new DateTime(2020, 12, 04),
+                Description= "Description",
+                CreatedTime =DateTime.Now,
                 Posts = new List<Post>
                 {
                     new Post

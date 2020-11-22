@@ -10,10 +10,18 @@ namespace InstutiteOfFineArt.Core.Model
     public class Competition
     {
         [Key]
-        public int Id { get; set; }
+        public int CompetitionId { get; set; }
         public string Name { get; set; }
+        [Required(ErrorMessage = "Departure date is required")]
+        [Display(Name = "Start Date")]
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yy H:mm:ss tt}", ApplyFormatInEditMode = true)]
         public DateTime StartDate { get; set; }
+        [Display(Name = "End Date")]
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yy H:mm:ss tt}", ApplyFormatInEditMode = true)]
         public DateTime EndDate { get; set; }
+        public DateTime CreatedTime { get; set; }
         public string Description { get; set; }
         public virtual IList<Post> Posts { get; set; }
     }

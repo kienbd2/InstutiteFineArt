@@ -1,8 +1,11 @@
 ﻿@model InstutiteOfFineArt.Core.Model.Post
+@using InstutiteOfFineArt.Core.Model
 @{
     ViewBag.Title = "Create";
 }
-
+@{
+    var lstCompetition = ViewBag.Competitions as List<Competition>;
+}
 
 <style type="text/css">
 
@@ -26,7 +29,7 @@
 <!-- page content -->
 
 <div class="">
-    <h3 style="text-align: center;">Vui lòng nhập thông tin căn hộ của bạn</h3>
+    <h3 style="text-align: center;">Please enter post information</h3>
 
     <div class="row">
         <!-- form input mask -->
@@ -39,39 +42,38 @@
                     <form class="" action="" id="data" method="post" enctype="multipart/form-data">
                         <fieldset>
                             <div class="field item form-group">
-                                <label class="col-form-label col-md-2 col-sm-2  ">Tên căn hộ mới</label>
+                                <label class="col-form-label col-md-2 col-sm-2  ">Title</label>
                                 <div class="col-md-9 col-sm-9">
-                                    <input class="form-control" data-validate-length-range="255" data-validate-words="2" name="name" id="name"
-                                           placeholder="Vui lòng nhập tên căn hộ mới." required />
+                                    <input class="form-control" data-validate-length-range="255" data-validate-words="2" name="Title" id="Title"
+                                           placeholder="Please enter title post" required />
                                 </div>
                             </div>
                             <div class="field item form-group">
-                                <label class="control-label col-md-2 col-sm-2">Chọn loại căn hộ</label>
+                                <label class="control-label col-md-2 col-sm-2">Select Competitions</label>
                                 <div class="col-md-9 col-sm-9 ">
-                                    <select class="form-control" id="apartment_type" name="apartment_type">
-                                        <option value="1">Biệt thự</option>
-                                        <option value="2">Studio</option>
-                                        <option value="3">Chung cư</option>
-                                        <option value="4">Nhà riêng</option>
-                                        <option value="5">Home stay</option>
-                                        <option value="6">Khách sạn</option>
+                                    <select class="form-control" id="competition" name="competition">
+                                        @foreach (var item in lstCompetition)
+                                        {
+                                            <option value="@item.CompetitionId">@item.Name</option>
+                                        }
+
                                     </select>
                                 </div>
                             </div>
                             <div class="field item form-group">
-                                <label class="col-form-label col-md-2 col-sm-2  ">Mô tả</label>
+                                <label class="col-form-label col-md-2 col-sm-2">Desciption</label>
                                 <div class="col-md-9 col-sm-9">
                                     @Html.TextAreaFor(m => m.PostContent, new { @class = "form-control", @id = "postContentId", @placeholder = "Mô tả căn hộ của bạn" })
                                 </div>
                             </div>
-                           
+
                             <div class="field item form-group">
                                 <label class="col-form-label col-md-2 col-sm-2 ">Images</label>
                                 <div class="col-md-9 col-sm-9">
                                     <input id="file-1" type="file" name="file" multiple class="file" data-overwrite-initial="false" data-min-file-count="2" data-theme="fas">
                                 </div>
                             </div>
-                          
+
                             <div class="ln_solid">
                                 <div class="form-group">
                                     <div class="col-md-6 offset-md-3">
@@ -153,6 +155,72 @@
              });
              */
         });
+    </script>
+    <script>
+        $(document).ready(function () {
+            var competition = $('#Competition option:selected').val();
+            $("#data").validate({
+                rules: {
+                    Title: "required",
+                    Description: {
+                        required: true,
+                        maxlength: 1000
+                    },
+                    Competition: {
+                        required: true,
+                    }
+                },
+                messages: {
+                    Title: "Please enter title post",
+                    Description: "Please enter description",
+                    Competition: {
+                        required: "Please enter Competition",
+                    }
+                }
+
+            });
+
+            $(document).on('submit', '#data', function (e) {
+                e.preventDefault();
+                
+
+                if ($("#data").valid()) {
+                    var form = $('#data')[0];
+
+                    var dataModel = new FormData(form);
+                    dataModel.append("competition", competition);
+                    if (confirm('Are you sure you want to create this?')) {
+                        $.ajax({
+                            type: "POST",
+                            enctype: 'multipart/form-data',
+                            url: "/Admin/Post/Create",
+                            data: dataModel,
+                            contentType: false, // Not to set any content header
+                            processData: false, // Not to process data
+                            success: function (response) {
+                                if (response.result) {
+                                    alert(response.mess);
+                                    window.location.href = response.url;
+                                }
+                                else {
+                                    alert(response.mess);
+                                    $("#message").removeClass("loader");
+                                }
+
+
+                            },
+                            error: function (response) {
+                                alert(response.mess);
+                                $("#message").removeClass("loader");
+                            }
+                        });
+                    }
+
+                }
+
+            });
+        });
+
     </script>
 
     <script src="~/ckeditor/ckeditor.js"></script>

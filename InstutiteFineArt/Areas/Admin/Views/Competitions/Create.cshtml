@@ -3,9 +3,15 @@
 @{
     ViewBag.Title = "Create";
 }
+<style type="text/css">
+
+    label.error {
+        color: red;
+    }
+</style>
 
 <div class="">
-    <h3 style="text-align: center;">Vui lòng nhập thông tin căn hộ của bạn</h3>
+    <h3 style="text-align: center;">Please enter competitions information</h3>
 
     <div class="row">
         <!-- form input mask -->
@@ -18,36 +24,32 @@
                     <form class="" action="" id="data" method="post" enctype="multipart/form-data">
                         <fieldset>
                             <div class="field item form-group">
-                                <label class="col-form-label col-md-2 col-sm-2  ">Tên căn hộ mới</label>
+                                <label class="col-form-label col-md-2 col-sm-2  ">Name competition</label>
                                 <div class="col-md-9 col-sm-9">
                                     <input class="form-control" data-validate-length-range="255" data-validate-words="2" name="name" id="name"
-                                           placeholder="Vui lòng nhập tên căn hộ mới." required />
-                                </div>
-                            </div>
-                            <div class="field item form-group">
-                                <label class="control-label col-md-2 col-sm-2">Chọn loại căn hộ</label>
-                                <div class="col-md-9 col-sm-9 ">
-                                    <select class="form-control" id="apartment_type" name="apartment_type">
-                                        <option value="1">Biệt thự</option>
-                                        <option value="2">Studio</option>
-                                        <option value="3">Chung cư</option>
-                                        <option value="4">Nhà riêng</option>
-                                        <option value="5">Home stay</option>
-                                        <option value="6">Khách sạn</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="field item form-group">
-                                <label class="col-form-label col-md-2 col-sm-2  ">Mô tả</label>
-                                <div class="col-md-9 col-sm-9">
-                                    @Html.TextAreaFor(m => m.Description, new { @class = "form-control", @id = "postContentId", @placeholder = "Mô tả căn hộ của bạn" })
+                                           placeholder="Please enter name competition" required />
                                 </div>
                             </div>
 
                             <div class="field item form-group">
-                                <label class="col-form-label col-md-2 col-sm-2 ">Images</label>
+                                <label class="col-form-label col-md-2 col-sm-2  ">Description</label>
                                 <div class="col-md-9 col-sm-9">
-                                    @Html.EditorFor(m=>m.StartDate)
+                                    @Html.TextAreaFor(m => m.Description, new { @class = "form-control", @id = "descriptionId", @placeholder = "Please enter description" })
+                                </div>
+                            </div>
+
+                            <div class="field item form-group">
+                                <label class="col-form-label col-md-2 col-sm-2 ">Start Date</label>
+                                <div class="col-md-9 col-sm-9">
+                                    @Html.TextBoxFor(m => m.StartDate, "{0:yyyy-MM-ddThh:mm}", new { @class = "form-control", type = "datetime-local" })
+
+                                </div>
+                            </div>
+                            <div class="field item form-group">
+                                <label class="col-form-label col-md-2 col-sm-2 ">End Date</label>
+                                <div class="col-md-9 col-sm-9">
+                                    @Html.TextBoxFor(m => m.EndDate, "{0:yyyy-MM-ddThh:mm}", new { @class = "form-control", type = "datetime-local" })
+
                                 </div>
                             </div>
 
@@ -71,10 +73,93 @@
     </div>
 </div><!-- /.docs-toggles -->
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
+<script src="~/ckeditor/ckeditor.js"></script>
+
+<script>
+    CKEDITOR.replace("descriptionId");
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 @section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            var today = new Date();
+            $("#data").validate({
+                rules: {
+                    name: "required",
+                    Description: {
+                        required: true,
+                        maxlength: 1000
+                    },
+                    StartDate: {
+                        required: true,
+                    },
+                    EndDate: {
+                        required: true,
+                    },
+                },
+                messages: {
+                    name: "Please enter name competition",
+                    Description: "Please enter description",
+                    StartDate: {
+                        required: "Please enter start date",
+                    },
+                    EndDate: "Please enter end date"
+                }
+
+            });
+
+            $(document).on('submit', '#data', function (e) {
+                e.preventDefault();
+                var dataModel = new FormData(form);
+                var startDate = new Date($('#StartDate').val());
+                var today = new Date();
+                if (startDate < today) {
+                    alert("Start time should not be less than current date");
+                }
+                else {
+                    if ($("#data").valid()) {
+                        var form = $('#data')[0];
+
+                        var dataModel = new FormData(form);
+                        if (confirm('Are you sure you want to create this?')) {
+                            $.ajax({
+                                type: "POST",
+                                enctype: 'multipart/form-data',
+                                url: "/Admin/Competitions/Create",
+                                data: dataModel,
+                                contentType: false, // Not to set any content header
+                                processData: false, // Not to process data
+                                success: function (response) {
+                                    if (response.result) {
+                                        alert(response.mess);
+                                        window.location.href = response.url;
+                                    }
+                                    else {
+                                        alert(response.mess);
+                                        $("#message").removeClass("loader");
+                                    }
+
+
+                                },
+                                error: function (response) {
+                                    alert(response.mess);
+                                    $("#message").removeClass("loader");
+                                }
+                            });
+                        }
+
+                    }
+                }
+               
+            });
+        });
+
+    </script>
+
     @Scripts.Render("~/bundles/jqueryval")
 }

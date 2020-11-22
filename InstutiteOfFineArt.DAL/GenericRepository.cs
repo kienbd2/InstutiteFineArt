@@ -20,10 +20,10 @@ namespace InstutiteOfFineArt.DAL
             _dbSet = _context.Set<TEntity>();
         }
 
-        public virtual void Add(TEntity entity)
+        public virtual int Add(TEntity entity)
         {
             _dbSet.Add(entity);
-            _context.SaveChanges();
+            return _context.SaveChanges();
         }
 
         public virtual TEntity GetDetail(object id)
@@ -36,10 +36,10 @@ namespace InstutiteOfFineArt.DAL
             return _dbSet.Count();
         }
 
-        public virtual void Update(TEntity entity)
+        public virtual int Update(TEntity entity)
         {
             _dbSet.AddOrUpdate(entity);
-            _context.SaveChanges();
+            return _context.SaveChanges();
         }
 
         public virtual TEntity Find(Expression<Func<TEntity, bool>> filter)
@@ -77,9 +77,15 @@ namespace InstutiteOfFineArt.DAL
             return orderBy != null ? orderBy(query) : query;
         }
 
-        public virtual IQueryable<TEntity> GetAll()
+        public virtual IEnumerable<TEntity> GetAll()
         {
-            return _dbSet;
+            return _dbSet.ToList();
+        }
+
+        public virtual int Detete(TEntity entity)
+        {
+            _dbSet.Remove(entity);
+            return _context.SaveChanges();
         }
     }
 }

@@ -9,15 +9,16 @@ namespace InstutiteOfFineArt.DAL
 {
     public interface IGenericRepository<TEntity> where TEntity : class
     {
-        void Add(TEntity entity);
+        int Add(TEntity entity);
 
-        void Update(TEntity entity);
+        int Update(TEntity entity);
+        int Detete(TEntity entity);
 
         int Count();
 
         TEntity GetDetail(object id);
 
-        IQueryable<TEntity> GetAll();
+        IEnumerable<TEntity> GetAll();
 
         IQueryable<TEntity> Get(Expression<Func<TEntity, bool>> filter = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,

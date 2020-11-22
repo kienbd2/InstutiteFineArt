@@ -47,6 +47,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CloudinaryDotNet, Version=1.13.2.0, Culture=neutral, PublicKeyToken=c8234dc617ae7841, processorArchitecture=MSIL">
+      <HintPath>..\packages\CloudinaryDotNet.1.13.2\lib\net45\CloudinaryDotNet.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -63,6 +66,14 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Text.Encodings.Web, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.4.5.0\lib\netstandard2.0\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -180,6 +191,7 @@
     <Compile Include="Areas\Admin\Controllers\HomeAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\PostController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CompetitionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
@@ -3894,6 +3906,59 @@
     <Content Include="App_Themes\CMS\vendors\validator\index.html" />
     <Content Include="App_Themes\CMS\vendors\validator\multifield.js" />
     <Content Include="App_Themes\CMS\vendors\validator\validator.js" />
+    <Content Include="App_Themes\Home\css\animate.min.css" />
+    <Content Include="App_Themes\Home\css\bootstrap.min.css" />
+    <Content Include="App_Themes\Home\css\font-awesome.min.css" />
+    <Content Include="App_Themes\Home\css\hover-min.css" />
+    <Content Include="App_Themes\Home\css\jquery.datetimepicker.css" />
+    <Content Include="App_Themes\Home\css\magnific-popup.css" />
+    <Content Include="App_Themes\Home\css\main.css" />
+    <Content Include="App_Themes\Home\css\meanmenu.min.css" />
+    <Content Include="App_Themes\Home\css\nivo-slider.css" />
+    <Content Include="App_Themes\Home\css\normalize.css" />
+    <Content Include="App_Themes\Home\css\owl.carousel.min.css" />
+    <Content Include="App_Themes\Home\css\owl.theme.default.min.css" />
+    <Content Include="App_Themes\Home\css\preview.css" />
+    <Content Include="App_Themes\Home\css\style.css" />
+    <Content Include="App_Themes\Home\Images\1.jpg" />
+    <Content Include="App_Themes\Home\Images\10.jpg" />
+    <Content Include="App_Themes\Home\Images\11.jpg" />
+    <Content Include="App_Themes\Home\Images\12.jpg" />
+    <Content Include="App_Themes\Home\Images\2.jpg" />
+    <Content Include="App_Themes\Home\Images\3.jpg" />
+    <Content Include="App_Themes\Home\Images\4.jpg" />
+    <Content Include="App_Themes\Home\Images\5.jpg" />
+    <Content Include="App_Themes\Home\Images\6.jpg" />
+    <Content Include="App_Themes\Home\Images\7.jpg" />
+    <Content Include="App_Themes\Home\Images\8.jpg" />
+    <Content Include="App_Themes\Home\Images\9.jpg" />
+    <Content Include="App_Themes\Home\Images\c1.jpg" />
+    <Content Include="App_Themes\Home\Images\c2.jpg" />
+    <Content Include="App_Themes\Home\Images\c3.jpg" />
+    <Content Include="App_Themes\Home\Images\c4.jpg" />
+    <Content Include="App_Themes\Home\Images\e.jpg" />
+    <Content Include="App_Themes\Home\Images\logo-primary.png" />
+    <Content Include="App_Themes\Home\Images\logo.jpg" />
+    <Content Include="App_Themes\Home\Images\top1.png" />
+    <Content Include="App_Themes\Home\Images\top2.png" />
+    <Content Include="App_Themes\Home\Images\top2.svg" />
+    <Content Include="App_Themes\Home\Images\top3.png" />
+    <Content Include="App_Themes\Home\js\bootstrap.min.js" />
+    <Content Include="App_Themes\Home\js\home.js" />
+    <Content Include="App_Themes\Home\js\isotope.pkgd.min.js" />
+    <Content Include="App_Themes\Home\js\jquery-2.2.4.min.js" />
+    <Content Include="App_Themes\Home\js\jquery.countdown.min.js" />
+    <Content Include="App_Themes\Home\js\jquery.counterup.min.js" />
+    <Content Include="App_Themes\Home\js\jquery.magnific-popup.min.js" />
+    <Content Include="App_Themes\Home\js\jquery.meanmenu.min.js" />
+    <Content Include="App_Themes\Home\js\jquery.nivo.slider.js" />
+    <Content Include="App_Themes\Home\js\jquery.scrollUp.min.js" />
+    <Content Include="App_Themes\Home\js\main.js" />
+    <Content Include="App_Themes\Home\js\modernizr-2.8.3.min.js" />
+    <Content Include="App_Themes\Home\js\owl.carousel.min.js" />
+    <Content Include="App_Themes\Home\js\plugins.js" />
+    <Content Include="App_Themes\Home\js\waypoints.min.js" />
+    <Content Include="App_Themes\Home\js\wow.min.js" />
     <Content Include="App_Themes\Login\css\font-awesome.css" />
     <Content Include="App_Themes\Login\css\style.css" />
     <Content Include="App_Themes\Login\fonts\fontawesome-webfont.svg" />
@@ -5397,6 +5462,7 @@
     <Content Include="Areas\Admin\Views\Competitions\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Competitions\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Competitions\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Post\Edit.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -5456,10 +5522,12 @@
     <Content Include="Views\RolesAdmin\Create.cshtml" />
     <Content Include="Views\Account\DisplayEmail.cshtml" />
     <Content Include="Views\Shared\_LayoutLogin.cshtml" />
+    <Content Include="Views\Competition\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
