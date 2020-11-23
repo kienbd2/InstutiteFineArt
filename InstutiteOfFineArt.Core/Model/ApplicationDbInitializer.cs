@@ -92,6 +92,7 @@ namespace InstutiteOfFineArt.Core.Model
                         User= user,
                         Mark=4,
                         Price=1000,
+                        Images="https://res.cloudinary.com/dev2020/image/upload/v1605894758/u4wf6ekwp0m4hbosnuja.jpg",
                         PriceCustomer=800,
                         IsSold=true,
                         IsPaid=true
@@ -106,6 +107,7 @@ namespace InstutiteOfFineArt.Core.Model
                         User= user,
                         Mark=3,
                         Price=500,
+                        Images="https://res.cloudinary.com/dev2020/image/upload/v1605894758/u4wf6ekwp0m4hbosnuja.jpg",
                         PriceCustomer=500,
                         IsSold=true,
                         IsPaid=true

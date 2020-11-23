@@ -10,9 +10,9 @@ using System.Web.Mvc;
 using System.Collections.Generic;
 using InstutiteOfFineArt.Core.Model;
 
-namespace IdentitySample.Controllers
+namespace InstutiteFineArt.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Administrator")]
     public class RolesAdminController : Controller
     {
         public RolesAdminController()
