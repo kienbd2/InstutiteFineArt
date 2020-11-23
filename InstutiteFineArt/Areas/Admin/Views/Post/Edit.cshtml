@@ -5,8 +5,14 @@
 }
 @{
     var lstCompetition = ViewBag.Competitions as List<Competition>;
-    var lstImages = ViewBag.Images as List<string>;
+    var strImages = "";
+    var lstImages = @Model.Images.Split(';');
+
+    foreach (var images in lstImages)
+        strImages += string.Join(",", images);
+
 }
+
 
 <style type="text/css">
 
@@ -72,7 +78,7 @@
                             <div class="field item form-group">
                                 <label class="col-form-label col-md-2 col-sm-2 ">Images</label>
                                 <div class="col-md-9 col-sm-9">
-                                    <input class="file-1" type="file" multiple>
+                                    <input id="file-1" type="file" name="file" multiple class="file" data-overwrite-initial="false" data-min-file-count="2" data-theme="fas">
                                 </div>
                             </div>
 
@@ -97,7 +103,7 @@
 </div><!-- /.docs-toggles -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 <script>
-    
+   
 </script>
 
 @section scripts{
@@ -105,8 +111,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyAWX9wvYc5A0RwrT_pMQfV9uw_YxIela_0" type="text/javascript"></script>
     <script>
+         console.log("@Model.Images");
 
-        //$(".file-1").fileinput({
+        //$("#file-1").fileinput({
         //    theme: 'fas',
         //    uploadUrl: '#', // you must set a valid URL here else you will get an error
         //    allowedFileExtensions: ['jpg', 'png', 'gif'],
@@ -119,18 +126,7 @@
         //    }
         //});
 
-        $(".btn-warning").on('click', function () {
-            var $el = $("#file-4");
-            if ($el.attr('disabled')) {
-                $el.fileinput('enable');
-            } else {
-                $el.fileinput('disable');
-            }
-        });
-        $(".btn-info").on('click', function () {
-            $("#file-4").fileinput('refresh', { previewClass: 'bg-info' });
-        });
-        $(".file-1").fileinput({
+        $("#file-1").fileinput({
             theme: 'fas',
             showUpload: false,
             showCaption: false,
@@ -140,8 +136,8 @@
             overwriteInitial: false,
             initialPreviewAsData: true,
             initialPreview: [
-                @lstImages
-              
+                //"https://res.cloudinary.com/dev2020/image/upload/v1605894758/u4wf6ekwp0m4hbosnuja.jpg",
+               @*@strImages*@
             ],
             initialPreviewConfig: [
                 { caption: "transport-1.jpg", size: 329892, width: "120px", url: "{$url}", key: 1 },
@@ -150,7 +146,8 @@
             ]
         });
 
-       
+
+
     </script>
     <script>
         $(document).ready(function () {
