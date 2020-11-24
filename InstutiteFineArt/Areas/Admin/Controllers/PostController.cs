@@ -85,7 +85,7 @@ namespace InstutiteFineArt.Areas.Admin.Controllers
             post.PriceCustomer = 800;
             post.IsSold = true;
             post.Published = true;
-            
+
             var result = _postRepository.Add(post);
             if (result > 0)
             {
@@ -103,7 +103,11 @@ namespace InstutiteFineArt.Areas.Admin.Controllers
             }
             ViewBag.Competitions = _competitionRepository.FindAll(x => x.EndDate >= DateTime.Now).ToList();
             Post post = _postRepository.Find(x => x.PostId == id);
-            ViewBag.Images = post.Images.Split(';');
+            ViewBag.Images = "";
+            foreach (var images in post.Images.Split(';'))
+            {
+                ViewBag.Images += "\"" + images + "\"" + ",";
+            }
             if (post == null)
             {
                 return HttpNotFound();

@@ -9,7 +9,7 @@
     var lstImages = @Model.Images.Split(';');
 
     foreach (var images in lstImages)
-        strImages += string.Join(",", images);
+        strImages += "\"" + images + "\"" + " ,";
 
 }
 
@@ -103,7 +103,7 @@
 </div><!-- /.docs-toggles -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 <script>
-   
+
 </script>
 
 @section scripts{
@@ -111,22 +111,36 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyAWX9wvYc5A0RwrT_pMQfV9uw_YxIela_0" type="text/javascript"></script>
     <script>
-         console.log("@Model.Images");
+        var arr = "@strImages";
+        var aab = arr.replace(/&quot;/g, "\"");
 
-        //$("#file-1").fileinput({
-        //    theme: 'fas',
-        //    uploadUrl: '#', // you must set a valid URL here else you will get an error
-        //    allowedFileExtensions: ['jpg', 'png', 'gif'],
-        //    overwriteInitial: false,
-        //    maxFileSize: 1000,
-        //    maxFilesNum: 10,
-        //    //allowedFileTypes: ['image', 'video', 'flash'],
-        //    slugCallback: function (filename) {
-        //        return filename.replace('(', '_').replace(']', '_');
-        //    }
-        //});
-
+        console.log(aab);
         $("#file-1").fileinput({
+            theme: 'fas',
+            uploadUrl: '#', // you must set a valid URL here else you will get an error
+            allowedFileExtensions: ['jpg', 'png', 'gif'],
+            overwriteInitial: false,
+            maxFileSize: 1000,
+            maxFilesNum: 10,
+             showUpload: false,
+            showCaption: false,
+            browseClass: "btn btn-primary btn-lg",
+            fileType: "any",
+            previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+            overwriteInitial: false,
+            initialPreviewAsData: true,
+            initialPreview: [
+                aab,
+               "https://res.cloudinary.com/dev2020/image/upload/v1605894758/u4wf6ekwp0m4hbosnuja.jpg" ,
+
+            ],
+            //allowedFileTypes: ['image', 'video', 'flash'],
+            slugCallback: function (filename) {
+                    return filename.replace('(', '_').replace(']', '_');
+                }
+        });
+
+        @*$("#file-1").fileinput({
             theme: 'fas',
             showUpload: false,
             showCaption: false,
@@ -137,14 +151,14 @@
             initialPreviewAsData: true,
             initialPreview: [
                 //"https://res.cloudinary.com/dev2020/image/upload/v1605894758/u4wf6ekwp0m4hbosnuja.jpg",
-               @*@strImages*@
+              "@Model.Images"
             ],
             initialPreviewConfig: [
                 { caption: "transport-1.jpg", size: 329892, width: "120px", url: "{$url}", key: 1 },
                 { caption: "transport-2.jpg", size: 872378, width: "120px", url: "{$url}", key: 2 },
                 { caption: "transport-3.jpg", size: 632762, width: "120px", url: "{$url}", key: 3 }
             ]
-        });
+        });*@
 
 
 
