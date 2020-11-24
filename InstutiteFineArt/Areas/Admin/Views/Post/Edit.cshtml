@@ -111,8 +111,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyAWX9wvYc5A0RwrT_pMQfV9uw_YxIela_0" type="text/javascript"></script>
     <script>
-        var arr = "@strImages";
-        var aab = arr.replace(/&quot;/g, "\"");
+        var arr = "@strImages.TrimEnd(',')";
+        var aab = arr.replace(/&quot;/g, "");
 
         console.log(aab);
         $("#file-1").fileinput({
@@ -164,6 +164,32 @@
 
     </script>
     <script>
+         var arr = "@strImages";
+        var aab = arr.replace(/&quot;/g, "\'");
+        $(document).ready(function () {
+
+             $("#file-1").fileinput({
+                theme: 'fas',
+                showUpload: false,
+                showCaption: false,
+                browseClass: "btn btn-primary btn-lg",
+                fileType: "any",
+                previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+                overwriteInitial: false,
+                initialPreviewAsData: true,
+                initialPreview: [
+                   aab
+                ],
+                initialPreviewConfig: [
+                    { caption: "transport-1.jpg", size: 329892, width: "120px", url: "{$url}", key: 1 },
+                    { caption: "transport-2.jpg", size: 872378, width: "120px", url: "{$url}", key: 2 },
+                    { caption: "transport-3.jpg", size: 632762, width: "120px", url: "{$url}", key: 3 }
+                ]
+            });
+
+        });
+    </script>
+    <script>
         $(document).ready(function () {
             var competition = $('#Competition option:selected').val();
             $("#data").validate({
@@ -212,7 +238,7 @@
                                 else {
                                     alert(response.mess);
                                     $("#message").removeClass("loader");
-                                }
+                            TrimEnd   TrimEnd★ Trim }
 
 
                             },
