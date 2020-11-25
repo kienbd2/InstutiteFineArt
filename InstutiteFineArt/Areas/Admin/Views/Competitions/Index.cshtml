@@ -32,13 +32,20 @@
 
                                         @foreach (var item in Model)
                                         {
-                                            <tr>
-                                                <td>@(stt++)</td>
-                                                <td>@item.Name</td>
-                                                <td>@Html.Raw(item.Description)</td>
-                                                <td>@item.StartDate.ToString("HH:mm dd/MM/yyyy")</td>
-                                                <td>@item.EndDate.ToString("HH:mm dd/MM/yyyy")</td>
-                                            </tr>
+                                        <tr>
+                                            <td>@(stt++)</td>
+                                            <td>@item.Name</td>
+                                            <td>@Html.Raw(item.Description)</td>
+                                            <td>@item.StartDate.ToString("HH:mm dd/MM/yyyy")</td>
+                                            <td>@item.EndDate.ToString("HH:mm dd/MM/yyyy")</td>
+                                            <td>
+
+                                                @Html.ActionLink("Edit", "Edit", new { Id = @item.CompetitionId }, null) |
+
+                                                @Html.ActionLink("Xóa", "Delete", new { Id = @item.CompetitionId }, null)
+
+                                            </td>
+                                        </tr>
                                         }
 
                                     </tbody>

@@ -117,9 +117,13 @@
                 e.preventDefault();
                 var dataModel = new FormData(form);
                 var startDate = new Date($('#StartDate').val());
+                var endDate = new Date($('#EndDate').val());
                 var today = new Date();
                 if (startDate < today) {
                     alert("Start time should not be less than current date");
+                }
+                else if (startDate > endDate) {
+                    alert("Start time must not be less than end date");
                 }
                 else {
                     if ($("#data").valid()) {
@@ -155,7 +159,7 @@
 
                     }
                 }
-               
+
             });
         });
 

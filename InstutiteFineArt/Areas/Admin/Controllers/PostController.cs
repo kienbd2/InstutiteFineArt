@@ -113,5 +113,65 @@ namespace InstutiteFineArt.Areas.Admin.Controllers
             }
             return View(post);
         }
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult Edit(Post post, int competition)
+        {
+            var lstImage = new List<string>();
+            HttpFileCollectionBase files = Request.Files;
+            if (files.Count > 1)
+            {
+                if (files.Count > 5)
+                {
+                    return Json(new { result = false, mess = "Do not upload larger than 5 images" });
+                }
+
+                Task task = Task.Run(async () =>
+                {
+                    for (int i = 0; i < files.Count; i++)
+                    {
+                        HttpPostedFileBase file = files[i];
+                        Account account = new Account("dev2020", "247996535991499", "9jI_5YjJaseBKUrY929sUtt0Fy0");
+
+                        string path = Path.Combine(Server.MapPath("Images"), Path.GetFileName(file.FileName));
+                        Cloudinary cloudinary = new Cloudinary(account);
+                        var uploadParams = new ImageUploadParams()
+                        {
+                            File = new FileDescription(path, file.InputStream),
+                        };
+                        var uploadResult = await cloudinary.UploadAsync(uploadParams);
+                        lstImage.Add(uploadResult.SecureUrl.ToString());
+                    }
+                });
+                task.Wait();
+            }
+            
+            
+            var userID = User.Identity.GetUserId();
+            post.Id = userID;
+            post.CompetitionId = competition;
+            //var competitionObj = _competitionRepository.Find(x => x.CompetitionId == competition);
+            //if (competitionObj != null)
+            //{
+            //    post.Competition = competitionObj;
+            //}
+            post.Images = post.Images + ";" + string.Join(";", lstImage);
+            post.UpdatedTime = DateTime.Now;
+            post.Mark = 3;
+            post.IsPaid = true;
+            post.Price = 1000;
+            post.PriceCustomer = 800;
+            post.IsSold = true;
+            post.Published = true;
+
+            var result = _postRepository.Update(post);
+            if (result > 0)
+            {
+                return Json(new { result = true, mess = "Edit Post Success", url = "/Admin/Post/Index" });
+            }
+
+            return Json(new { result = false, mess = "Edit Post not Success", url = "/Admin/Post/Index" });
+        }
+
     }
 }

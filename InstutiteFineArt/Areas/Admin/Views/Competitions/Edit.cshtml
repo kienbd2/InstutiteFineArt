@@ -4,55 +4,168 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
+<style type="text/css">
 
+    label.error {
+        color: red;
+    }
+</style>
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Competition</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Id)
+<div class="">
+    <h3 style="text-align: center;">Please enter competitions information</h3>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+    <div class="row">
+        <!-- form input mask -->
+        <div class="col-md-12 col-sm-12  ">
+            <div class="x_panel">
+                <div class="x_title">
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <form class="" action="" id="data" method="post" enctype="multipart/form-data">
+                        <fieldset>
+                            @Html.HiddenFor(x => x.CompetitionId)
+                            <div class="field item form-group">
+                                <label class="col-form-label col-md-2 col-sm-2  ">Name competition</label>
+                                <div class="col-md-9 col-sm-9">
+                                    @Html.EditorFor(x => x.Name, new { htmlAttributes = new { @class = "form-control", required = "required", @placeholder = "Please enter name competition" } })
+                                </div>
+                            </div>
+
+                            <div class="field item form-group">
+                                <label class="col-form-label col-md-2 col-sm-2  ">Description</label>
+                                <div class="col-md-9 col-sm-9">
+                                    @Html.TextAreaFor(m => m.Description, new { @class = "form-control", @id = "descriptionId", @placeholder = "Please enter description" })
+                                </div>
+                            </div>
+
+                            <div class="field item form-group">
+                                <label class="col-form-label col-md-2 col-sm-2 ">Start Date</label>
+                                <div class="col-md-9 col-sm-9">
+                                    @Html.TextBoxFor(m => m.StartDate, "{0:yyyy-MM-ddThh:mm}", new { @class = "form-control", type = "datetime-local" })
+
+                                </div>
+                            </div>
+                            <div class="field item form-group">
+                                <label class="col-form-label col-md-2 col-sm-2 ">End Date</label>
+                                <div class="col-md-9 col-sm-9">
+                                    @Html.TextBoxFor(m => m.EndDate, "{0:yyyy-MM-ddThh:mm}", new { @class = "form-control", type = "datetime-local" })
+
+                                </div>
+                            </div>
+                            @Html.HiddenFor(x => x.CreatedTime)
+                            <div class="ln_solid">
+                                <div class="form-group">
+                                    <div class="col-md-6 offset-md-3">
+                                        <input type='submit' class="btn btn-primary" id="btnSave" value="Submit" />
+                                        @Html.ActionLink("Update", "Edit", null, new { @class = "btn btn-success" })
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </fieldset>
+                    </form>
+                </div>
             </div>
         </div>
+        <!-- /form input mask -->
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </div>
     </div>
-}
+</div><!-- /.docs-toggles -->
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
+<script src="~/ckeditor/ckeditor.js"></script>
+
+<script>
+    CKEDITOR.replace("descriptionId");
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 @section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            var today = new Date();
+            $("#data").validate({
+                rules: {
+                    name: "required",
+                    Description: {
+                        required: true,
+                        maxlength: 1000
+                    },
+                    StartDate: {
+                        required: true,
+                    },
+                    EndDate: {
+                        required: true,
+                    },
+                },
+                messages: {
+                    name: "Please enter name competition",
+                    Description: "Please enter description",
+                    StartDate: {
+                        required: "Please enter start date",
+                    },
+                    EndDate: "Please enter end date"
+                }
+
+            });
+
+            $(document).on('submit', '#data', function (e) {
+                e.preventDefault();
+                var dataModel = new FormData(form);
+                var startDate = new Date($('#StartDate').val());
+                var endDate = new Date($('#EndDate').val());
+                var today = new Date();
+                if (startDate < today) {
+                    alert("Start time should not be less than current date");
+                }
+                else if (startDate > endDate) {
+                    alert("Start time must not be less than end date");
+                }
+                else {
+                    if ($("#data").valid()) {
+                        var form = $('#data')[0];
+
+                        var dataModel = new FormData(form);
+                        if (confirm('Are you sure you want to create this?')) {
+                            $.ajax({
+                                type: "POST",
+                                enctype: 'multipart/form-data',
+                                url: "/Admin/Competitions/Edit",
+                                data: dataModel,
+                                contentType: false, // Not to set any content header
+                                processData: false, // Not to process data
+                                success: function (response) {
+                                    if (response.result) {
+                                        alert(response.mess);
+                                        window.location.href = response.url;
+                                    }
+                                    else {
+                                        alert(response.mess);
+                                        $("#message").removeClass("loader");
+                                    }
+
+
+                                },
+                                error: function (response) {
+                                    alert(response.mess);
+                                    $("#message").removeClass("loader");
+                                }
+                            });
+                        }
+
+                    }
+                }
+
+            });
+        });
+
+    </script>
+
     @Scripts.Render("~/bundles/jqueryval")
 }
+

@@ -5,11 +5,7 @@
 }
 @{
     var lstCompetition = ViewBag.Competitions as List<Competition>;
-    var strImages = "";
     var lstImages = @Model.Images.Split(';');
-
-    foreach (var images in lstImages)
-        strImages += "\"" + images + "\"" + " ,";
 
 }
 
@@ -48,12 +44,13 @@
                 <div class="x_content">
                     <form class="" action="" id="data" method="post" enctype="multipart/form-data">
                         <fieldset>
+                            @Html.HiddenFor(x => x.PostId)
                             <div class="field item form-group">
                                 <label class="col-form-label col-md-2 col-sm-2  ">Title</label>
                                 <div class="col-md-9 col-sm-9">
                                     @Html.EditorFor(x => x.Title, new { htmlAttributes = new { @class = "form-control", required = "required", @placeholder = "Please enter title post" } })
                                     @*<input class="form-control" data-validate-length-range="255" data-validate-words="2" name="Title" id="Title"
-                                        placeholder="Please enter title post" required />*@
+                placeholder="Please enter title post" required />*@
                                 </div>
                             </div>
                             <div class="field item form-group">
@@ -81,7 +78,8 @@
                                     <input id="file-1" type="file" name="file" multiple class="file" data-overwrite-initial="false" data-min-file-count="2" data-theme="fas">
                                 </div>
                             </div>
-
+                            @Html.HiddenFor(x => x.Images)
+                            @Html.HiddenFor(x => x.CreatedTime)
                             <div class="ln_solid">
                                 <div class="form-group">
                                     <div class="col-md-6 offset-md-3">
@@ -111,11 +109,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyAWX9wvYc5A0RwrT_pMQfV9uw_YxIela_0" type="text/javascript"></script>
     <script>
-        var arr = "@strImages.TrimEnd(',')";
-        var aab = arr.replace(/&quot;/g, "");
+      
         var model = '@Html.Raw(Json.Encode(lstImages))';
-             var data = JSON.parse(model);
-        console.log(data);
+         var data = JSON.parse(model);
         $("#file-1").fileinput({
             theme: 'fas',
             uploadUrl: '#', // you must set a valid URL here else you will get an error
@@ -132,8 +128,6 @@
             initialPreviewAsData: true,
             initialPreview: 
                 data
-
-
             ,
             //allowedFileTypes: ['image', 'video', 'flash'],
             slugCallback: function (filename) {
@@ -164,7 +158,7 @@
 
 
     </script>
-    <script>
+    @*<script>
          var arr = "@strImages";
         var aab = arr.replace(/&quot;/g, "\'");
         $(document).ready(function () {
@@ -189,8 +183,8 @@
             });
 
         });
-    </script>
-    <script>
+    </script>*@
+<script>
         $(document).ready(function () {
             var competition = $('#Competition option:selected').val();
             $("#data").validate({
@@ -227,7 +221,7 @@
                         $.ajax({
                             type: "POST",
                             enctype: 'multipart/form-data',
-                            url: "/Admin/Post/Create",
+                            url: "/Admin/Post/Edit",
                             data: dataModel,
                             contentType: false, // Not to set any content header
                             processData: false, // Not to process data
@@ -255,7 +249,7 @@
             });
         });
 
-    </script>
+</script>
 
     <script src="~/ckeditor/ckeditor.js"></script>
 

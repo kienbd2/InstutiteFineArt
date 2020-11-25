@@ -62,6 +62,7 @@ namespace InstutiteFineArt.Areas.Admin.Controllers
                 {
                     return Json(new { result = true, mess = "Start time should not be less than current date" });
                 }
+                competition.CreatedTime=DateTime.Now;
                 _competitionRepository.Add(competition);
                 return Json(new { result = true, mess = "Create Success", url = "/Admin/Competitions/Index" });
             }
@@ -88,15 +89,21 @@ namespace InstutiteFineArt.Areas.Admin.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,StartDate,EndDate")] Competition competition)
+        [ValidateInput(false)]
+        //[ValidateAntiForgeryToken]
+        public ActionResult Edit(Competition competition)
         {
             if (ModelState.IsValid)
             {
+                if (competition.StartDate < DateTime.Now)
+                {
+                    return Json(new { result = true, mess = "Start time should not be less than current date" });
+                }
                 _competitionRepository.Update(competition);
-                return RedirectToAction("Index");
+                return Json(new { result = true, mess = "Edit Success", url = "/Admin/Competitions/Index" });
             }
-            return View(competition);
+
+            return Json(new { result = false, mess = "Edit not Success", url = "/Admin/Competitions/Index" });
         }
 
         // GET: Admin/Competitions/Delete/5
