@@ -1,5 +1,8 @@
 ﻿using IdentitySample.Models;
 using InstutiteOfFineArt.Core.Model;
+using InstutiteOfFineArt.DAL.Repository;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using System.Data.Entity;
 using System.Linq;
@@ -13,8 +16,12 @@ namespace InstutiteFineArt.Areas.Admin.Controllers
     [Authorize(Roles = "Administrator")]
     public class UsersAdminController : Controller
     {
+        private readonly InstutiteFineArtDbContext context;
+        private readonly UserRepository _repoUser;
         public UsersAdminController()
         {
+            _repoUser = new UserRepository();
+            context = new InstutiteFineArtDbContext();
         }
 
         public UsersAdminController(ApplicationUserManager userManager, ApplicationRoleManager roleManager)
@@ -55,6 +62,20 @@ namespace InstutiteFineArt.Areas.Admin.Controllers
         public async Task<ActionResult> Index()
         {
             return View(await UserManager.Users.ToListAsync());
+        }
+        public ActionResult StaffIndex()
+        {
+            var role = RoleManager.Roles.FirstOrDefault(x => x.Name == "Staff");
+            var lstUserId = _repoUser.FindAll(x => x.RoleId == role.Id).Select(x=>x.UserId).ToList();
+            var lstUser = UserManager.Users.Where(x => lstUserId.Any(p=>p.Contains(x.Id)));
+            return View(lstUser);
+        }
+        public ActionResult StudentIndex()
+        {
+            var role = RoleManager.Roles.FirstOrDefault(x => x.Name == "Student");
+            var lstUserId = _repoUser.FindAll(x => x.RoleId == role.Id).Select(x => x.UserId).ToList();
+            var lstUser = UserManager.Users.Where(x => lstUserId.Any(p => p.Contains(x.Id)));
+            return View(lstUser);
         }
 
         //

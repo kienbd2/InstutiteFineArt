@@ -35,7 +35,11 @@
                 </ul>
             </li>
             <li>
-                <a href="/Admin/UsersAdmin/Index"><i class="fa fa-fire"></i> Manager User <span class="fa fa-chevron-down"></span></a>
+                <a><i class="fa fa-fire"></i> Manager User <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li>@Html.ActionLink("Staff", "StaffIndex", "UsersAdmin")</li>
+                    <li> @Html.ActionLink("Student", "StudentIndex", "UsersAdmin")</li>
+                </ul>
             </li>
             <li>
                 <a href="/Admin/RolesAdmin/Index"><i class="fa fa-fire"></i> Manager Role <span class="fa fa-chevron-down"></span></a>

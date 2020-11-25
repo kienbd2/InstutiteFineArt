@@ -113,8 +113,9 @@
     <script>
         var arr = "@strImages.TrimEnd(',')";
         var aab = arr.replace(/&quot;/g, "");
-
-        console.log(aab);
+        var model = '@Html.Raw(Json.Encode(lstImages))';
+             var data = JSON.parse(model);
+        console.log(data);
         $("#file-1").fileinput({
             theme: 'fas',
             uploadUrl: '#', // you must set a valid URL here else you will get an error
@@ -129,11 +130,11 @@
             previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
             overwriteInitial: false,
             initialPreviewAsData: true,
-            initialPreview: [
-                aab,
-               "https://res.cloudinary.com/dev2020/image/upload/v1605894758/u4wf6ekwp0m4hbosnuja.jpg" ,
+            initialPreview: 
+                data
 
-            ],
+
+            ,
             //allowedFileTypes: ['image', 'video', 'flash'],
             slugCallback: function (filename) {
                     return filename.replace('(', '_').replace(']', '_');
@@ -238,7 +239,7 @@
                                 else {
                                     alert(response.mess);
                                     $("#message").removeClass("loader");
-                            TrimEnd   TrimEnd★ Trim }
+                                     }
 
 
                             },

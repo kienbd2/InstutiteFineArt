@@ -27,7 +27,6 @@ namespace InstutiteFineArt.Areas.Admin.Controllers
             _userRepository = new UserRepository();
         }
         // GET: Admin/Post
-        [Authorize(Roles = "Student")]
         public ActionResult Index()
         {
             var userID = User.Identity.GetUserId();

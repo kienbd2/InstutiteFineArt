@@ -5463,6 +5463,8 @@
     <Content Include="Areas\Admin\Views\Competitions\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Competitions\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Post\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\UsersAdmin\StaffIndex.cshtml" />
+    <Content Include="Areas\Admin\Views\UsersAdmin\StudentIndex.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
