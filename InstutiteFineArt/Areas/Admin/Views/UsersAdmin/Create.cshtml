@@ -3,51 +3,127 @@
     ViewBag.Title = "Create";
 }
 
-<h2>@ViewBag.Title.</h2>
+
+<style type="text/css">
+
+    label.error {
+        color: red;
+    }
+</style>
+
+
+
+
 
 @using (Html.BeginForm("Create", "UsersAdmin", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
-    <h4>Create a new account.</h4>
-    <hr />
     @Html.ValidationSummary("", new { @class = "text-error" })
-    <div class="form-group">
-        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">
-            Select User Role
-        </label>
-        <div class="col-md-10">
-            @foreach (var item in (SelectList)ViewBag.RoleId)
-            {
-                <input type="checkbox" name="SelectedRoles" value="@item.Value" class="checkbox-inline" />
-                @Html.Label(item.Value, new { @class = "control-label" })
-            }
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Create" />
-        </div>
-    </div>
-}
 
+
+    <div class="">
+        <h3 style="text-align: center;">Create a new account.</h3>
+
+        <div class="row">
+            <!-- form input mask -->
+            <div class="col-md-12 col-sm-12  ">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <form class="" action="" id="data" method="post" enctype="multipart/form-data">
+                            <fieldset>
+                                <div class="field item form-group">
+                                    @Html.LabelFor(m => m.Email, new { @class = "col-form-label col-md-2 col-sm-2" })
+                                    <div class="col-md-9 col-sm-9">
+                                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="field item form-group">
+                                    @Html.LabelFor(m => m.Password, new { @class = "col-form-label col-md-2 col-sm-2" })
+                                    <div class="col-md-9 col-sm-9">
+                                        @Html.TextBoxFor(m => m.Password, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="field item form-group">
+                                    @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-form-label col-md-2 col-sm-2" })
+                                    <div class="col-md-9 col-sm-9">
+                                        @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="field item form-group">
+                                    @Html.LabelFor(m => m.DateOfBirth, new { @class = "col-form-label col-md-2 col-sm-2" })
+                                    <div class="col-md-9 col-sm-9">
+                                        @Html.TextBoxFor(m => m.DateOfBirth, new { @class = "form-control", type = "date" })
+                                    </div>
+                                </div>
+                                <div class="field item form-group">
+                                    @Html.LabelFor(m => m.Avatar, new { @class = "col-form-label col-md-2 col-sm-2" })
+                                    <div class="col-md-4 col-sm-4">
+                                        <div class="file-loading">
+                                            @Html.EditorFor(x => x.Avatar, new { htmlAttributes= new { @class = "form-control", type = "file" } })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="field item form-group">
+                                    <label class="col-form-label col-md-2 col-sm-2">
+                                        Select User Role
+                                    </label>
+                                    <div class="col-md-9 col-sm-9">
+                                        @foreach (var item in (SelectList)ViewBag.RoleId)
+                                        {
+                                            <input type="checkbox" name="SelectedRoles" value="@item.Value" class="checkbox-inline" />
+                                            @Html.Label(item.Value, new { @class = "control-label" })
+                                        }
+                                    </div>
+                                </div>
+
+
+                                <div class="ln_solid">
+                                    <div class="form-group">
+                                        <div class="col-md-6 offset-md-3">
+                                            <input type='submit' class="btn btn-primary" id="btnSave" value="Submit" />
+                                            @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-success" })
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- /form input mask -->
+
+        </div>
+    </div><!-- /.docs-toggles -->
+
+}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 @section Scripts {
+    <script>
+        var btnCust = '<button type="button" class="btn btn-secondary" title="Add picture tags" ' +
+            'onclick="alert(\'Call your custom code here.\')">' +
+            '<i class="glyphicon glyphicon-tag"></i>' +
+            '</button>';
+        $("#Avatar").fileinput({
+            overwriteInitial: true,
+            maxFileSize: 1500,
+            showClose: false,
+            showCaption: false,
+            browseLabel: '',
+            removeLabel: '',
+            browseIcon: '<i class="glyphicon glyphicon-folder-open"></i>',
+            removeIcon: '<i class="glyphicon glyphicon-remove"></i>',
+            removeTitle: 'Cancel or reset changes',
+            elErrorContainer: '#kv-avatar-errors-1',
+            msgErrorClass: 'alert alert-block alert-danger',
+            defaultPreviewContent: '<img src="/Images/default-avatar-male.png" alt="Your Avatar">',
+            layoutTemplates: { main2: '{preview} ' + btnCust + ' {remove} {browse}' },
+            allowedFileExtensions: ["jpg", "png", "gif"]
+        });
+    </script>
     @Scripts.Render("~/bundles/jqueryval")
 }

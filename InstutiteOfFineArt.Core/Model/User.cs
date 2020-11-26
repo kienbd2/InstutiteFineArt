@@ -13,7 +13,10 @@ namespace InstutiteOfFineArt.Core.Model
     public class User : IdentityUser
     {
         public string Avartar { get; set; }
-        [Required(ErrorMessage = "Name is required")]
+        [Display(Name = "Date Of Birth")]
+        [Required(ErrorMessage = "Date Of Birth is required")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime DateOfBirth { get; set; }
         public virtual IList<Post> Posts { get; set; }
         public virtual UserClass UserClass { get; set; }

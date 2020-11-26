@@ -115,7 +115,6 @@
 
             $(document).on('submit', '#data', function (e) {
                 e.preventDefault();
-                var dataModel = new FormData(form);
                 var startDate = new Date($('#StartDate').val());
                 var endDate = new Date($('#EndDate').val());
                 var today = new Date();

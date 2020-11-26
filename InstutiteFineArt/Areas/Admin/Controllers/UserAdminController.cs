@@ -1,10 +1,13 @@
-﻿using IdentitySample.Models;
+﻿using CloudinaryDotNet;
+using CloudinaryDotNet.Actions;
+using IdentitySample.Models;
 using InstutiteOfFineArt.Core.Model;
 using InstutiteOfFineArt.DAL.Repository;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -66,8 +69,8 @@ namespace InstutiteFineArt.Areas.Admin.Controllers
         public ActionResult StaffIndex()
         {
             var role = RoleManager.Roles.FirstOrDefault(x => x.Name == "Staff");
-            var lstUserId = _repoUser.FindAll(x => x.RoleId == role.Id).Select(x=>x.UserId).ToList();
-            var lstUser = UserManager.Users.Where(x => lstUserId.Any(p=>p.Contains(x.Id)));
+            var lstUserId = _repoUser.FindAll(x => x.RoleId == role.Id).Select(x => x.UserId).ToList();
+            var lstUser = UserManager.Users.Where(x => lstUserId.Any(p => p.Contains(x.Id)));
             return View(lstUser);
         }
         public ActionResult StudentIndex()
@@ -108,11 +111,35 @@ namespace InstutiteFineArt.Areas.Admin.Controllers
         // POST: /Users/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(RegisterViewModel userViewModel, params string[] selectedRoles)
+        public async Task<ActionResult> Create(RegisterViewModel userViewModel, HttpPostedFileBase Avatar, params string[] selectedRoles)
         {
             if (ModelState.IsValid)
             {
-                var user = new User { UserName = userViewModel.Email, Email = userViewModel.Email };
+                var images = "";
+                HttpFileCollectionBase files = Request.Files;
+                if (files.Count > 5)
+                {
+                    return Json(new { result = false, mess = "Do not upload larger than 5 images" });
+                }
+
+                Task task = Task.Run(async () =>
+                {
+
+                    Account account = new Account("dev2020", "247996535991499", "9jI_5YjJaseBKUrY929sUtt0Fy0");
+
+                    string path = Path.Combine(Server.MapPath("Images"), Path.GetFileName(Avatar.FileName));
+                    Cloudinary cloudinary = new Cloudinary(account);
+                    var uploadParams = new ImageUploadParams()
+                    {
+                        File = new FileDescription(path, Avatar.InputStream),
+                    };
+                    var uploadResult = await cloudinary.UploadAsync(uploadParams);
+                    images = uploadResult.SecureUrl.ToString();
+
+                });
+                task.Wait();
+
+                var user = new User { UserName = userViewModel.Email, Email = userViewModel.Email, DateOfBirth = userViewModel.DateOfBirth };
                 var adminresult = await UserManager.CreateAsync(user, userViewModel.Password);
 
                 //Add User to the selected Roles 

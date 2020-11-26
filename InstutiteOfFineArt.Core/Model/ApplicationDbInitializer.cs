@@ -42,7 +42,7 @@ namespace InstutiteOfFineArt.Core.Model
             var user = userManager.FindByName("kienstudent@example.com");
             if (user == null)
             {
-                user = new User { UserName = "kienstudent", Email = "kienstudent@example.com", DateOfBirth = new DateTime(1990, 10, 10) };
+                user = new User { UserName = "kienstudent@example.com", Email = "kienstudent@example.com", DateOfBirth = new DateTime(1990, 10, 10) };
                 var result = userManager.Create(user, password);
                 result = userManager.SetLockoutEnabled(user.Id, false);
                 userManager.AddToRole(user.Id, roleStudent.Name);
@@ -50,7 +50,7 @@ namespace InstutiteOfFineArt.Core.Model
             var user2 = userManager.FindByName("kienstaff@example.com");
             if (user2 == null)
             {
-                user2 = new User { UserName = "kienstaff", Email = "kienstaff@example.com", DateOfBirth = new DateTime(1980, 10, 20) };
+                user2 = new User { UserName = "kienstaff@example.com", Email = "kienstaff@example.com", DateOfBirth = new DateTime(1980, 10, 20) };
                 var result = userManager.Create(user2, password);
                 result = userManager.SetLockoutEnabled(user2.Id, false);
                 userManager.AddToRole(user2.Id, roleStaff.Name);
@@ -58,7 +58,7 @@ namespace InstutiteOfFineArt.Core.Model
             var user3 = userManager.FindByName("kienadmin");
             if (user3 == null)
             {
-                user3 = new User { UserName = "kienadmin", Email = "kienadmin@example.com", DateOfBirth = new DateTime(1970, 02, 10) };
+                user3 = new User { UserName = "kienadmin@example.com", Email = "kienadmin@example.com", DateOfBirth = new DateTime(1970, 02, 10) };
                 userManager.Create(user3, password);
                 userManager.SetLockoutEnabled(user3.Id, false);
                 userManager.AddToRole(user3.Id, roleAdministrator.Name);

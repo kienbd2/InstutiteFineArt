@@ -40,16 +40,21 @@
                     <li> @Html.ActionLink("Create Paintin", "Create", "Post")</li>
                 </ul>
             </li>
-            <li>
-                <a><i class="fa fa-fire"></i> Manager User <span class="fa fa-chevron-down"></span></a>
-                <ul class="nav child_menu">
-                    <li>@Html.ActionLink("Staff", "StaffIndex", "UsersAdmin")</li>
-                    <li> @Html.ActionLink("Student", "StudentIndex", "UsersAdmin")</li>
-                </ul>
-            </li>
-            <li>
-                <a href="/Admin/RolesAdmin/Index"><i class="fa fa-fire"></i> Manager Role <span class="fa fa-chevron-down"></span></a>
-            </li>
+            @if (Request.IsAuthenticated && User.IsInRole("Administrator"))
+            {
+
+                <li>
+                    <a><i class="fa fa-fire"></i> Manager User <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                        <li>@Html.ActionLink("Staff", "StaffIndex", "UsersAdmin")</li>
+                        <li> @Html.ActionLink("Student", "StudentIndex", "UsersAdmin")</li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="/Admin/RolesAdmin/Index"><i class="fa fa-fire"></i> Manager Role <span class="fa fa-chevron-down"></span></a>
+                </li>
+            }
+
         </ul>
     </div>
 
