@@ -1,13 +1,19 @@
-﻿ <!-- menu profile quick info -->
-<div class="profile clearfix">
-    <div class="profile_pic">
-        <img src="~/App_Themes/CMS/production/images/img.jpg" alt="..." class="img-circle profile_img">
+﻿@using Microsoft.AspNet.Identity
+<!-- menu profile quick info -->
+@if (Request.IsAuthenticated)
+{
+    <div class="profile clearfix">
+        <div class="profile_pic">
+            <img src="~/App_Themes/CMS/production/images/img.jpg" alt="..." class="img-circle profile_img">
+        </div>
+        <div class="profile_info">
+            <span>Hello, @User.Identity.GetUserName()</span>
+
+        </div>
     </div>
-    <div class="profile_info">
-        <span>Xin Chào,</span>
-       
-    </div>
-</div>
+}
+
+
 <!-- /menu profile quick info -->
 
 <br />
