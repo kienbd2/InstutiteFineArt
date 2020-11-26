@@ -11,7 +11,7 @@ namespace InstutiteFineArt.Controllers
         // GET: Competition
         public ActionResult Index()
         {
-            return View();
+            return View(); 
         }
     }
 }
