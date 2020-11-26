@@ -1,6 +1,7 @@
 a.meanmenu-reveal{display:none}
 .mean-container .mean-bar {
   background: transparent;
+  top: 0;
   float: left;
   min-height: 42px;
   padding: 0;

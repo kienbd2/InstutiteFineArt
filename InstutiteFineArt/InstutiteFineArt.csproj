@@ -3914,6 +3914,7 @@
     <Content Include="App_Themes\Home\css\magnific-popup.css" />
     <Content Include="App_Themes\Home\css\main.css" />
     <Content Include="App_Themes\Home\css\meanmenu.min.css" />
+    <Content Include="App_Themes\Home\css\MyStyle.css" />
     <Content Include="App_Themes\Home\css\nivo-slider.css" />
     <Content Include="App_Themes\Home\css\normalize.css" />
     <Content Include="App_Themes\Home\css\owl.carousel.min.css" />
@@ -5525,6 +5526,7 @@
     <Content Include="Views\Account\DisplayEmail.cshtml" />
     <Content Include="Views\Shared\_LayoutLogin.cshtml" />
     <Content Include="Views\Competition\Index.cshtml" />
+    <Content Include="Views\Competition\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
