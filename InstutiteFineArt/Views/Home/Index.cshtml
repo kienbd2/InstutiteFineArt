@@ -1,4 +1,8 @@
-﻿@{
+﻿@model PagedList.IPagedList<InstutiteOfFineArt.Core.Model.User>
+@using PagedList.Mvc;
+@using System.Globalization;
+
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -45,242 +49,59 @@
     <div class="container">
         <h2 class="title-default-left">Our Skilled Lecturers</h2>
         <div class="row">
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                <div class="single-item">
-                    <div class="lecturers1-item-wrapper">
-                        <div class="lecturers-img-wrapper">
-                            <a href="#"><img class="img-responsive" src="~/App_Themes/Home/Images/1.jpg" alt="team"></a>
-                        </div>
-                        <div class="lecturers-content-wrapper">
-                            <h3 class="item-title"><a href="#">Rosy Janner</a></h3>
-                            <span class="item-designation">Senior Finance Lecturer</span>
-                            <ul class="lecturers-social">
-                                <li><a href="#"><i class="fa fa-envelope-o" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                <div class="single-item">
-                    <div class="lecturers1-item-wrapper">
-                        <div class="lecturers-img-wrapper">
-                            <a href="#"><img class="img-responsive" src="~/App_Themes/Home/Images/2.jpg" alt="team"></a>
-                        </div>
-                        <div class="lecturers-content-wrapper">
-                            <h3 class="item-title"><a href="#">Mike Hussy</a></h3>
-                            <span class="item-designation">Senior Finance Lecturer</span>
-                            <ul class="lecturers-social">
-                                <li><a href="#"><i class="fa fa-envelope-o" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                            </ul>
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="single-item">
+                        <div class="lecturers1-item-wrapper">
+                            <div class="lecturers-img-wrapper">
+                                @if (item.Avartar.IsEmpty())
+                                {
+                                    <a href="#"><img class="img-responsive" src="/Images/default-avatar-male.png" alt="team"></a>
+
+                                }
+                                else
+                                {
+                                    <a href="#"><img class="img-responsive" src="@item.Avartar" alt="team"></a>
+                                }
+                            </div>
+                            <div class="lecturers-content-wrapper">
+                                <h3 class="item-title"><a href="#">@item.UserName</a></h3>
+                                <span class="item-designation">Senior Finance Lecturer</span>
+                                <ul class="lecturers-social">
+                                    <li><a href="#"><i class="fa fa-envelope-o" aria-hidden="true"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                <div class="single-item">
-                    <div class="lecturers1-item-wrapper">
-                        <div class="lecturers-img-wrapper">
-                            <a href="#"><img class="img-responsive" src="~/App_Themes/Home/Images/3.jpg" alt="team"></a>
-                        </div>
-                        <div class="lecturers-content-wrapper">
-                            <h3 class="item-title"><a href="#">Daziy Millar</a></h3>
-                            <span class="item-designation">Senior Finance Lecturer</span>
-                            <ul class="lecturers-social">
-                                <li><a href="#"><i class="fa fa-envelope-o" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                <div class="single-item">
-                    <div class="lecturers1-item-wrapper">
-                        <div class="lecturers-img-wrapper">
-                            <a href="#"><img class="img-responsive" src="~/App_Themes/Home/Images/4.jpg" alt="team"></a>
-                        </div>
-                        <div class="lecturers-content-wrapper">
-                            <h3 class="item-title"><a href="#">Kazi Fahim</a></h3>
-                            <span class="item-designation">Senior Finance Lecturer</span>
-                            <ul class="lecturers-social">
-                                <li><a href="#"><i class="fa fa-envelope-o" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                <div class="single-item">
-                    <div class="lecturers1-item-wrapper">
-                        <div class="lecturers-img-wrapper">
-                            <a href="#"><img class="img-responsive" src="~/App_Themes/Home/Images/5.jpg" alt="team"></a>
-                        </div>
-                        <div class="lecturers-content-wrapper">
-                            <h3 class="item-title"><a href="#">David Lipu</a></h3>
-                            <span class="item-designation">Senior Finance Lecturer</span>
-                            <ul class="lecturers-social">
-                                <li><a href="#"><i class="fa fa-envelope-o" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                <div class="single-item">
-                    <div class="lecturers1-item-wrapper">
-                        <div class="lecturers-img-wrapper">
-                            <a href="#"><img class="img-responsive" src="~/App_Themes/Home/Images/6.jpg" alt="team"></a>
-                        </div>
-                        <div class="lecturers-content-wrapper">
-                            <h3 class="item-title"><a href="#">Luice Nishaa</a></h3>
-                            <span class="item-designation">Senior Finance Lecturer</span>
-                            <ul class="lecturers-social">
-                                <li><a href="#"><i class="fa fa-envelope-o" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                <div class="single-item">
-                    <div class="lecturers1-item-wrapper">
-                        <div class="lecturers-img-wrapper">
-                            <a href="#"><img class="img-responsive" src="~/App_Themes/Home/Images/7.jpg" alt="team"></a>
-                        </div>
-                        <div class="lecturers-content-wrapper">
-                            <h3 class="item-title"><a href="#">Tom Steven</a></h3>
-                            <span class="item-designation">Senior Finance Lecturer</span>
-                            <ul class="lecturers-social">
-                                <li><a href="#"><i class="fa fa-envelope-o" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                <div class="single-item">
-                    <div class="lecturers1-item-wrapper">
-                        <div class="lecturers-img-wrapper">
-                            <a href="#"><img class="img-responsive" src="~/App_Themes/Home/Images/8.jpg" alt="team"></a>
-                        </div>
-                        <div class="lecturers-content-wrapper">
-                            <h3 class="item-title"><a href="#">Jenifar Lopez</a></h3>
-                            <span class="item-designation">Senior Finance Lecturer</span>
-                            <ul class="lecturers-social">
-                                <li><a href="#"><i class="fa fa-envelope-o" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                <div class="single-item">
-                    <div class="lecturers1-item-wrapper">
-                        <div class="lecturers-img-wrapper">
-                            <a href="#"><img class="img-responsive" src="~/App_Themes/Home/Images/9.jpg" alt="team"></a>
-                        </div>
-                        <div class="lecturers-content-wrapper">
-                            <h3 class="item-title"><a href="#">Essy Rojario</a></h3>
-                            <span class="item-designation">Senior Finance Lecturer</span>
-                            <ul class="lecturers-social">
-                                <li><a href="#"><i class="fa fa-envelope-o" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                <div class="single-item">
-                    <div class="lecturers1-item-wrapper">
-                        <div class="lecturers-img-wrapper">
-                            <a href="#"><img class="img-responsive" src="~/App_Themes/Home/Images/10.jpg" alt="team"></a>
-                        </div>
-                        <div class="lecturers-content-wrapper">
-                            <h3 class="item-title"><a href="#">Mike Hussy</a></h3>
-                            <span class="item-designation">Senior Finance Lecturer</span>
-                            <ul class="lecturers-social">
-                                <li><a href="#"><i class="fa fa-envelope-o" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                <div class="single-item">
-                    <div class="lecturers1-item-wrapper">
-                        <div class="lecturers-img-wrapper">
-                            <a href="#"><img class="img-responsive" src="~/App_Themes/Home/Images/11.jpg" alt="team"></a>
-                        </div>
-                        <div class="lecturers-content-wrapper">
-                            <h3 class="item-title"><a href="#">Daziy Millar</a></h3>
-                            <span class="item-designation">Senior Finance Lecturer</span>
-                            <ul class="lecturers-social">
-                                <li><a href="#"><i class="fa fa-envelope-o" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                <div class="single-item">
-                    <div class="lecturers1-item-wrapper">
-                        <div class="lecturers-img-wrapper">
-                            <a href="#"><img class="img-responsive" src="~/App_Themes/Home/Images/12.jpg" alt="team"></a>
-                        </div>
-                        <div class="lecturers-content-wrapper">
-                            <h3 class="item-title"><a href="#">Lubna</a></h3>
-                            <span class="item-designation">Senior Finance Lecturer</span>
-                            <ul class="lecturers-social">
-                                <li><a href="#"><i class="fa fa-envelope-o" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            }
+
+
         </div>
-        <div class="row">
+        @*<div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <ul class="pagination-center">
                     <li class="active"><a href="#">1</a></li>
                     <li><a href="#">2</a></li>
                     <li><a href="#">3</a></li>
                     <li><a href="#">4</a></li>
+                </ul>
+            </div>
+        </div>*@
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <ul class="pagination-center">
+                    @Html.PagedListPager(Model, page => Url.Action("Index",
+                    new { page, size = ViewBag.currentSize, sortOrder = ViewBag.CurrentSort, SearchString = ViewBag.CurrentFilter }),
+                        new PagedListRenderOptions()
+                        {
+                            LiElementClasses = new List<string> { }
+                        }
+                    )
                 </ul>
             </div>
         </div>
