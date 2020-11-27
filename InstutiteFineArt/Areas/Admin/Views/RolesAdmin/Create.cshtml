@@ -4,37 +4,58 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create.</h2>
-
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
+    @Html.ValidationSummary("", new { @class = "text-error" })
 
-    <div class="form-horizontal">
-        <h4>Role.</h4>
-        <hr />
-        @Html.ValidationSummary(true)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Name)
+    <div class="">
+        <h3 style="text-align: center;">Create a new account.</h3>
+
+        <div class="row">
+            <!-- form input mask -->
+            <div class="col-md-12 col-sm-12  ">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <form class="" action="" id="data" method="post" enctype="multipart/form-data">
+                            <fieldset>
+                                <div class="field item form-group">
+                                    @Html.LabelFor(m => m.Name, new { @class = "col-form-label col-md-2 col-sm-2" })
+                                    <div class="col-md-9 col-sm-9">
+                                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                                    </div>
+                                </div>
+
+                                <div class="ln_solid">
+                                    <div class="form-group">
+                                        <div class="col-md-6 offset-md-3">
+                                            <input type='submit' class="btn btn-primary" id="btnSave" value="Submit" />
+                                            @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-success" })
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
             </div>
-        </div>
+            <!-- /form input mask -->
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
         </div>
-    </div>
+    </div><!-- /.docs-toggles -->
+
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+
+
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

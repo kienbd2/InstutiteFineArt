@@ -15,11 +15,11 @@ namespace InstutiteOfFineArt.Core.Model
         [Required(ErrorMessage = "Departure date is required")]
         [Display(Name = "Start Date")]
         [DataType(DataType.DateTime)]
-        [DisplayFormat(DataFormatString = "{0:MM/dd/yy H:mm:ss tt}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yy H:mm:ss tt}", ApplyFormatInEditMode = true)]
         public DateTime StartDate { get; set; }
         [Display(Name = "End Date")]
         [DataType(DataType.DateTime)]
-        [DisplayFormat(DataFormatString = "{0:MM/dd/yy H:mm:ss tt}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yy H:mm:ss tt}", ApplyFormatInEditMode = true)]
         public DateTime EndDate { get; set; }
         public DateTime CreatedTime { get; set; }
         public string Description { get; set; }

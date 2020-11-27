@@ -16,7 +16,8 @@
                 <tr>
                     <th>UserName</th>
                     <th>Email</th>
-
+                    <th>Date of birth</th>
+                    <th>Avatar</th>
                     <th></th>
 
                 </tr>
@@ -35,6 +36,16 @@
 
                         <td>@item.UserName</td>
                         <td>@item.Email</td>
+                        <td>@item.DateOfBirth.ToString("dd/MM/yyyy")</td>
+                        @if (item.Avartar.IsEmpty())
+                        {
+                            <td><a><img width="200" height="150" src="/Images/default-avatar-male.png" /></a></td>
+                        }
+                        else
+                        {
+                            <td><img width="200" height="150" src="@item.Avartar" /></td>
+                        }
+
                         <td>
 
                             @Html.ActionLink("Sửa thông tin", "Edit", new { Id = item.Id }, null) |

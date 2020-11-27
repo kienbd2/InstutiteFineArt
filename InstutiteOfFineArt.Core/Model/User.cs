@@ -15,8 +15,8 @@ namespace InstutiteOfFineArt.Core.Model
         public string Avartar { get; set; }
         [Display(Name = "Date Of Birth")]
         [Required(ErrorMessage = "Date Of Birth is required")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yy}", ApplyFormatInEditMode = true)]
         public DateTime DateOfBirth { get; set; }
         public virtual IList<Post> Posts { get; set; }
         public virtual UserClass UserClass { get; set; }

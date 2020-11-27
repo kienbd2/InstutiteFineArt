@@ -177,7 +177,7 @@ namespace InstutiteOfFineArt.Core.Model
             var user = userManager.FindByName(name);
             if (user == null)
             {
-                user = new User { UserName = name, Email = name };
+                user = new User { UserName = name, Email = name, DateOfBirth = new DateTime(1980, 10, 20) };
                 var result = userManager.Create(user, password);
                 result = userManager.SetLockoutEnabled(user.Id, false);
             }
