@@ -57,7 +57,10 @@ namespace InstutiteFineArt.Controllers
             ViewBag.total = lstPost.ToList().Count;
             page = page ?? 1;
             int pageSize = (size ?? 4);
+            ViewBag.pageSize = pageSize;
             int pageNumber = (page ?? 1);
+            ViewBag.Page = page;
+            ViewBag.competitionId = competitionId;
             return View(lstPost.ToPagedList(pageNumber, pageSize));
         }
     }

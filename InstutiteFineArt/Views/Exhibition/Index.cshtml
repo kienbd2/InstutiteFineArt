@@ -1,4 +1,6 @@
-﻿
+﻿@model PagedList.IPagedList<InstutiteOfFineArt.Core.Model.Post>
+@using PagedList.Mvc;
+@using System.Globalization;
 @{
     ViewBag.Title = "Index";
 }
@@ -19,120 +21,51 @@
         <div class="row">
             <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
                 <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                        <div class="news-box">
-                            <div class="news-img-holder">
-                                <img src="~/App_Themes/Home/Images/Exhibition/7.jpg" class="img-responsive" alt="research">
-                                <ul class="news-date2">
-                                    <li>27 Dec</li>
-                                    <li>2016</li>
-                                </ul>
+                    @if (Model.Count > 0)
+                    {
+                        foreach (var item in Model)
+                        {
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class="news-box">
+                                    <div class="news-img-holder">
+                                        <img style="width:420px !important;height:273px !important;" src="@(item.Images.Split(';')[0])" class="img-responsive" alt="research">
+                                        <ul class="news-date2">
+                                            <li>27 Dec</li>
+                                            <li>2016</li>
+                                        </ul>
+                                    </div>
+                                    <h3 class="title-news-left-bold"><a href="/Exhibition/Details">@item.Title</a></h3>
+                                    <ul class="title-bar-high news-comments">
+                                        <li><a href="#"><i class="fa fa-user" aria-hidden="true"></i><span>By</span> @item.User.UserName</a></li>
+                                        <li><a href="#"><i class="fa fa-tags" aria-hidden="true"></i>Business</a></li>
+                                        <li><a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i><span>(03)</span> Comments</a></li>
+                                    </ul>
+                                    @if (item.PostContent.Length > 150)
+                                    {
+                                        <p>@Html.Raw(item.PostContent.Substring(0,150)+"...")</p>
+                                    }
+                                    else
+                                    {
+                                        <p>@Html.Raw(item.PostContent)</p>
+                                    }
+
+                                </div>
                             </div>
-                            <h3 class="title-news-left-bold"><a href="/Exhibition/Details">How To Build HTML To WordPress Site?</a></h3>
-                            <ul class="title-bar-high news-comments">
-                                <li><a href="#"><i class="fa fa-user" aria-hidden="true"></i><span>By</span> Admin</a></li>
-                                <li><a href="#"><i class="fa fa-tags" aria-hidden="true"></i>Business</a></li>
-                                <li><a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i><span>(03)</span> Comments</a></li>
-                            </ul>
-                            <p>Bimply dummy text of the printing and typesetting istryrem Ipsum has been the industry's standard dummy text ever when an unknown printer.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                        <div class="news-box">
-                            <div class="news-img-holder">
-                                <img src="~/App_Themes/Home/Images/Exhibition/8.jpg" class="img-responsive" alt="research">
-                                <ul class="news-date2">
-                                    <li>20 Dec</li>
-                                    <li>2016</li>
-                                </ul>
-                            </div>
-                            <h3 class="title-news-left-bold"><a href="#">The printing and typesetting industry</a></h3>
-                            <ul class="title-bar-high news-comments">
-                                <li><a href="#"><i class="fa fa-user" aria-hidden="true"></i><span>By</span> Admin</a></li>
-                                <li><a href="#"><i class="fa fa-tags" aria-hidden="true"></i>Business</a></li>
-                                <li><a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i><span>(03)</span> Comments</a></li>
-                            </ul>
-                            <p>Bimply dummy text of the printing and typesetting istryrem Ipsum has been the industry's standard dummy text ever when an unknown printer.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                        <div class="news-box">
-                            <div class="news-img-holder">
-                                <img src="~/App_Themes/Home/Images/Exhibition/9.jpg" class="img-responsive" alt="research">
-                                <ul class="news-date2">
-                                    <li>12 Dec</li>
-                                    <li>2016</li>
-                                </ul>
-                            </div>
-                            <h3 class="title-news-left-bold"><a href="#">Business printing pesetting industry</a></h3>
-                            <ul class="title-bar-high news-comments">
-                                <li><a href="#"><i class="fa fa-user" aria-hidden="true"></i><span>By</span> Admin</a></li>
-                                <li><a href="#"><i class="fa fa-tags" aria-hidden="true"></i>Business</a></li>
-                                <li><a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i><span>(03)</span> Comments</a></li>
-                            </ul>
-                            <p>Bimply dummy text of the printing and typesetting istryrem Ipsum has been the industry's standard dummy text ever when an unknown printer.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                        <div class="news-box">
-                            <div class="news-img-holder">
-                                <img src="~/App_Themes/Home/Images/Exhibition/10.jpg" class="img-responsive" alt="research">
-                                <ul class="news-date2">
-                                    <li>03 Dec</li>
-                                    <li>2016</li>
-                                </ul>
-                            </div>
-                            <h3 class="title-news-left-bold"><a href="#">How To Build HTML To WordPress Site?</a></h3>
-                            <ul class="title-bar-high news-comments">
-                                <li><a href="#"><i class="fa fa-user" aria-hidden="true"></i><span>By</span> Admin</a></li>
-                                <li><a href="#"><i class="fa fa-tags" aria-hidden="true"></i>Business</a></li>
-                                <li><a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i><span>(03)</span> Comments</a></li>
-                            </ul>
-                            <p>Bimply dummy text of the printing and typesetting istryrem Ipsum has been the industry's standard dummy text ever when an unknown printer.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                        <div class="news-box">
-                            <div class="news-img-holder">
-                                <img src="~/App_Themes/Home/Images/Exhibition/11.jpg" class="img-responsive" alt="research">
-                                <ul class="news-date2">
-                                    <li>25 Nov</li>
-                                    <li>2016</li>
-                                </ul>
-                            </div>
-                            <h3 class="title-news-left-bold"><a href="#">The printing and typesetting industry</a></h3>
-                            <ul class="title-bar-high news-comments">
-                                <li><a href="#"><i class="fa fa-user" aria-hidden="true"></i><span>By</span> Admin</a></li>
-                                <li><a href="#"><i class="fa fa-tags" aria-hidden="true"></i>Business</a></li>
-                                <li><a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i><span>(03)</span> Comments</a></li>
-                            </ul>
-                            <p>Bimply dummy text of the printing and typesetting istryrem Ipsum has been the industry's standard dummy text ever when an unknown printer.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                        <div class="news-box">
-                            <div class="news-img-holder">
-                                <img src="~/App_Themes/Home/Images/Exhibition/12.jpg" class="img-responsive" alt="research">
-                                <ul class="news-date2">
-                                    <li>19 Nov</li>
-                                    <li>2016</li>
-                                </ul>
-                            </div>
-                            <h3 class="title-news-left-bold"><a href="#">How To Build HTML To WordPress Site?</a></h3>
-                            <ul class="title-bar-high news-comments">
-                                <li><a href="#"><i class="fa fa-user" aria-hidden="true"></i><span>By</span> Admin</a></li>
-                                <li><a href="#"><i class="fa fa-tags" aria-hidden="true"></i>Business</a></li>
-                                <li><a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i><span>(03)</span> Comments</a></li>
-                            </ul>
-                            <p>Bimply dummy text of the printing and typesetting istryrem Ipsum has been the industry's standard dummy text ever when an unknown printer.</p>
-                        </div>
-                    </div>
+                        }
+                    }
+                    else
+                    {
+                        <p>No Data</p>
+                    }
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <ul class="pagination-center">
-                            <li class="active"><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
+                            @Html.PagedListPager(Model, page => Url.Action("Index",
+                   new { page, size = ViewBag.currentSize, sortOrder = ViewBag.CurrentSort, SearchString = ViewBag.CurrentFilter }),
+                       new PagedListRenderOptions()
+                       {
+                           LiElementClasses = new List<string> { }
+                       }
+                   )
                         </ul>
                     </div>
                 </div>
