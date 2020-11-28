@@ -80,6 +80,7 @@ namespace InstutiteOfFineArt.Core.Model
                 EndDate = new DateTime(2020, 12, 04),
                 Description = "Description",
                 CreatedTime = DateTime.Now,
+                Logo = "https://res.cloudinary.com/dev2020/image/upload/v1605894758/u4wf6ekwp0m4hbosnuja.jpg",
                 Posts = new List<Post>
                 {
                     new Post

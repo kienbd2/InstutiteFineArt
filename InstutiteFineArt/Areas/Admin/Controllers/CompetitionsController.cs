@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using CloudinaryDotNet;
+using CloudinaryDotNet.Actions;
 using InstutiteOfFineArt.Core.Model;
 using InstutiteOfFineArt.DAL.Repository;
 
@@ -54,7 +57,7 @@ namespace InstutiteFineArt.Areas.Admin.Controllers
         [HttpPost]
         [ValidateInput(false)]
         //[ValidateAntiForgeryToken]
-        public ActionResult Create(Competition competition)
+        public ActionResult Create(Competition competition, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
@@ -62,6 +65,27 @@ namespace InstutiteFineArt.Areas.Admin.Controllers
                 {
                     return Json(new { result = true, mess = "Start time should not be less than current date" });
                 }
+                var images = "";
+                if (file != null)
+                {
+                    Task task = Task.Run(async () =>
+                    {
+
+                        Account account = new Account("dev2020", "247996535991499", "9jI_5YjJaseBKUrY929sUtt0Fy0");
+
+                        string path = Path.Combine(Server.MapPath("Images"), Path.GetFileName(file.FileName));
+                        Cloudinary cloudinary = new Cloudinary(account);
+                        var uploadParams = new ImageUploadParams()
+                        {
+                            File = new FileDescription(path, file.InputStream),
+                        };
+                        var uploadResult = await cloudinary.UploadAsync(uploadParams);
+                        images = uploadResult.SecureUrl.ToString();
+
+                    });
+                    task.Wait();
+                }
+                competition.Logo = images;
                 competition.CreatedTime=DateTime.Now;
                 _competitionRepository.Add(competition);
                 return Json(new { result = true, mess = "Create Success", url = "/Admin/Competitions/Index" });
@@ -91,13 +115,32 @@ namespace InstutiteFineArt.Areas.Admin.Controllers
         [HttpPost]
         [ValidateInput(false)]
         //[ValidateAntiForgeryToken]
-        public ActionResult Edit(Competition competition)
+        public ActionResult Edit(Competition competition, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
                 if (competition.StartDate < DateTime.Now)
                 {
                     return Json(new { result = true, mess = "Start time should not be less than current date" });
+                }
+                if (file != null)
+                {
+                    Task task = Task.Run(async () =>
+                    {
+
+                        Account account = new Account("dev2020", "247996535991499", "9jI_5YjJaseBKUrY929sUtt0Fy0");
+
+                        string path = Path.Combine(Server.MapPath("Images"), Path.GetFileName(file.FileName));
+                        Cloudinary cloudinary = new Cloudinary(account);
+                        var uploadParams = new ImageUploadParams()
+                        {
+                            File = new FileDescription(path, file.InputStream),
+                        };
+                        var uploadResult = await cloudinary.UploadAsync(uploadParams);
+                        competition.Logo = uploadResult.SecureUrl.ToString();
+
+                    });
+                    task.Wait();
                 }
                 _competitionRepository.Update(competition);
                 return Json(new { result = true, mess = "Edit Success", url = "/Admin/Competitions/Index" });

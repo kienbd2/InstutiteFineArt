@@ -1,0 +1,67 @@
+﻿@model IEnumerable<InstutiteOfFineArt.Core.Model.UserClass>
+
+@{
+    ViewBag.Title = "Index";
+}
+@{var stt = 1;}
+
+<link href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" rel="stylesheet" />
+
+<div class="row">
+
+    <div class="col-sm-12">
+
+        @Html.ActionLink("Create class", "Create", null, new { @class = "btn btn-primary" })
+
+        <table class="table table-borderer display" id="example">
+
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Class Name</th>
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                @foreach (var item in Model)
+
+                {
+                <tr>
+                    <td>@(stt++)</td>
+                    <td>@item.Name</td>
+
+
+                    <td>
+
+                        @Html.ActionLink("Sửa thông tin", "Edit", new { Id = item.Id }, null) |
+
+                        @Html.ActionLink("Xóa", "Delete", new { Id = item.Id }, null)
+
+                    </td>
+
+                </tr>
+
+                }
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.js" type="text/javascript"></script>
+
+@section Scripts {
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script>
+        $(document).ready(function () {
+            var table = $('#example').DataTable();
+           
+        });
+    </script>
+}

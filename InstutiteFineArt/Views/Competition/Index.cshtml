@@ -1,4 +1,6 @@
-﻿
+﻿@model PagedList.IPagedList<InstutiteOfFineArt.Core.Model.Competition>
+@using PagedList.Mvc;
+@using System.Globalization;
 @{
     ViewBag.Title = "Index";
 }
@@ -27,147 +29,126 @@
                             </div>
                             <div class="col-md-8">
                                 <form id="checkout-form" style="display:flex; float:right; padding: 10px;">
+                                    @using (Html.BeginForm())
+                                    {
 
-                                    <div class=" course-name">
-                                        <input id="first-name" placeholder="Course Name" class="form-control" type="text">
+                                        @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, null, new { @class = "sidebar-search-btn disabled", @placeholder = "Search for..." })
 
-                                    </div>
-                                    <button class="sidebar-search-btn disabled" type="submit" value="Login">Search</button>
+                                        <button class="sidebar-search-btn disabled" type="submit" value="Login">Search</button>
+
+                                    }
+
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
+                    @if (Model.Count > 0)
+                    {
+                        foreach (var item in Model)
+                        {
+                            <div class="tab-content">
+                                <!-- Listed product show -->
+                                <div class="tab-pane active" id="list-view">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div @*class="product-box2"*@>
+                                            <div class="media">
+                                                <a class="pull-left" href="#">
+                                                    <img class="img-responsive" width="200" height="300" src="@(item.Logo.IsEmpty()? "/Images/logo.jpg": item.Logo)" alt="product">
+                                                </a>
+                                                <div class="media-body">
+                                                    <div class="product-box2-content">
+                                                        @*<h3><a href="/Competition/Details">@item.Name</a></h3>*@
+                                                        <h3>@Html.ActionLink(item.Name, "Details", new { competitionId = item.CompetitionId }, null) </h3>
+                                                        <p> @Html.Raw(item.Description)</p>
+                                                    </div>
+                                                    <div class="row">
+                                                        @{ var lstPost = item.Posts.OrderByDescending(x => x.Mark).ThenBy(x => x.UpdatedTime).ToList(); }
+                                                        @for (int i = 0; i < 3; i++)
+                                                        {
+                                                            if (i > lstPost.Count || lstPost.Count == 0)
+                                                            {
+                                                                continue;
+                                                            }
+                                                            if (i == 0)
+                                                            {
+                                                                <div class="col-lg-4" data-id="3461121">
+                                                                    <div class="avatar" data-original-title="" title="" aria-describedby="popover323545">
+
+                                                                    </div>
+                                                                    <div class="info">
+                                                                        <span>@lstPost[i].User.UserName</span>
+                                                                        <p>
+                                                                            <img src="" class="level-avatar" alt=""><img width="50" height="50" src="@(@lstPost[i].User.Avartar.IsEmpty()? "/Images/default-avatar-male.png": @lstPost[i].User.Avartar)">
+                                                                            <img class="top-item" width="50" height="50" src="~/App_Themes/Home/Images/top1.png">
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            }
+                                                            if (i == 1)
+                                                            {
+                                                                <div class="col-lg-4" data-id="3461121">
+
+                                                                    <div class="info">
+                                                                        <span>@lstPost[i].User.UserName</span>
+                                                                        <p>
+                                                                            <img src="" class="level-avatar" alt=""><img width="50" height="50" src="@(@lstPost[i].User.Avartar.IsEmpty()? "/Images/default-avatar-male.png": @lstPost[i].User.Avartar)" class="user-avatar" alt="">
+                                                                            <img class="top-item" width="50" height="50" src="~/App_Themes/Home/Images/top2.png">
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            }
+                                                            if (i == 2)
+                                                            {
+                                                                <div class="col-lg-4" data-id="3461121">
+
+                                                                    <div class="info">
+                                                                        <span>@lstPost[i].User.UserName</span>
+                                                                        <p>
+                                                                            <img src="" class="level-avatar" alt=""><img width="50" height="50" src="@(@lstPost[i].User.Avartar.IsEmpty()? "/Images/default-avatar-male.png": @lstPost[i].User.Avartar)" class="user-avatar" alt="">
+                                                                            <img class="top-item" width="50" height="50" src="~/App_Themes/Home/Images/top3.png">
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            }
+                                                        }
+
+
+
+
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <p>No Data</p>
+                    }
+
+
                     <!-- Tab panes -->
-                    <div class="tab-content">
-                        <!-- Listed product show -->
-                        <div class="tab-pane active" id="list-view">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <div class="product-box2">
-                                    <div class="media">
-                                        <a class="pull-left" href="#">
-                                            <img class="img-responsive" src="~/App_Themes/Home/Images/logo.jpg" alt="product">
-                                        </a>
-                                        <div class="media-body">
-                                            <div class="product-box2-content">
-                                                <h3><a href="/Competition/Details">Money Book - Finance</a></h3>
-
-                                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-lg-4" data-id="3461121">
-                                                    <div class="avatar" data-original-title="" title="" aria-describedby="popover323545">
-                                                        <img src="" class="level-avatar" alt=""><img src="" class="user-avatar" alt="">
-                                                    </div>
-                                                    <div class="info">
-                                                        <span>19130259@st....</span>
-                                                        <p>
-                                                            <img class="top-item" src="~/App_Themes/Home/Images/top1.png">
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-4" data-id="3461121">
-                                                    <div class="avatar" data-original-title="" title="" aria-describedby="popover323545">
-                                                        <img src="" class="level-avatar" alt=""><img src="" class="user-avatar" alt="">
-                                                    </div>
-                                                    <div class="info">
-                                                        <span>19130259@st....</span>
-                                                        <p>
-                                                            <img class="top-item" src="~/App_Themes/Home/Images/top2.png">
-                                                        </p>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-lg-4" data-id="3461121">
-                                                    <div class="avatar" data-original-title="" title="" aria-describedby="popover323545">
-                                                        <img src="" class="level-avatar" alt=""><img src="" class="user-avatar" alt="">
-                                                    </div>
-                                                    <div class="info">
-                                                        <span>19130259@st....</span>
-                                                        <p>
-                                                            <img class="top-item" src="~/App_Themes/Home/Images/top3.png">
-                                                        </p>
-                                                    </div>
-                                                </div>
 
 
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-content">
-                        <!-- Listed product show -->
-                        <div class="tab-pane active" id="list-view">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <div class="product-box2">
-                                    <div class="media">
-                                        <a class="pull-left" href="#">
-                                            <img class="img-responsive" src="~/App_Themes/Home/Images/logo.jpg" alt="product">
-                                        </a>
-                                        <div class="media-body">
-                                            <div class="product-box2-content">
-                                                <h3><a href="#">Money Book - Finance</a></h3>
-
-                                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-lg-4" data-id="3461121">
-                                                    <div class="avatar" data-original-title="" title="" aria-describedby="popover323545">
-                                                        <img src="" class="level-avatar" alt=""><img src="" class="user-avatar" alt="">
-                                                    </div>
-                                                    <div class="info">
-                                                        <span>19130259@st....</span>
-                                                        <p>
-                                                            <img class="top-item" src="~/App_Themes/Home/Images/top1.png">
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-4" data-id="3461121">
-                                                    <div class="avatar" data-original-title="" title="" aria-describedby="popover323545">
-                                                        <img src="" class="level-avatar" alt=""><img src="" class="user-avatar" alt="">
-                                                    </div>
-                                                    <div class="info">
-                                                        <span>19130259@st....</span>
-                                                        <p>
-                                                            <img class="top-item" src="~/App_Themes/Home/Images/top2.png">
-                                                        </p>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-lg-4" data-id="3461121">
-                                                    <div class="avatar" data-original-title="" title="" aria-describedby="popover323545">
-                                                        <img src="" class="level-avatar" alt=""><img src="" class="user-avatar" alt="">
-                                                    </div>
-                                                    <div class="info">
-                                                        <span>19130259@st....</span>
-                                                        <p>
-                                                            <img class="top-item" src="~/App_Themes/Home/Images/top3.png">
-                                                        </p>
-                                                    </div>
-                                                </div>
-
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <ul class="pagination-center">
-                            <li class="active"><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
+                            @Html.PagedListPager(Model, page => Url.Action("Index",
+                   new { page, size = ViewBag.currentSize, sortOrder = ViewBag.CurrentSort, SearchString = ViewBag.CurrentFilter }),
+                       new PagedListRenderOptions()
+                       {
+                           LiElementClasses = new List<string> { }
+                       }
+                   )
                         </ul>
                     </div>
                 </div>

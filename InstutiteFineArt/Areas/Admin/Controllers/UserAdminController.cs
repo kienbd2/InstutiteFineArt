@@ -202,7 +202,7 @@ namespace InstutiteFineArt.Areas.Admin.Controllers
         // POST: /Users/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(EditUserViewModel editUser, params string[] selectedRole)
+        public async Task<ActionResult> Edit(EditUserViewModel editUser, HttpPostedFileBase file, params string[] selectedRole)
         {
             if (ModelState.IsValid)
             {
@@ -211,7 +211,25 @@ namespace InstutiteFineArt.Areas.Admin.Controllers
                 {
                     return HttpNotFound();
                 }
+                if (file != null)
+                {
+                    Task task = Task.Run(async () =>
+                    {
 
+                        Account account = new Account("dev2020", "247996535991499", "9jI_5YjJaseBKUrY929sUtt0Fy0");
+
+                        string path = Path.Combine(Server.MapPath("Images"), Path.GetFileName(file.FileName));
+                        Cloudinary cloudinary = new Cloudinary(account);
+                        var uploadParams = new ImageUploadParams()
+                        {
+                            File = new FileDescription(path, file.InputStream),
+                        };
+                        var uploadResult = await cloudinary.UploadAsync(uploadParams);
+                        user.Avartar = uploadResult.SecureUrl.ToString();
+
+                    });
+                    task.Wait();
+                }
                 user.UserName = editUser.Email;
                 user.Email = editUser.Email;
 

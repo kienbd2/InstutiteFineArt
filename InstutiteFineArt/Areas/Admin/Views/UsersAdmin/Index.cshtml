@@ -34,14 +34,8 @@
                         <td>@item.UserName</td>
                         <td>@item.Email</td>
                         <td>@item.DateOfBirth.ToString("dd/MM/yyyy")</td>
-                        @if (item.Avartar.IsEmpty())
-                        {
-                            <td><a><img width="200" height="150" src="/Images/default-avatar-male.png" /></a></td>
-                        }
-                        else
-                        {
-                            <td><img width="200" height="150" src="@item.Avartar" /></td>
-                        }
+
+                        <td><img width="200" height="150" src="@(item.Avartar.IsEmpty()? "/Images/default-avatar-male.png": item.Avartar)" /></td>
 
                         <td>
 

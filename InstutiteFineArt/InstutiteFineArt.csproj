@@ -190,6 +190,7 @@
     <Compile Include="Areas\Admin\Controllers\CompetitionsController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\PostController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UserClassesController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CompetitionController.cs" />
     <Compile Include="Controllers\ExhibitionController.cs" />
@@ -4371,6 +4372,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\default-avatar-male.png" />
+    <Content Include="Images\logo.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\Admin\Views\web.config" />
@@ -5468,6 +5470,11 @@
     <Content Include="Areas\Admin\Views\Post\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\UsersAdmin\StaffIndex.cshtml" />
     <Content Include="Areas\Admin\Views\UsersAdmin\StudentIndex.cshtml" />
+    <Content Include="Areas\Admin\Views\UserClasses\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\UserClasses\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\UserClasses\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\UserClasses\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\UserClasses\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

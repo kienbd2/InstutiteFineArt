@@ -53,7 +53,17 @@
 
                                 </div>
                             </div>
-                            @Html.HiddenFor(x => x.CreatedTime)
+                            <div class="field item form-group">
+                                @Html.LabelFor(m => m.Logo, new { @class = "col-form-label col-md-2 col-sm-2" })
+                                <div class="col-md-4 col-sm-4">
+                                    <div class="file-loading">
+                                        <input id="file" name="file" type="file">
+                                        @*@Html.EditorFor(x => x.Avatar, new { htmlAttributes = new { @class = "form-control", type = "file" } })*@
+                                    </div>
+                                </div>
+                            </div>
+                            @Html.HiddenFor(x => x.Logo)
+                            @Html.HiddenFor(x=>x.CreatedTime)
                             <div class="ln_solid">
                                 <div class="form-group">
                                     <div class="col-md-6 offset-md-3">
@@ -164,6 +174,28 @@
             });
         });
 
+    </script>
+    <script>
+        var btnCust = '<button type="button" class="btn btn-secondary" title="Add picture tags" ' +
+            'onclick="alert(\'Call your custom code here.\')">' +
+            '<i class="glyphicon glyphicon-tag"></i>' +
+            '</button>';
+        $("#file").fileinput({
+            overwriteInitial: true,
+            maxFileSize: 1500,
+            showClose: false,
+            showCaption: false,
+            browseLabel: '',
+            removeLabel: '',
+            browseIcon: '<i class="glyphicon glyphicon-folder-open"></i>',
+            removeIcon: '<i class="glyphicon glyphicon-remove"></i>',
+            removeTitle: 'Cancel or reset changes',
+            elErrorContainer: '#kv-avatar-errors-1',
+            msgErrorClass: 'alert alert-block alert-danger',
+            defaultPreviewContent: '<img width="250" height="200"  src="@(Model.Logo.IsEmpty()? "/Images/logo.jpg" : Model.Logo)" alt="Your Avatar">',
+            layoutTemplates: { main2: '{preview} ' + btnCust + ' {remove} {browse}' },
+            allowedFileExtensions: ["jpg", "png", "gif"]
+        });
     </script>
 
     @Scripts.Render("~/bundles/jqueryval")

@@ -73,6 +73,13 @@
                                     <input id="file-1" type="file" name="file" multiple class="file" data-overwrite-initial="false" data-min-file-count="2" data-theme="fas">
                                 </div>
                             </div>
+                            <div class=" field item form-group">
+                                <div class="col-md-6 offset-md-3">
+                                    <div id="message"> </div>
+                                    @*<label id="mess" class="col-form-label col-md-3 col-sm-3 "></label>*@
+                                </div>
+
+                            </div>
 
                             <div class="ln_solid">
                                 <div class="form-group">
@@ -186,7 +193,7 @@
 
                 if ($("#data").valid()) {
                     var form = $('#data')[0];
-
+                    $("#message").addClass("loader");
                     var dataModel = new FormData(form);
                     dataModel.append("competition", competition);
                     if (confirm('Are you sure you want to create this?')) {

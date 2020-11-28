@@ -23,6 +23,7 @@ namespace InstutiteOfFineArt.Core.Model
         public DateTime EndDate { get; set; }
         public DateTime CreatedTime { get; set; }
         public string Description { get; set; }
+        public string Logo { get; set; }
         public virtual IList<Post> Posts { get; set; }
     }
 }
