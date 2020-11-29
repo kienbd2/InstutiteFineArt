@@ -29,20 +29,27 @@
                         <h3 class="sidebar-title">Search</h3>
                     </div>
                     <div class="col-md-8">
-                        <form id="checkout-form" style="display:flex; float:right; padding: 10px;">
-                            @using (Html.BeginForm())
-                            {
 
+                        @*@using (Html.BeginForm())
+                        {
+
+                            @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, null, new { @class = "sidebar-search-btn disabled", @placeholder = "Search for..." })
+
+                            <button class="sidebar-search-btn disabled" type="submit" value="Login">Search</button>
+
+                        }*@
+                        <form id="checkout-form"  style="display:flex; float:right; padding: 10px;">
+                            @using (Html.BeginForm("Details", "Competition", new { competitionId = ViewBag.competitionId }, FormMethod.Get))
+                            {
+                            <input id="competitionId" name="competitionId" type="hidden" value="@ViewBag.competitionId" />
                                 @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, null, new { @class = "sidebar-search-btn disabled", @placeholder = "Search for..." })
 
-                                <button class="sidebar-search-btn disabled" type="submit" value="Login">Search</button>
+                                <button class="sidebar-search-btn disabled" onclick="submitForm()" value="Login">Search</button>
 
                             }
-                            @*<div class=" course-name">
-                                    <input id="first-name" placeholder="Course Name" class="form-control" type="text">
-                                </div>
-                                <button class="sidebar-search-btn disabled" type="submit" value="Login">Search</button>*@
+
                         </form>
+
                     </div>
                 </div>
             </div>

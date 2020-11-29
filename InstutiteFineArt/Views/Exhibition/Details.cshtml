@@ -1,4 +1,4 @@
-﻿
+﻿@model InstutiteOfFineArt.Core.Model.Post
 @{
     ViewBag.Title = "Details";
 }
@@ -9,7 +9,7 @@
             <h1>News Details</h1>
             <ul>
                 <li><a href="/">Home</a> -</li>
-                <li>Details</li>
+                <li>Details - @Model.Title</li>
             </ul>
         </div>
     </div>
@@ -21,21 +21,29 @@
                 <div class="row news-details-page-inner">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="news-img-holder">
-                            <img src="~/App_Themes/Home/Images/Exhibition/13.jpg" class="img-responsive" alt="research">
+                            <img src="@Model.Images.Split(';')[0]" class="img-responsive" alt="research">
                             <ul class="news-date1">
-                                <li>27 Dec</li>
-                                <li>2016</li>
+                                <li>@Model.UpdatedTime.Day Dec</li>
+                                <li>@Model.UpdatedTime.Year</li>
                             </ul>
                         </div>
-                        <h2 class="title-default-left-bold-lowhight"><a href="#">How To Build HTML To WordPress Site?</a></h2>
+                        <h2 class="title-default-left-bold-lowhight"><a href="#">@Model.Title</a></h2>
                         <ul class="title-bar-high news-comments">
-                            <li><a href="#"><i class="fa fa-user" aria-hidden="true"></i><span>By</span> Admin</a></li>
+                            <li><a href="#"><i class="fa fa-user" aria-hidden="true"></i><span>By</span> @Model.User.UserName</a></li>
                             <li><a href="#"><i class="fa fa-tags" aria-hidden="true"></i>Business</a></li>
                             <li><a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i><span>(03)</span> Comments</a></li>
                         </ul>
-                        <p>Bimply dummy text of the printing and typesetting istryrem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer.when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuriesp into electronic.simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                        <p>@Html.Raw(Model.PostContent)</p>
                         <p><span>Bimply dummy text of the printing and typesetting istryrem Ipsum has been the industry's standard dummy type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchan scrambled.</span></p>
-                        <p>Bimply dummy text of the printing and typesetting istryrem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer.when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuriesp into electronic.simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy.</p>
+
+                        @foreach (var item in Model.Images.Split(';'))
+                        {
+                            if (!item.IsEmpty())
+                            {
+                                <img src="@item" class="img-responsive" alt="research">
+                            }
+                        }
+
                         <ul class="news-social">
                             <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
                             <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
@@ -44,9 +52,11 @@
                             <li><a href="#"><i class="fa fa-rss" aria-hidden="true"></i></a></li>
                             <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
                         </ul>
-                        <div class="course-details-comments">
+                        <div class="course-details-comments" >
+                            <input type="hidden" name="name" id="PostId" value="@Model.PostId" />
                             <h3 class="sidebar-title">(4) Comments</h3>
-                            <div class="media">
+                            <div id="list"></div>
+                            @*<div class="media" >
                                 <a href="#" class="pull-left">
                                     <img alt="Comments" src="~/App_Themes/Home/Images/Exhibition/comment/16.jpg" class="media-object">
                                 </a>
@@ -55,27 +65,7 @@
                                     <h4>Excellent course!</h4>
                                     <p>Rimply dummy text of the printinwhen an unknown printer took eype and scramb relofeletogimply dummy and typesetting industry.</p>
                                 </div>
-                            </div>
-                            <div class="media">
-                                <a href="#" class="pull-left">
-                                    <img alt="Comments" src="~/App_Themes/Home/Images/Exhibition/comment/17.jpg" class="media-object">
-                                </a>
-                                <div class="media-body">
-                                    <h3><a href="#">Lora Ekram</a></h3>
-                                    <h4>Excellent course!</h4>
-                                    <p>Rimply dummy text of the printinwhen an unknown printer took eype and scramb relofeletogimply dummy and typesetting industry.</p>
-                                </div>
-                            </div>
-                            <div class="media">
-                                <a href="#" class="pull-left">
-                                    <img alt="Comments" src="~/App_Themes/Home/Images/Exhibition/comment/18.jpg" class="media-object">
-                                </a>
-                                <div class="media-body">
-                                    <h3><a href="#">Mike Jones</a></h3>
-                                    <h4>Excellent course!</h4>
-                                    <p>Rimply dummy text of the printinwhen an unknown printer took eype and scramb relofeletogimply dummy and typesetting industry.</p>
-                                </div>
-                            </div>
+                            </div>*@
                         </div>
                         <!--Comment -->
                         <div class="leave-comments">
@@ -86,17 +76,17 @@
                                         <fieldset>
                                             <div class="col-sm-6">
                                                 <div class="form-group">
-                                                    <input type="text" placeholder="Name" class="form-control">
+                                                    <input type="email" placeholder="Name" id="name" class="form-control">
                                                     <div class="help-block with-errors"></div>
                                                 </div>
                                             </div>
                                             <div class="col-sm-6">
                                                 <div class="form-group">
-                                                    <input type="email" placeholder="Email" class="form-control">
+                                                    <input type="password" placeholder="Password" id="password" class="form-control">
                                                     <div class="help-block with-errors"></div>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-12">
+                                            <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <div class="rate-wrapper">
                                                         <div class="rate-label">Your Rating:</div>
@@ -110,15 +100,21 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <input type="number" placeholder="Mark" id="mark" class="form-control">
+                                                    <div class="help-block with-errors"></div>
+                                                </div>
+                                            </div>
                                             <div class="col-sm-12 col-md-12">
                                                 <div class="form-group">
-                                                    <textarea placeholder="Comment" class="textarea form-control" id="form-message" rows="8" cols="20"></textarea>
+                                                    <textarea placeholder="Comment" class="textarea form-control" id="commentText" rows="8" cols="115"></textarea>
                                                     <div class="help-block with-errors"></div>
                                                 </div>
                                             </div>
                                             <div class="col-sm-12">
                                                 <div class="form-group">
-                                                    <button type="submit" class="view-all-accent-btn">Post Comment</button>
+                                                    <button type="button" class="view-all-accent-btn" onclick="return _add();">Post Comment</button>
                                                 </div>
                                             </div>
                                         </fieldset>
@@ -144,19 +140,6 @@
                                     </div>
                                 </form>
                             </div>
-                        </div>
-                    </div>
-                    <div class="sidebar-box">
-                        <div class="sidebar-box-inner">
-                            <h3 class="sidebar-title">Categories</h3>
-                            <ul class="sidebar-categories">
-                                <li><a href="#">GMAT</a></li>
-                                <li><a href="#">IELTS</a></li>
-                                <li><a href="#">Regular MBA</a></li>
-                                <li><a href="#">BBA</a></li>
-                                <li><a href="#">CSE</a></li>
-                                <li><a href="#">Diploma</a></li>
-                            </ul>
                         </div>
                     </div>
                     <div class="sidebar-box">
@@ -204,21 +187,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="sidebar-box">
-                        <div class="sidebar-box-inner">
-                            <h3 class="sidebar-title">Popular Tags</h3>
-                            <ul class="product-tags">
-                                <li><a href="#">Education</a></li>
-                                <li><a href="#">Study</a></li>
-                                <li><a href="#">Class</a></li>
-                                <li><a href="#">Lecturers</a></li>
-                                <li><a href="#">Events</a></li>
-                                <li><a href="#">University</a></li>
-                                <li><a href="#">Date</a></li>
-                                <li><a href="#">Campus</a></li>
-                            </ul>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
         </div>

@@ -27,12 +27,18 @@ namespace InstutiteFineArt.Controllers
             ViewBag.currentSize = size; // tạo biến kích thước trang hiện tại
             ViewBag.total = lstPost.ToList().Count;
             page = page ?? 1;
-            int pageSize = (size ?? 4);
+            int pageSize = (size ?? 6);
             int pageNumber = (page ?? 1);
             return View(lstPost.ToPagedList(pageNumber, pageSize));
         }
-        public ActionResult Details()
+        public ActionResult Details(int postId)
         {
+            var post = _postRepository.Find(x => x.PostId == postId);
+            if (post != null)
+            {
+                var a = post.Images.Split(';');
+                return View(post);
+            }
             return View();
         }
     }

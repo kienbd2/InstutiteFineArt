@@ -19,7 +19,6 @@ namespace InstutiteOfFineArt.DAL
             _context = new InstutiteFineArtDbContext();
             _dbSet = _context.Set<TEntity>();
         }
-
         public virtual int Add(TEntity entity)
         {
             _dbSet.Add(entity);

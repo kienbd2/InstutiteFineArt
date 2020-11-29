@@ -26,6 +26,7 @@ namespace InstutiteOfFineArt.Core.Model
         public DbSet<Awards> Awards  { get; set; }
         public DbSet<Competition> Competitions { get; set; }
         public DbSet<UserClass> UserClasses { get; set; }
+        public DbSet<Comment> Comments { get; set; }
 
 
         public static InstutiteFineArtDbContext Create()

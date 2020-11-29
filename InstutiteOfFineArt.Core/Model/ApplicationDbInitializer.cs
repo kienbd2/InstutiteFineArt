@@ -42,7 +42,7 @@ namespace InstutiteOfFineArt.Core.Model
             var user = userManager.FindByName("kienstudent@example.com");
             if (user == null)
             {
-                user = new User { UserName = "kienstudent@example.com", Email = "kienstudent@example.com", DateOfBirth = new DateTime(1990, 10, 10) };
+                user = new User { UserName = "kienstudent@example.com", Email = "kienstudent@example.com", DateOfBirth = new DateTime(1990, 10, 10), Avartar = "https://res.cloudinary.com/dev2020/image/upload/v1605894758/u4wf6ekwp0m4hbosnuja.jpg" };
                 var result = userManager.Create(user, password);
                 result = userManager.SetLockoutEnabled(user.Id, false);
                 userManager.AddToRole(user.Id, roleStudent.Name);
@@ -50,7 +50,7 @@ namespace InstutiteOfFineArt.Core.Model
             var user2 = userManager.FindByName("kienstaff@example.com");
             if (user2 == null)
             {
-                user2 = new User { UserName = "kienstaff@example.com", Email = "kienstaff@example.com", DateOfBirth = new DateTime(1980, 10, 20) };
+                user2 = new User { UserName = "kienstaff@example.com", Email = "kienstaff@example.com", DateOfBirth = new DateTime(1980, 10, 20), Avartar = "https://res.cloudinary.com/dev2020/image/upload/v1605894758/u4wf6ekwp0m4hbosnuja.jpg" };
                 var result = userManager.Create(user2, password);
                 result = userManager.SetLockoutEnabled(user2.Id, false);
                 userManager.AddToRole(user2.Id, roleStaff.Name);
@@ -58,7 +58,7 @@ namespace InstutiteOfFineArt.Core.Model
             var user3 = userManager.FindByName("kienadmin");
             if (user3 == null)
             {
-                user3 = new User { UserName = "kienadmin@example.com", Email = "kienadmin@example.com", DateOfBirth = new DateTime(1970, 02, 10) };
+                user3 = new User { UserName = "kienadmin@example.com", Email = "kienadmin@example.com", DateOfBirth = new DateTime(1970, 02, 10), Avartar = "https://res.cloudinary.com/dev2020/image/upload/v1605894758/u4wf6ekwp0m4hbosnuja.jpg" };
                 userManager.Create(user3, password);
                 userManager.SetLockoutEnabled(user3.Id, false);
                 userManager.AddToRole(user3.Id, roleAdministrator.Name);
@@ -66,7 +66,7 @@ namespace InstutiteOfFineArt.Core.Model
             var user4 = userManager.FindByName("kienmanager");
             if (user4 == null)
             {
-                user4 = new User { UserName = "kienmanager@example.com", Email = "kienmanager@example.com", DateOfBirth = new DateTime(1995, 10, 10) };
+                user4 = new User { UserName = "kienmanager@example.com", Email = "kienmanager@example.com", DateOfBirth = new DateTime(1995, 10, 10), Avartar = "https://res.cloudinary.com/dev2020/image/upload/v1605894758/u4wf6ekwp0m4hbosnuja.jpg" };
                 userManager.Create(user4, password);
                 userManager.SetLockoutEnabled(user4.Id, false);
                 userManager.AddToRole(user4.Id, roleManager.Name);
@@ -153,6 +153,24 @@ namespace InstutiteOfFineArt.Core.Model
             user3.UserClass = userClass2;
             user4.UserClass = userClass3;
             user.Posts = competition.Posts;
+
+            Comment comment = new Comment
+            {
+                User = user2,
+                Post = competition.Posts[0],
+                CommentText = "Good article, beautiful image, try to promote",
+                CreateTime = DateTime.Now
+
+            };
+            context.Comments.Add(comment);
+            Comment comment2 = new Comment
+            {
+                User = user2,
+                Post = competition.Posts[1],
+                CommentText = "Good article, beautiful image, try to promote",
+                CreateTime = DateTime.Now
+            };
+            context.Comments.Add(comment2);
             InitializeIdentityForEF(context);
             context.SaveChanges();
             base.Seed(context);
@@ -166,7 +184,7 @@ namespace InstutiteOfFineArt.Core.Model
             const string name = "admin@example.com";
             const string password = "Admin@123456";
             const string roleName = "Admin";
-
+            
             //Create Role Admin if it does not exist
             var role = roleManager.FindByName(roleName);
             if (role == null)
@@ -174,14 +192,19 @@ namespace InstutiteOfFineArt.Core.Model
                 role = new IdentityRole(roleName);
                 var roleresult = roleManager.Create(role);
             }
-
+            UserClass userClass = new UserClass
+            {
+                Name = "MVC",
+            };
             var user = userManager.FindByName(name);
             if (user == null)
             {
-                user = new User { UserName = name, Email = name, DateOfBirth = new DateTime(1980, 10, 20) };
+                user = new User { UserName = name, Email = name, DateOfBirth = new DateTime(1980, 10, 20), Avartar = "https://res.cloudinary.com/dev2020/image/upload/v1605894758/u4wf6ekwp0m4hbosnuja.jpg",UserClass = userClass };
                 var result = userManager.Create(user, password);
                 result = userManager.SetLockoutEnabled(user.Id, false);
+                
             }
+            
 
             // Add user admin to Role Admin if not already added
             var rolesForUser = userManager.GetRoles(user.Id);

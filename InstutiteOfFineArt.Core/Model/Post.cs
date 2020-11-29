@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -14,10 +15,10 @@ namespace InstutiteOfFineArt.Core.Model
         [Display(Name = "Post title")]
         public string Title { get; set; }
 
-
+        [StringLength(1024, MinimumLength = 200, ErrorMessage = "Quotations, Stories should be between 200 characters and 1000 characters only")]
         [Column(TypeName = "ntext")]
         [Display(Name = "Content")]
-        [StringLength(1024)]
+        [Required(ErrorMessage = "Quotations, Stories is required.")]
         public string PostContent { get; set; }
 
 
@@ -39,5 +40,6 @@ namespace InstutiteOfFineArt.Core.Model
 
         public bool? IsPaid { get; set; }
         public bool? IsSold { get; set; }
+        public virtual IList<Comment> Comments { get; set; }
     }
 }

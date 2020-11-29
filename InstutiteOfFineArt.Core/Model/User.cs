@@ -19,6 +19,7 @@ namespace InstutiteOfFineArt.Core.Model
         [DisplayFormat(DataFormatString = "{0:dd/MM/yy}", ApplyFormatInEditMode = true)]
         public DateTime DateOfBirth { get; set; }
         public virtual IList<Post> Posts { get; set; }
+        public virtual IList<Comment> Comments { get; set; }
         public virtual UserClass UserClass { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager)
         {

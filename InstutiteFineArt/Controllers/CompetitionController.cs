@@ -24,6 +24,7 @@ namespace InstutiteFineArt.Controllers
             var lst = _competitionRepository.GetAll();
             if (!String.IsNullOrEmpty(searchString))
             {
+                ViewBag.CurrentFilter = searchString;
                 lst = lst.Where(s => s.Name.Contains(searchString));
             }
             ViewBag.stt = 1;
@@ -36,19 +37,20 @@ namespace InstutiteFineArt.Controllers
         }
         public ActionResult Details(int? competitionId, int? size, int? page, string searchString)
         {
-            if (competitionId == null)
-            {
-                return View();
-            }
+            //if (competitionId == null)
+            //{
+            //    return View();
+            //}
             var compettion = _competitionRepository.Find(x => x.CompetitionId == competitionId);
             if (compettion == null)
             {
                 return View();
             }
             ViewBag.CompetitionName = compettion.Name;
-            var lstPost = _postRepository.FindAll(x => x.CompetitionId == competitionId).OrderByDescending(x=>x.Mark).ThenBy(x=>x.UpdatedTime);
+            var lstPost = _postRepository.FindAll(x => x.CompetitionId == competitionId).OrderByDescending(x=>x.Mark).OrderBy(x=>x.UpdatedTime);
             if (!String.IsNullOrEmpty(searchString))
             {
+                ViewBag.CurrentFilter = searchString;
                 lstPost.Where(s => s.User.UserClass.Name.Contains(searchString));
             }
             ViewBag.competitionId = competitionId;
@@ -61,6 +63,7 @@ namespace InstutiteFineArt.Controllers
             int pageNumber = (page ?? 1);
             ViewBag.Page = page;
             ViewBag.competitionId = competitionId;
+            
             return View(lstPost.ToPagedList(pageNumber, pageSize));
         }
     }

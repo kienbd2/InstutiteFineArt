@@ -30,19 +30,28 @@
                                     <div class="news-img-holder">
                                         <img style="width:420px !important;height:273px !important;" src="@(item.Images.Split(';')[0])" class="img-responsive" alt="research">
                                         <ul class="news-date2">
-                                            <li>27 Dec</li>
-                                            <li>2016</li>
+                                            <li>@item.UpdatedTime.Day Dec</li>
+                                            <li>@item.UpdatedTime.Year</li>
                                         </ul>
                                     </div>
-                                    <h3 class="title-news-left-bold"><a href="/Exhibition/Details">@item.Title</a></h3>
+                                    @if (item.Title.Length > 60)
+                                    {
+                                        <h3 class="title-news-left-bold">@Html.ActionLink(item.Title.Substring(0, 60) + "...", "Details", new { postId = item.PostId }, null)</h3>
+                                    }
+                                    else
+                                    {
+
+                                        <h3 class="title-news-left-bold">@Html.ActionLink(@item.Title, "Details", new { postId = item.PostId }, null)</h3>
+                                    }
+
                                     <ul class="title-bar-high news-comments">
                                         <li><a href="#"><i class="fa fa-user" aria-hidden="true"></i><span>By</span> @item.User.UserName</a></li>
                                         <li><a href="#"><i class="fa fa-tags" aria-hidden="true"></i>Business</a></li>
                                         <li><a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i><span>(03)</span> Comments</a></li>
                                     </ul>
-                                    @if (item.PostContent.Length > 150)
+                                    @if (item.PostContent.Length > 160)
                                     {
-                                        <p>@Html.Raw(item.PostContent.Substring(0,150)+"...")</p>
+                                        <p>@Html.Raw(item.PostContent.Substring(0, 160) + "...")</p>
                                     }
                                     else
                                     {

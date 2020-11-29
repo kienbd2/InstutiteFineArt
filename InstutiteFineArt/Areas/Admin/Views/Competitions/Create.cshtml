@@ -110,6 +110,7 @@
                     name: "required",
                     Description: {
                         required: true,
+                        minlength: 200,
                         maxlength: 1000
                     },
                     StartDate: {
@@ -121,7 +122,11 @@
                 },
                 messages: {
                     name: "Please enter name competition",
-                    Description: "Please enter description",
+                    Description: {
+                        required: "Please enter description",
+                        minlength: "Description at least 200 characters",
+                        maxlength: "Description must not be larger than 1000 characters"
+                        },
                     StartDate: {
                         required: "Please enter start date",
                     },

@@ -56,6 +56,7 @@
   <ItemGroup>
     <Compile Include="Model\ApplicationDbInitializer.cs" />
     <Compile Include="Model\Awards.cs" />
+    <Compile Include="Model\Comment.cs" />
     <Compile Include="Model\Competition.cs" />
     <Compile Include="Model\InstutiteFineArtDbContext.cs" />
     <Compile Include="Model\Post.cs" />

@@ -40,6 +40,7 @@
                 </div>
                 <div class="x_content">
                     <form class="" action="" id="data" method="post" enctype="multipart/form-data">
+                        @Html.ValidationSummary("", new { @class = "text-error" })
                         <fieldset>
                             <div class="field item form-group">
                                 <label class="col-form-label col-md-2 col-sm-2  ">Title</label>
@@ -63,7 +64,7 @@
                             <div class="field item form-group">
                                 <label class="col-form-label col-md-2 col-sm-2">Desciption</label>
                                 <div class="col-md-9 col-sm-9">
-                                    @Html.TextAreaFor(m => m.PostContent, new { @class = "form-control", @id = "postContentId", @placeholder = "Mô tả căn hộ của bạn" })
+                                    @Html.TextAreaFor(m => m.PostContent, new { @class = "form-control", @id = "postContentId", required = "required", @placeholder = "Mô tả căn hộ của bạn" })
                                 </div>
                             </div>
 
@@ -168,18 +169,31 @@
             var competition = $('#Competition option:selected').val();
             $("#data").validate({
                 rules: {
-                    Title: "required",
-                    Description: {
+                    Title: {
                         required: true,
-                        maxlength: 1000
+                        minlength: 20,
+                        maxlength: 200
+                    },
+                    PostContent: {
+                        required: true,
+                        minlength: 20,
+                        maxlength: 200
                     },
                     Competition: {
                         required: true,
                     }
                 },
                 messages: {
-                    Title: "Please enter title post",
-                    Description: "Please enter description",
+                    Title: {
+                        required: "Please enter title post",
+                        minlength: "Title at least 20 characters",
+                        maxlength: "Title must not be larger than 200 characters"
+                    },
+                    PostContent: {
+                        required: "Please enter Quotations, Stories",
+                        minlength: "Quotations, Stories at least 200 characters",
+                        maxlength: "Quote, Stories must not be larger than 1000 characters"
+                    },
                     Competition: {
                         required: "Please enter Competition",
                     }
@@ -189,7 +203,12 @@
 
             $(document).on('submit', '#data', function (e) {
                 e.preventDefault();
-                
+                var postContent = $("#postContentId").val();
+                console.log(postContent);
+                if (postContent.length < 200 || postContent.length > 1000) {
+                    alert("Quotations, Stories should be between 200 characters and 1000 characters only");
+                    return;
+                }
 
                 if ($("#data").valid()) {
                     var form = $('#data')[0];
