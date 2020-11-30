@@ -22,7 +22,8 @@ namespace IdentitySample.Models
         [DisplayFormat(DataFormatString = "{0:dd/MM/yy}", ApplyFormatInEditMode = true)]
         public DateTime DateOfBirth { get; set; }
         public string Avatar { get; set; }
-
+        public int ClassId { get; set; }
+        public int ClassIdSelected { get; set; }
         [Required(AllowEmptyStrings = false)]
         [Display(Name = "Email")]
         [EmailAddress]

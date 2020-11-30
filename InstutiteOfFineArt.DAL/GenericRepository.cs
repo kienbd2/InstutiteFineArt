@@ -54,7 +54,7 @@ namespace InstutiteOfFineArt.DAL
 
         public virtual IQueryable<TEntity> FindBy(Expression<Func<TEntity, bool>> filter)
         {
-            return _dbSet.Where(filter);
+            return _dbSet.Where<TEntity>(filter);
         }
 
         public virtual TEntity GetById(object id)

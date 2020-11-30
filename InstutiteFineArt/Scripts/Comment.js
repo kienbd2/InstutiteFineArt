@@ -23,6 +23,7 @@ function _getAllComment(id) {
                 html += '<div class="media-body">'
                 html += '<h3><a href="#">' + item.UserName + '</a></h3>'
                 html += '<h4>Excellent course!</h4>'
+                html += '<p><h4>Mark:</h4> <h4> ' + item.Mark + '</h4></p>'
                 html += '<p>' + item.CommentText + '</p>'
                 html += '</div>'
                 html += '</div>';
@@ -47,20 +48,22 @@ function _add() {
         Mark: $('#mark').val(),
         CommentText: $("#commentText").val(),
     }
-    $.ajax({
-        url: '/Comment/Create',
-        data: JSON.stringify(obj),
-        type: "POST",
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (result) {
-            _getAllComment(id);
-            $('#name').val("");
-            $('#password').val("");
-            $('#mark').val("");
-        },
-        error: function (errormessage) {
-            alert(errormessage.responseText);
-        }
-    });
+    if (confirm('Are you sure you want to create this?')) {
+        $.ajax({
+            url: '/Comment/Create',
+            data: JSON.stringify(obj),
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+                _getAllComment(id);
+                $('#name').val("");
+                $('#password').val("");
+                $('#mark').val("");
+            },
+            error: function (errormessage) {
+                alert(errormessage.responseText);
+            }
+        });
+    }
 }

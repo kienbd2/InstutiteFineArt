@@ -19,12 +19,13 @@ namespace InstutiteFineArt.Areas.Admin.Controllers
     [Authorize(Roles = "Administrator")]
     public class UsersAdminController : Controller
     {
-        private readonly InstutiteFineArtDbContext context;
+
         private readonly UserRepository _repoUser;
+        private readonly UserClassRepository _repoUserClass;
         public UsersAdminController()
         {
             _repoUser = new UserRepository();
-            context = new InstutiteFineArtDbContext();
+            _repoUserClass = new UserClassRepository();
         }
 
         public UsersAdminController(ApplicationUserManager userManager, ApplicationRoleManager roleManager)
@@ -103,6 +104,7 @@ namespace InstutiteFineArt.Areas.Admin.Controllers
         public async Task<ActionResult> Create()
         {
             //Get the list of Roles
+            ViewBag.UserClassId = new SelectList(_repoUserClass.GetAll().ToList(), "ClassId", "Name");
             ViewBag.RoleId = new SelectList(await RoleManager.Roles.ToListAsync(), "Name", "Name");
             return View();
         }
@@ -136,7 +138,7 @@ namespace InstutiteFineArt.Areas.Admin.Controllers
                     task.Wait();
                 }
 
-                var user = new User { UserName = userViewModel.Email, Email = userViewModel.Email, DateOfBirth = userViewModel.DateOfBirth, Avartar = images };
+                var user = new User { UserName = userViewModel.Email, Email = userViewModel.Email, DateOfBirth = userViewModel.DateOfBirth, Avartar = images, ClassId = userViewModel.ClassId };
                 var adminresult = await UserManager.CreateAsync(user, userViewModel.Password);
 
                 //Add User to the selected Roles 
@@ -149,6 +151,7 @@ namespace InstutiteFineArt.Areas.Admin.Controllers
                         {
                             ModelState.AddModelError("", result.Errors.First());
                             ViewBag.RoleId = new SelectList(await RoleManager.Roles.ToListAsync(), "Name", "Name");
+                            ViewBag.UserClassId = new SelectList(_repoUserClass.GetAll().ToList(), "ClassId", "Name");
                             return View();
                         }
                     }
@@ -157,12 +160,14 @@ namespace InstutiteFineArt.Areas.Admin.Controllers
                 {
                     ModelState.AddModelError("", adminresult.Errors.First());
                     ViewBag.RoleId = new SelectList(RoleManager.Roles, "Name", "Name");
+                    ViewBag.UserClassId = new SelectList(_repoUserClass.GetAll().ToList(), "ClassId", "Name");
                     return View();
 
                 }
                 return RedirectToAction("Index");
             }
             ViewBag.RoleId = new SelectList(RoleManager.Roles, "Name", "Name");
+            ViewBag.UserClassId = new SelectList(_repoUserClass.GetAll().ToList(), "ClassId", "Name");
             return View();
         }
 
@@ -180,7 +185,7 @@ namespace InstutiteFineArt.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-
+            ViewBag.UserClassId = new SelectList(_repoUserClass.GetAll().ToList(), "ClassId", "Name");
             var userRoles = await UserManager.GetRolesAsync(user.Id);
 
             return View(new EditUserViewModel()
@@ -189,6 +194,7 @@ namespace InstutiteFineArt.Areas.Admin.Controllers
                 Email = user.Email,
                 Avatar = user.Avartar,
                 DateOfBirth = user.DateOfBirth,
+                ClassIdSelected = user.ClassId,
                 RolesList = RoleManager.Roles.ToList().Select(x => new SelectListItem()
                 {
                     Selected = userRoles.Contains(x.Name),
@@ -232,7 +238,7 @@ namespace InstutiteFineArt.Areas.Admin.Controllers
                 }
                 user.UserName = editUser.Email;
                 user.Email = editUser.Email;
-
+                user.ClassId = editUser.ClassId;
                 var userRoles = await UserManager.GetRolesAsync(user.Id);
 
                 selectedRole = selectedRole ?? new string[] { };

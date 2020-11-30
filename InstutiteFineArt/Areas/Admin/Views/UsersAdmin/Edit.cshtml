@@ -38,7 +38,7 @@
                                     @Html.LabelFor(m => m.Avatar, new { @class = "col-form-label col-md-2 col-sm-2" })
                                     <div class="col-md-4 col-sm-4">
                                         <div class="file-loading">
-                                            <input id="file" name="file" type="file" required>
+                                            <input id="file" name="file" type="file">
                                             @*@Html.EditorFor(x => x.Avatar, new { htmlAttributes = new { @class = "form-control", type = "file" } })*@
                                         </div>
                                     </div>
@@ -55,7 +55,30 @@
                                         }
                                     </div>
                                 </div>
-                                @Html.HiddenFor(x=>x.Avatar)
+                                <div class="field item form-group">
+                                    <label class="col-form-label col-md-2 col-sm-2">
+                                        Select User CLass
+                                    </label>
+                                    <div class="col-md-9 col-sm-9">
+                                        <select class="form-control" id="ClassId" name="ClassId">
+
+                                            @foreach (var item in (SelectList)ViewBag.UserClassId)
+                                            {
+                                                if (Convert.ToInt32(item.Value) == Model.ClassIdSelected)
+                                                {
+                                                    <option value="@item.Value" selected="@Model.ClassIdSelected">@item.Text</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@item.Value">@item.Text</option>
+                                                }
+
+                                            }
+                                        </select>
+
+                                    </div>
+                                </div>
+                                @Html.HiddenFor(x => x.Avatar)
 
                                 <div class="ln_solid">
                                     <div class="form-group">

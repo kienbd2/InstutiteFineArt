@@ -18,10 +18,10 @@ namespace InstutiteFineArt.Controllers
         // GET: Exhibition
         public ActionResult Index(int? size, int? page, string searchString)
         {
-            var lstPost = _postRepository.FindAll(x => x.Published == true).OrderByDescending(x => x.UpdatedTime);
+            var lstPost = _postRepository.FindAll(x => x.Published == true).OrderByDescending(x => x.UpdatedTime).ToList();
             if (!String.IsNullOrEmpty(searchString))
             {
-                 lstPost.Where(s => s.Title.Contains(searchString));
+                lstPost = lstPost.Where(s => s.Title.Contains(searchString)).ToList();
             }
             ViewBag.stt = 1;
             ViewBag.currentSize = size; // tạo biến kích thước trang hiện tại

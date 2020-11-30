@@ -59,7 +59,15 @@
                                     <select class="form-control" id="competition" name="competition">
                                         @foreach (var item in lstCompetition)
                                         {
-                                            <option value="@item.CompetitionId">@item.Name</option>
+                                            if (item.CompetitionId == Model.CompetitionId)
+                                            {
+                                                <option value="@item.CompetitionId" selected="@Model.CompetitionId">@item.Name</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@item.CompetitionId">@item.Name</option>
+                                            }
+
                                         }
 
                                     </select>

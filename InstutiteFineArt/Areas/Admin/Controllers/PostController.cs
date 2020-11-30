@@ -1,8 +1,10 @@
 ﻿using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
+using IdentitySample.Models;
 using InstutiteOfFineArt.Core.Model;
 using InstutiteOfFineArt.DAL.Repository;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -26,9 +28,48 @@ namespace InstutiteFineArt.Areas.Admin.Controllers
             _competitionRepository = new CompetitionRepository();
             _userRepository = new UserRepository();
         }
+        private ApplicationUserManager _userManager;
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
+        private ApplicationRoleManager _roleManager;
+        public ApplicationRoleManager RoleManager
+        {
+            get
+            {
+                return _roleManager ?? HttpContext.GetOwinContext().Get<ApplicationRoleManager>();
+            }
+            private set
+            {
+                _roleManager = value;
+            }
+        }
+
+        [Authorize(Roles = "Staff,Student")]
         // GET: Admin/Post
         public ActionResult Index()
         {
+            if (User.IsInRole("Staff"))
+            {
+                var role = RoleManager.Roles.FirstOrDefault(x => x.Name == "Student");
+                var lstUserId = _userRepository.FindAll(x => x.RoleId == role.Id).Select(x => x.UserId).ToList();
+                var lstUser = UserManager.Users.Where(x => lstUserId.Any(p => p.Contains(x.Id))).Select(x=>x.Id);
+                //var listPost = _postRepository.FindBy(x => lstUser.Any(p => p.Contains(x.User.Id))).ToList();
+                var listPost = new List<Post>();
+                foreach (var item in lstUser)
+                {
+                    listPost.AddRange(_postRepository.FindAll(x => x.User.Id == item));
+                }
+                return View(listPost);
+            }
             var userID = User.Identity.GetUserId();
             var lstPost = _postRepository.FindAll(filter: x => x.User.Id == userID);
             return View(lstPost);
@@ -145,8 +186,8 @@ namespace InstutiteFineArt.Areas.Admin.Controllers
                 });
                 task.Wait();
             }
-            
-            
+
+
             var userID = User.Identity.GetUserId();
             post.Id = userID;
             post.CompetitionId = competition;
@@ -172,6 +213,20 @@ namespace InstutiteFineArt.Areas.Admin.Controllers
 
             return Json(new { result = false, mess = "Edit Post not Success", url = "/Admin/Post/Index" });
         }
-
+        public JsonResult ChangeStatus(int id, bool active)
+        {
+            var post = _postRepository.Find(x => x.PostId == id);
+            if (post != null)
+            {
+                post.Published = !active;
+                _postRepository.Update(post);
+                if (active)
+                {
+                    return Json(new { result = true, active = false, mess = "Removed articles from successful exhibitions" });
+                }
+                return Json(new { result = true, active = true, mess = "Moved the article to the exhibition successfully" });
+            }
+            return Json(new { result = false, mess = "Did not find the article" });
+        }
     }
 }

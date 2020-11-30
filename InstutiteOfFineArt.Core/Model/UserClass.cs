@@ -10,7 +10,7 @@ namespace InstutiteOfFineArt.Core.Model
     public class UserClass
     {
         [Key]
-        public int Id { get; set; }
+        public int ClassId { get; set; }
         public string Name { get; set; }
         public virtual IList<User> Users { get; set; }
     }

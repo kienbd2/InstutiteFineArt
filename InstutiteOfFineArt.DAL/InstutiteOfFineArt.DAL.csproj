@@ -63,6 +63,7 @@
     <Compile Include="Repository\CommentRepository.cs" />
     <Compile Include="Repository\CompetitionRepository.cs" />
     <Compile Include="Repository\PostRepository.cs" />
+    <Compile Include="Repository\UserClassRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>

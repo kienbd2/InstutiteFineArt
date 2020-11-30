@@ -13,6 +13,7 @@ namespace InstutiteFineArt.Controllers
 {
     public class CommentController : Controller
     {
+        private readonly PostRepository _repoPost;
         private readonly CommentRepository _commentRepository;
         private readonly UserRepository _userRepository;
         private InstutiteFineArtDbContext _context = new InstutiteFineArtDbContext();
@@ -20,6 +21,7 @@ namespace InstutiteFineArt.Controllers
         {
             _commentRepository = new CommentRepository();
             _userRepository = new UserRepository();
+            _repoPost = new PostRepository();
         }
         public CommentController(ApplicationUserManager userManager)
         {
@@ -38,6 +40,18 @@ namespace InstutiteFineArt.Controllers
                 _userManager = value;
             }
         }
+        private ApplicationRoleManager _roleManager;
+        public ApplicationRoleManager RoleManager
+        {
+            get
+            {
+                return _roleManager ?? HttpContext.GetOwinContext().Get<ApplicationRoleManager>();
+            }
+            private set
+            {
+                _roleManager = value;
+            }
+        }
         public async Task<JsonResult> List(int? id)
         {
             _context.Configuration.ProxyCreationEnabled = false;
@@ -54,16 +68,25 @@ namespace InstutiteFineArt.Controllers
         // GET: Comment
         public async Task<JsonResult> Create(Comment comment)
         {
-            var user = await UserManager.FindAsync(comment.UserName,comment.PassWord);
-            if (user != null)
+            if (comment != null)
             {
-                comment.Id = user.Id;
-                comment.CreateTime = DateTime.Now;
-                _context.Comments.Add(comment);
-                _context.SaveChanges();
+                var user = await UserManager.FindAsync(comment.UserName, comment.PassWord);
+                if (user != null)
+                {
+                    comment.Id = user.Id;
+                    comment.CreateTime = DateTime.Now;
+                    _context.Comments.Add(comment);
+                    _context.SaveChanges();
+                    var post = _repoPost.Find(x => x.PostId == comment.PostId);
+                    if (post != null)
+                    {
+                        post.Mark = (post.Mark + comment.Mark) / 2;
+                        _repoPost.Update(post);
+                    }
+                }
             }
 
-            return Json(new { msg = "Bạn không có quyền commnent hoặc sai mật khẩu. Vui lòng thử lại!" }, JsonRequestBehavior.AllowGet);
+            return Json(new { msg = "You have not completed the information. Please try again!" }, JsonRequestBehavior.AllowGet);
         }
     }
 }

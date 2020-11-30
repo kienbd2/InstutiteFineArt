@@ -20,6 +20,7 @@ namespace InstutiteOfFineArt.Core.Model
         public DateTime DateOfBirth { get; set; }
         public virtual IList<Post> Posts { get; set; }
         public virtual IList<Comment> Comments { get; set; }
+        public int ClassId { get; set; }
         public virtual UserClass UserClass { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager)
         {
