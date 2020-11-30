@@ -41,7 +41,7 @@
                                             <td>@item.IsSold</td>
                                             <td>@item.CreatedTime.ToString("HH:mm dd/MM/yyyy")</td>
                                             <td>
-                                                @Html.ActionLink("Edit", "Edit", new { id = item.PostId }, new { @class = "btn btn-success btn-active" })
+                                                @Html.ActionLink("Edit", "Edit", new { id = item.PostId }, new { @class = "btn btn-success" })
 
                                             </td>
                                             @if (User.IsInRole("Staff"))

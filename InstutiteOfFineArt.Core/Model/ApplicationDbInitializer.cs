@@ -104,7 +104,7 @@ namespace InstutiteOfFineArt.Core.Model
                         CreatedTime = DateTime.Now,
                         UpdatedTime = DateTime.Now,
                         User= user,
-                        Mark=4,
+                        Mark=60,
                         Price=1000,
                         Images="https://res.cloudinary.com/dev2020/image/upload/v1605894758/u4wf6ekwp0m4hbosnuja.jpg",
                         PriceCustomer=800,
@@ -119,7 +119,7 @@ namespace InstutiteOfFineArt.Core.Model
                         CreatedTime = DateTime.Now,
                         UpdatedTime = DateTime.Now,
                         User= user,
-                        Mark=3,
+                        Mark=60,
                         Price=500,
                         Images="https://res.cloudinary.com/dev2020/image/upload/v1605894758/u4wf6ekwp0m4hbosnuja.jpg",
                         PriceCustomer=500,
@@ -145,7 +145,7 @@ namespace InstutiteOfFineArt.Core.Model
                 Post = competition.Posts[0],
                 CommentText = "Good article, beautiful image, try to promote",
                 CreateTime = DateTime.Now,
-                Mark = 50
+                Mark = 60
 
             };
             context.Comments.Add(comment);

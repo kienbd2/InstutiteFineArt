@@ -74,13 +74,10 @@
                                                             if (i == 0)
                                                             {
                                                                 <div class="col-lg-4" data-id="3461121">
-                                                                    <div class="avatar" data-original-title="" title="" aria-describedby="popover323545">
-
-                                                                    </div>
                                                                     <div class="info">
                                                                         <span>@lstPost[i].User.UserName</span>
                                                                         <p>
-                                                                            <img src="" class="level-avatar" alt=""><img width="50" height="50" src="@(@lstPost[i].User.Avartar.IsEmpty()? "/Images/default-avatar-male.png": @lstPost[i].User.Avartar)">
+                                                                            <img style="width:50px !important;height:50px !important;" src="@(@lstPost[i].User.Avartar.IsEmpty()? "/Images/default-avatar-male.png": @lstPost[i].User.Avartar)">
                                                                             <img class="top-item" width="50" height="50" src="~/App_Themes/Home/Images/top1.png">
                                                                         </p>
                                                                     </div>
@@ -93,7 +90,7 @@
                                                                     <div class="info">
                                                                         <span>@lstPost[i].User.UserName</span>
                                                                         <p>
-                                                                            <img src="" class="level-avatar" alt=""><img width="50" height="50" src="@(@lstPost[i].User.Avartar.IsEmpty()? "/Images/default-avatar-male.png": @lstPost[i].User.Avartar)" class="user-avatar" alt="">
+                                                                            <img style="width:50px !important;height:50px !important;" src="@(@lstPost[i].User.Avartar.IsEmpty()? "/Images/default-avatar-male.png": @lstPost[i].User.Avartar)" class="user-avatar" alt="">
                                                                             <img class="top-item" width="50" height="50" src="~/App_Themes/Home/Images/top2.png">
                                                                         </p>
                                                                     </div>
@@ -106,20 +103,23 @@
                                                                     <div class="info">
                                                                         <span>@lstPost[i].User.UserName</span>
                                                                         <p>
-                                                                            <img src="" class="level-avatar" alt=""><img width="50" height="50" src="@(@lstPost[i].User.Avartar.IsEmpty()? "/Images/default-avatar-male.png": @lstPost[i].User.Avartar)" class="user-avatar" alt="">
+                                                                            <img style="width:50px !important;height:50px !important;" src="@(@lstPost[i].User.Avartar.IsEmpty()? "/Images/default-avatar-male.png": @lstPost[i].User.Avartar)" class="user-avatar" alt="">
                                                                             <img class="top-item" width="50" height="50" src="~/App_Themes/Home/Images/top3.png">
                                                                         </p>
                                                                     </div>
                                                                 </div>
                                                             }
+                                                            @*<div class="col-lg-4" ><h4>4</h4></div>
+                                                                <div class="col-lg-4" >@DateTime.Now.ToString("HH:mm dd/MM/yyyy")</div>*@
                                                         }
 
 
 
 
 
-
                                                     </div>
+                                                    <div class="col-lg-6"><h3>4 <i class="glyphicon glyphicon-user"></i></h3></div>
+                                                    <div class="col-lg-6">@DateTime.Now.ToString("HH:mm dd/MM/yyyy")</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -157,4 +157,14 @@
         </div>
     </div>
 </div>
+@section scripts{
+    <script>
 
+        $(".nav a").on("click", function () {
+            console.log("nav");
+            $(".nav li").find(".active").removeClass("active");
+            $(this).parent().addClass("active");
+        });
+
+    </script>
+}

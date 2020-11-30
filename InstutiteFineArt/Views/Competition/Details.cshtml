@@ -31,17 +31,17 @@
                     <div class="col-md-8">
 
                         @*@using (Html.BeginForm())
-                        {
+                            {
 
-                            @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, null, new { @class = "sidebar-search-btn disabled", @placeholder = "Search for..." })
+                                @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, null, new { @class = "sidebar-search-btn disabled", @placeholder = "Search for..." })
 
-                            <button class="sidebar-search-btn disabled" type="submit" value="Login">Search</button>
+                                <button class="sidebar-search-btn disabled" type="submit" value="Login">Search</button>
 
-                        }*@
-                        <form id="checkout-form"  style="display:flex; float:right; padding: 10px;">
+                            }*@
+                        <form id="checkout-form" style="display:flex; float:right; padding: 10px;">
                             @using (Html.BeginForm("Details", "Competition", new { competitionId = ViewBag.competitionId }, FormMethod.Get))
                             {
-                            <input id="competitionId" name="competitionId" type="hidden" value="@ViewBag.competitionId" />
+                                <input id="competitionId" name="competitionId" type="hidden" value="@ViewBag.competitionId" />
                                 @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, null, new { @class = "sidebar-search-btn disabled", @placeholder = "Search for..." })
 
                                 <button class="sidebar-search-btn disabled" onclick="submitForm()" value="Login">Search</button>
@@ -59,10 +59,12 @@
             <table class="table table-sm" id="top3">
                 <thead>
                     <tr>
-                        <th scope="col" style="text-align:center">#</th>
+                        <th scope="col" style="text-align:center">Top</th>
+                        <th scope="col" style="text-align:center">Title</th>
                         <th scope="col" style="text-align:center">Name</th>
                         <th scope="col" style="text-align:center">Class</th>
                         <th scope="col" style="text-align:center">Mark</th>
+                        <th scope="col" style="text-align:center">Date</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -74,48 +76,84 @@
                             if (sort == 1 && ViewBag.Page == 1)
                             {
                                 <tr>
+
                                     <th scope="row" style="text-align:center"><img width="50" height="50" src="~/App_Themes/Home/Images/top1.png" alt="Top 1" /></th>
+                                    @if (item.Title.Length > 70)
+                                    {
+                                        <th>@Html.ActionLink(item.Title.Substring(0, 70) + "...", "Details", "Exhibition", new { PostId = item.PostId }, null)</th>
+                                    }
+                                    else
+                                    {
+                                        <th>@Html.ActionLink(item.Title, "Details", "Exhibition", new { PostId = item.PostId }, null)</th>
+                                    }
+
                                     <td><a href="#">@item.User.UserName</a></td>
                                     <td>@item.User.UserClass.Name</td>
                                     <td style="color: red;">@item.Mark</td>
+                                    <td>@item.UpdatedTime.ToString("HH:mm dd/MM/yyyy")</td>
                                 </tr>
                             }
                             if (sort == 2 && ViewBag.Page == 1)
                             {
                                 <tr>
                                     <th scope="row" style="text-align:center"><img width="50" height="50" src="~/App_Themes/Home/Images/top2.png" alt="Top 2" /></th>
+                                    @if (item.Title.Length > 70)
+                                    {
+                                        <th>@Html.ActionLink(item.Title.Substring(0, 70) + "...", "Details", "Exhibition", new { PostId = item.PostId }, null)</th>
+                                    }
+                                    else
+                                    {
+                                        <th>@Html.ActionLink(item.Title, "Details", "Exhibition", new { PostId = item.PostId }, null)</th>
+                                    }
                                     <td><a href="#">@item.User.UserName</a></td>
                                     <td>@item.User.UserClass.Name</td>
                                     <td style="color: red;">@item.Mark</td>
+                                    <td>@item.UpdatedTime.ToString("HH:mm dd/MM/yyyy")</td>
                                 </tr>
                             }
                             if (sort == 3 && ViewBag.Page == 1)
                             {
                                 <tr>
                                     <th scope="row" style="text-align:center"><img width="50" height="50" src="~/App_Themes/Home/Images/top3.png" alt="Top 3" /></th>
-
+                                    @if (item.Title.Length > 70)
+                                    {
+                                        <th>@Html.ActionLink(item.Title.Substring(0, 70) + "...", "Details", "Exhibition", new { PostId = item.PostId }, null)</th>
+                                    }
+                                    else
+                                    {
+                                        <th>@Html.ActionLink(item.Title, "Details", "Exhibition", new { PostId = item.PostId }, null)</th>
+                                    }
                                     <td><a href="#">@item.User.UserName</a></td>
                                     <td>@item.User.UserClass.Name</td>
                                     <td style="color: red;">@item.Mark</td>
+                                    <td>@item.UpdatedTime.ToString("HH:mm dd/MM/yyyy")</td>
                                 </tr>
                             }
                             if (sort > 3 || ViewBag.Page > 1)
                             {
-                <tr>
-                    @if (ViewBag.Page == 1)
-                    {
-                        <th scope="row" style="text-align:center">@sort</th>
-                    }
-                    else
-                    {
+                                <tr>
+                                    @if (ViewBag.Page == 1)
+                                    {
+                                        <th scope="row" style="text-align:center">@sort</th>
+                                    }
+                                    else
+                                    {
 
-                        <th scope="row" style="text-align:center">@((ViewBag.pageSize * (ViewBag.Page - 1)) +sort)</th>
-                    }
-
-                    <td><a href="#">@item.User.UserName</a></td>
-                    <td>@item.User.UserClass.Name</td>
-                    <td style="color: red;">@item.Mark</td>
-                </tr>
+                                        <th scope="row" style="text-align:center">@((ViewBag.pageSize * (ViewBag.Page - 1)) +sort)</th>
+                                    }
+                                    @if (item.Title.Length > 70)
+                                    {
+                                        <th>@Html.ActionLink(item.Title.Substring(0, 70) + "...", "Details", "Exhibition", new { PostId = item.PostId }, null)</th>
+                                    }
+                                    else
+                                    {
+                                        <th>@Html.ActionLink(item.Title, "Details", "Exhibition", new { PostId = item.PostId }, null)</th>
+                                    }
+                                    <td><a href="#">@item.User.UserName</a></td>
+                                    <td>@item.User.UserClass.Name</td>
+                                    <td style="color: red;">@item.Mark</td>
+                                    <td>@item.UpdatedTime.ToString("HH:mm dd/MM/yyyy")</td>
+                                </tr>
                             }
                             sort++;
                         }
@@ -124,8 +162,7 @@
                     {
                         <tr>No Data</tr>
                     }
-
-
+                    
                 </tbody>
             </table>
         </div>
