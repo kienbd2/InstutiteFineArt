@@ -23,7 +23,7 @@
                         <div class="news-img-holder">
                             <img src="@Model.Images.Split(';')[0]" class="img-responsive" alt="research">
                             <ul class="news-date1">
-                                <li>@Model.UpdatedTime.Day Dec</li>
+                                <li>@Model.UpdatedTime.Day - @Model.UpdatedTime.Month</li>
                                 <li>@Model.UpdatedTime.Year</li>
                             </ul>
                         </div>
@@ -31,7 +31,7 @@
                         <ul class="title-bar-high news-comments">
                             <li><a href="#"><i class="fa fa-user" aria-hidden="true"></i><span>By</span> @Model.User.UserName</a></li>
                             <li><a href="#"><i class="fa fa-tags" aria-hidden="true"></i>Business</a></li>
-                            <li><a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i><span>(03)</span> Comments</a></li>
+                            <li><a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i><span>(@Model.Comments.Count())</span> Comments</a></li>
                         </ul>
                         <p>@Html.Raw(Model.PostContent)</p>
                         <p><span>Bimply dummy text of the printing and typesetting istryrem Ipsum has been the industry's standard dummy type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchan scrambled.</span></p>
@@ -54,7 +54,7 @@
                         </ul>
                         <div class="course-details-comments" >
                             <input type="hidden" name="name" id="PostId" value="@Model.PostId" />
-                            <h3 class="sidebar-title">(4) Comments</h3>
+                            <h3 class="sidebar-title">(@Model.Comments.Count()) Comments</h3>
                             <div id="list"></div>
                             @*<div class="media" >
                                 <a href="#" class="pull-left">

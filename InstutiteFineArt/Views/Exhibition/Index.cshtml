@@ -30,7 +30,7 @@
                                     <div class="news-img-holder">
                                         <img style="width:420px !important;height:273px !important;" src="@(item.Images.Split(';')[0])" class="img-responsive" alt="research">
                                         <ul class="news-date2">
-                                            <li>@item.UpdatedTime.Day Dec</li>
+                                            <li>@item.UpdatedTime.Day - @item.UpdatedTime.Month</li>
                                             <li>@item.UpdatedTime.Year</li>
                                         </ul>
                                     </div>
@@ -47,7 +47,7 @@
                                     <ul class="title-bar-high news-comments">
                                         <li><a href="#"><i class="fa fa-user" aria-hidden="true"></i><span>By</span> @item.User.UserName</a></li>
                                         <li><a href="#"><i class="fa fa-tags" aria-hidden="true"></i>Business</a></li>
-                                        <li><a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i><span>(03)</span> Comments</a></li>
+                                        <li><a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i><span>(@item.Comments.Count())</span> Comments</a></li>
                                     </ul>
                                     @if (item.PostContent.Length > 160)
                                     {

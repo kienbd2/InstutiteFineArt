@@ -4,6 +4,7 @@
 @{
     ViewBag.Title = "Index";
 }
+
 <div class="inner-page-banner-area" style="background-image: url('/App_Themes/Home/Images/5.jpg');">
     <div class="container">
         <div class="pagination-area">
@@ -55,7 +56,7 @@
                                         <div @*class="product-box2"*@>
                                             <div class="media">
                                                 <a class="pull-left" href="#">
-                                                    <img class="img-responsive" width="200" height="300" src="@(item.Logo.IsEmpty()? "/Images/logo.jpg": item.Logo)" alt="product">
+                                                    <img class="img-responsive" width="200" height="300" src="@(item.Logo.IsEmpty() ? "/Images/logo.jpg" : item.Logo)" alt="product">
                                                 </a>
                                                 <div class="media-body">
                                                     <div class="product-box2-content">
@@ -77,7 +78,7 @@
                                                                     <div class="info">
                                                                         <span>@lstPost[i].User.UserName</span>
                                                                         <p>
-                                                                            <img style="width:50px !important;height:50px !important;" src="@(@lstPost[i].User.Avartar.IsEmpty()? "/Images/default-avatar-male.png": @lstPost[i].User.Avartar)">
+                                                                            <img style="width:50px !important;height:50px !important;" src="@(@lstPost[i].User.Avartar.IsEmpty() ? "/Images/default-avatar-male.png" : @lstPost[i].User.Avartar)">
                                                                             <img class="top-item" width="50" height="50" src="~/App_Themes/Home/Images/top1.png">
                                                                         </p>
                                                                     </div>
@@ -90,7 +91,7 @@
                                                                     <div class="info">
                                                                         <span>@lstPost[i].User.UserName</span>
                                                                         <p>
-                                                                            <img style="width:50px !important;height:50px !important;" src="@(@lstPost[i].User.Avartar.IsEmpty()? "/Images/default-avatar-male.png": @lstPost[i].User.Avartar)" class="user-avatar" alt="">
+                                                                            <img style="width:50px !important;height:50px !important;" src="@(@lstPost[i].User.Avartar.IsEmpty() ? "/Images/default-avatar-male.png" : @lstPost[i].User.Avartar)" class="user-avatar" alt="">
                                                                             <img class="top-item" width="50" height="50" src="~/App_Themes/Home/Images/top2.png">
                                                                         </p>
                                                                     </div>
@@ -103,7 +104,7 @@
                                                                     <div class="info">
                                                                         <span>@lstPost[i].User.UserName</span>
                                                                         <p>
-                                                                            <img style="width:50px !important;height:50px !important;" src="@(@lstPost[i].User.Avartar.IsEmpty()? "/Images/default-avatar-male.png": @lstPost[i].User.Avartar)" class="user-avatar" alt="">
+                                                                            <img style="width:50px !important;height:50px !important;" src="@(@lstPost[i].User.Avartar.IsEmpty() ? "/Images/default-avatar-male.png" : @lstPost[i].User.Avartar)" class="user-avatar" alt="">
                                                                             <img class="top-item" width="50" height="50" src="~/App_Themes/Home/Images/top3.png">
                                                                         </p>
                                                                     </div>
@@ -118,8 +119,8 @@
 
 
                                                     </div>
-                                                    <div class="col-lg-6"><h3>4 <i class="glyphicon glyphicon-user"></i></h3></div>
-                                                    <div class="col-lg-6">@DateTime.Now.ToString("HH:mm dd/MM/yyyy")</div>
+                                                    <div class="col-lg-4"><h3>@item.Posts.Count() <i class="glyphicon glyphicon-user"></i></h3></div>
+                                                    <div class="col-lg-4" ><button class="btn btn-success" id='demo@(item.CompetitionId)' onmouseover="getDate(@item.CompetitionId,'@item.EndDate')">Contest time</button></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -166,5 +167,41 @@
             $(this).parent().addClass("active");
         });
 
+    </script>
+    <script>
+        
+        function getDate(id, date) {
+            console.log(date);
+            // Thiết lập thời gian đích mà ta sẽ đếm
+            var countDownDate = new Date(date).getTime();
+
+            // cập nhập thời gian sau mỗi 1 giây
+            var x = setInterval(function () {
+
+                // Lấy thời gian hiện tại
+                var now = new Date().getTime();
+
+                // Lấy số thời gian chênh lệch
+                var distance = countDownDate - now;
+
+                // Tính toán số ngày, giờ, phút, giây từ thời gian chênh lệch
+                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                // HIển thị chuỗi thời gian trong thẻ p
+                document.getElementById("demo" + id).innerHTML = days + " Day " + hours + " House "
+                    + minutes + " Minute  " + seconds + " Second";
+
+                // Nếu thời gian kết thúc, hiển thị chuỗi thông báo
+                if (distance < 0) {
+                    clearInterval(x);
+                    document.getElementById("demo" + id).innerHTML = "Contest time has ended";
+                }
+            }, 1000);
+        }
+        //getDate(id, date);
+       
     </script>
 }

@@ -22,9 +22,9 @@ function _getAllComment(id) {
                 html += '</a>'
                 html += '<div class="media-body">'
                 html += '<h3><a href="#">' + item.UserName + '</a></h3>'
-                html += '<h4>Excellent course!</h4>'
-                html += '<p><h4>Mark:</h4> <h4> ' + item.Mark + '</h4></p>'
+                html += '<h4>Mark:</h4> <h4> ' + item.Mark + '</h4>'
                 html += '<p>' + item.CommentText + '</p>'
+                html += '<h4>Date:</h4> <h4> ' + item.Create + '</h4>'
                 html += '</div>'
                 html += '</div>';
             });

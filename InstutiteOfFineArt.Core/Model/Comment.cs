@@ -28,5 +28,6 @@ namespace InstutiteOfFineArt.Core.Model
         public string CommentText { get; set; }
 
         public DateTime CreateTime { get; set; }
+        public string Create { get; set; }
     }
 }
