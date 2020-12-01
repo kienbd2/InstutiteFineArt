@@ -74,20 +74,35 @@ namespace InstutiteFineArt.Controllers
                 var user = await UserManager.FindAsync(comment.UserName, comment.PassWord);
                 if (user != null)
                 {
-                    comment.Id = user.Id;
-                    comment.CreateTime = DateTime.Now;
-                    _context.Comments.Add(comment);
-                    _context.SaveChanges();
-                    var post = _repoPost.Find(x => x.PostId == comment.PostId);
-                    if (post != null)
+                    var userRoles = await UserManager.GetRolesAsync(user.Id);
+                    if (userRoles.Contains("Staff"))
                     {
-                        post.Mark = (post.Mark + comment.Mark) / 2;
-                        _repoPost.Update(post);
+                        var commentObj = _commentRepository.Find(x => x.Id == user.Id&&x.PostId==comment.PostId);
+                        if (commentObj == null)
+                        {
+                            comment.Id = user.Id;
+                            comment.CreateTime = DateTime.Now;
+                            _context.Comments.Add(comment);
+                            _context.SaveChanges();
+                            var post = _repoPost.Find(x => x.PostId == comment.PostId);
+                            if (post != null)
+                            {
+                                post.Mark = (post.Mark + comment.Mark) / 2;
+                                _repoPost.Update(post);
+                            }
+                            return Json(new { result = true }, JsonRequestBehavior.AllowGet);
+                        }
+
+                        return Json(new { result = false, msg = "You have done comment.Please try again!" }, JsonRequestBehavior.AllowGet);
                     }
+
+                    return Json(new { result = false, msg = "You do not have the right to comment" }, JsonRequestBehavior.AllowGet);
+
                 }
+                return Json(new { result = false, msg = "Incorrect username or password.Please try again!" }, JsonRequestBehavior.AllowGet);
             }
 
-            return Json(new { msg = "You have not completed the information. Please try again!" }, JsonRequestBehavior.AllowGet);
+            return Json(new { result = false, msg = "You have not entered comment information. Please try again!" }, JsonRequestBehavior.AllowGet);
         }
         private string GenerateRelativeString(DateTime dateTime)
         {

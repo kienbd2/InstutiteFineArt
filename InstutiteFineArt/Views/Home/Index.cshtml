@@ -8,10 +8,10 @@
 
 <!-- Header Area End Here -->
 <!-- Inner Page Banner Area Start Here -->
-<div class="inner-page-banner-area" style="background-image: url('/App_Themes/Home/Images/5.jpg');">
+<div class="inner-page-banner-area" style="background-image: url('/App_Themes/Home/Images/Home.jpg');">
     <div class="container">
         <div class="pagination-area">
-            <h1>Our Lecturers_01</h1>
+            <h1>Our Education</h1>
             <ul>
                 <li><a href="/">Home</a></li>
             </ul>
@@ -111,20 +111,20 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 counter1-box wow fadeInUp" data-wow-duration=".5s" data-wow-delay=".20s" style="visibility: visible; animation-duration: 0.5s; animation-delay: 0.2s; animation-name: fadeInUp;">
-                <h2 class="about-counter title-bar-counter" data-num="80">80</h2>
-                <p>PROFESSIONAL TEACHER</p>
+                <h2 class="about-counter title-bar-counter" data-num="@ViewBag.CountStaff">@ViewBag.CountStaff</h2>
+                <p>TOTAL TEACHER</p>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 counter1-box wow fadeInUp" data-wow-duration=".5s" data-wow-delay=".40s" style="visibility: visible; animation-duration: 0.5s; animation-delay: 0.4s; animation-name: fadeInUp;">
-                <h2 class="about-counter title-bar-counter" data-num="20">20</h2>
-                <p>NEWS COURSES EVERY YEARS</p>
+                <h2 class="about-counter title-bar-counter" data-num="@ViewBag.CountStudent">@ViewBag.CountStudent</h2>
+                <p>TOTAL STUDENT</p>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 counter1-box wow fadeInUp" data-wow-duration=".5s" data-wow-delay=".60s" style="visibility: visible; animation-duration: 0.5s; animation-delay: 0.6s; animation-name: fadeInUp;">
-                <h2 class="about-counter title-bar-counter" data-num="56">56</h2>
-                <p>NEWS COURSES EVERY YEARS</p>
+                <h2 class="about-counter title-bar-counter" data-num="@ViewBag.CountCompetition">@ViewBag.CountCompetition</h2>
+                <p>TOTAL COMPETITION</p>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 counter1-box wow fadeInUp" data-wow-duration=".5s" data-wow-delay=".80s" style="visibility: visible; animation-duration: 0.5s; animation-delay: 0.8s; animation-name: fadeInUp;">
-                <h2 class="about-counter title-bar-counter" data-num="77">77</h2>
-                <p>REGISTERED STUDENTS</p>
+                <h2 class="about-counter title-bar-counter" data-num="@ViewBag.CountPost">@ViewBag.CountPost</h2>
+                <p>TOTAl POST</p>
             </div>
         </div>
     </div>

@@ -121,7 +121,6 @@ namespace InstutiteFineArt.Areas.Admin.Controllers
             post.UpdatedTime = DateTime.Now;
             post.Mark = 3;
             post.IsPaid = true;
-            post.Price = 1000;
             post.PriceCustomer = 800;
             post.IsSold = true;
             post.Published = true;
@@ -143,11 +142,6 @@ namespace InstutiteFineArt.Areas.Admin.Controllers
             }
             ViewBag.Competitions = _competitionRepository.FindAll(x => x.EndDate >= DateTime.Now).ToList();
             Post post = _postRepository.Find(x => x.PostId == id);
-            ViewBag.Images = "";
-            foreach (var images in post.Images.Split(';'))
-            {
-                ViewBag.Images += "\"" + images + "\"" + ",";
-            }
             if (post == null)
             {
                 return HttpNotFound();
@@ -200,7 +194,6 @@ namespace InstutiteFineArt.Areas.Admin.Controllers
             post.UpdatedTime = DateTime.Now;
             post.Mark = 3;
             post.IsPaid = true;
-            post.Price = 1000;
             post.PriceCustomer = 800;
             post.IsSold = true;
             post.Published = true;

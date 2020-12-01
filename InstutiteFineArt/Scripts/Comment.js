@@ -55,14 +55,20 @@ function _add() {
             type: "POST",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
-            success: function (result) {
-                _getAllComment(id);
-                $('#name').val("");
-                $('#password').val("");
-                $('#mark').val("");
+            success: function (val) {
+                if (val.result) {
+                    _getAllComment(id);
+                    $('#name').val("");
+                    $('#password').val("");
+                    $('#mark').val("");
+                }
+                else {
+                    alert(val.msg);
+                }
+               
             },
-            error: function (errormessage) {
-                alert(errormessage.responseText);
+            error: function (error) {
+                alert(error.msg);
             }
         });
     }

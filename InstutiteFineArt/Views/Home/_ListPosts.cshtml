@@ -1,0 +1,39 @@
+﻿@model IEnumerable<InstutiteOfFineArt.Core.Model.Post>
+@using InstutiteOfFineArt.Core.Model;
+
+<div class="sidebar-box">
+    <div class="sidebar-box-inner">
+        <h3 class="sidebar-title">Top 5 post with the highest score</h3>
+        <div class="sidebar-latest-research-area">
+            <ul>
+                @if (Model.Count() > 0)
+                {
+                    foreach (var post in Model)
+                    {
+                        <li>
+                            <div class="latest-research-img">
+                                <a href="#"><img src="@post.Images.Split(';')[0]" class="img-responsive" alt="skilled"></a>
+                            </div>
+                            <div class="latest-research-content">
+                                <h4>@post.UpdatedTime.Day- @post.UpdatedTime.Month, @post.UpdatedTime.Year</h4>
+                                @if (post.Title.Length > 30)
+                                {
+                                    <p>@Html.ActionLink(post.Title.Substring(0, 30) + "...", "Details", "Exhibition", new { PostId = post.PostId }, null)</p>
+                                }
+                                else
+                                {
+                                    <p>@Html.ActionLink(post.Title, "Details", "Exhibition", new { PostId = post.PostId }, null)</p>
+                                }
+
+                            </div>
+                        </li>
+                    }
+                }
+                else
+                {
+                    <li>No posts found!</li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>

@@ -5,13 +5,13 @@
     ViewBag.Title = "Index";
 }
 
-<div class="inner-page-banner-area" style="background-image: url('/App_Themes/Home/Images/banner/5.jpg');">
+<div class="inner-page-banner-area" style="background-image: url('/App_Themes/Home/Images/Exhibition.jpg');">
     <div class="container">
         <div class="pagination-area">
-            <h1>News - 02</h1>
+            <h1>Exhibition</h1>
             <ul>
                 <li><a href="/">Home</a> -</li>
-                <li>News</li>
+                <li>Exhibition</li>
             </ul>
         </div>
     </div>
@@ -46,7 +46,7 @@
 
                                     <ul class="title-bar-high news-comments">
                                         <li><a href="#"><i class="fa fa-user" aria-hidden="true"></i><span>By</span> @item.User.UserName</a></li>
-                                        <li><a href="#"><i class="fa fa-tags" aria-hidden="true"></i>Business</a></li>
+                                        <li><a href="#"><i class="fa fa-tags" aria-hidden="true"></i>Price: @(item.Price)$</a></li>
                                         <li><a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i><span>(@item.Comments.Count())</span> Comments</a></li>
                                     </ul>
                                     @if (item.PostContent.Length > 160)
@@ -86,16 +86,16 @@
                             <h3 class="sidebar-title">Search</h3>
                             <div class="sidebar-find-course">
                                 @*<form id="checkout-form">
-                                    <div class="form-group course-name">
-                                        <input id="first-name" placeholder="Type Here . . .." class="form-control" type="text">
-                                    </div>
-                                    <div class="form-group">
-                                        <button class="sidebar-search-btn-full disabled" type="submit" value="Login">Search</button>
-                                    </div>
-                                </form>*@
+                        <div class="form-group course-name">
+                            <input id="first-name" placeholder="Type Here . . .." class="form-control" type="text">
+                        </div>
+                        <div class="form-group">
+                            <button class="sidebar-search-btn-full disabled" type="submit" value="Login">Search</button>
+                        </div>
+                    </form>*@
 
 
-                                <form id="checkout-form" >
+                                <form id="checkout-form">
                                     @using (Html.BeginForm())
                                     {
 
@@ -109,53 +109,9 @@
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="sidebar-box">
-                        <div class="sidebar-box-inner">
-                            <h3 class="sidebar-title">Latest Posts</h3>
-                            <div class="sidebar-latest-research-area">
-                                <ul>
-                                    <li>
-                                        <div class="latest-research-img">
-                                            <a href="#"><img src="~/App_Themes/Home/Images/Exhibition/sidebar/8.jpg" class="img-responsive" alt="skilled"></a>
-                                        </div>
-                                        <div class="latest-research-content">
-                                            <h4>30 Nov, 2016</h4>
-                                            <p>when an unknown printer took.</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="latest-research-img">
-                                            <a href="#"><img src="~/App_Themes/Home/Images/Exhibition/sidebar/4.jpg" class="img-responsive" alt="skilled"></a>
-                                        </div>
-                                        <div class="latest-research-content">
-                                            <h4>10 Aug, 2016</h4>
-                                            <p>when an unknown printer took.</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="latest-research-img">
-                                            <a href="#"><img src="~/App_Themes/Home/Images/Exhibition/sidebar/9.jpg" class="img-responsive" alt="skilled"></a>
-                                        </div>
-                                        <div class="latest-research-content">
-                                            <h4>05 Jul, 2016</h4>
-                                            <p>when an unknown printer took.</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="latest-research-img">
-                                            <a href="#"><img src="~/App_Themes/Home/Images/Exhibition/sidebar/10.jpg" class="img-responsive" alt="skilled"></a>
-                                        </div>
-                                        <div class="latest-research-content">
-                                            <h4>30 Feb, 2016</h4>
-                                            <p>when an unknown printer took.</p>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                   
+
+                    @Html.Action("MostViewedPost", "Home")
+
                 </div>
             </div>
         </div>

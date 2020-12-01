@@ -3940,7 +3940,10 @@
     <Content Include="App_Themes\Home\Images\c2.jpg" />
     <Content Include="App_Themes\Home\Images\c3.jpg" />
     <Content Include="App_Themes\Home\Images\c4.jpg" />
+    <Content Include="App_Themes\Home\Images\Competition.jpg" />
     <Content Include="App_Themes\Home\Images\e.jpg" />
+    <Content Include="App_Themes\Home\Images\Exhibition.jpg" />
+    <Content Include="App_Themes\Home\Images\Home.jpg" />
     <Content Include="App_Themes\Home\Images\logo-primary.png" />
     <Content Include="App_Themes\Home\Images\logo.jpg" />
     <Content Include="App_Themes\Home\Images\top1.png" />
@@ -5540,6 +5543,7 @@
     <Content Include="Views\Competition\Details.cshtml" />
     <Content Include="Views\Exhibition\Details.cshtml" />
     <Content Include="Views\Exhibition\Index.cshtml" />
+    <Content Include="Views\Home\_ListPosts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

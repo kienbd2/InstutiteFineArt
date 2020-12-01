@@ -12,9 +12,13 @@ namespace IdentitySample.Controllers
     public class HomeController : Controller
     {
         private readonly UserRepository _repoUser;
+        private readonly PostRepository _repoPost;
+        private readonly CompetitionRepository _repoCompetition;
         public HomeController()
         {
             _repoUser = new UserRepository();
+            _repoPost = new PostRepository();
+            _repoCompetition = new CompetitionRepository();
         }
         public HomeController(ApplicationUserManager userManager, ApplicationRoleManager roleManager)
         {
@@ -50,21 +54,39 @@ namespace IdentitySample.Controllers
         [HttpGet]
         public ActionResult Index(int? size, int? page, string searchString)
         {
-            
+
             ViewBag.CurrentFilter = searchString;
 
-            var role = RoleManager.Roles.FirstOrDefault(x => x.Name == "Staff");
-            var lstUserId = _repoUser.FindAll(x => x.RoleId == role.Id).Select(x => x.UserId).ToList();
+            var roleStaff = RoleManager.Roles.FirstOrDefault(x => x.Name == "Staff");
+            var lstUserId = _repoUser.FindAll(x => x.RoleId == roleStaff.Id).Select(x => x.UserId).ToList();
             var lstUser = UserManager.Users.Where(x => lstUserId.Any(p => p.Contains(x.Id))).ToList();
+            var roleStudent = RoleManager.Roles.FirstOrDefault(x => x.Name == "Student");
+            //total staff
+            ViewBag.CountStaff = lstUserId.Count();
+            //total student
+            ViewBag.CountStudent = _repoUser.FindAll(x => x.RoleId == roleStudent.Id).Count();
+            //total competition
+            ViewBag.CountCompetition = _repoCompetition.Count();
+            //total post
+            ViewBag.CountPost = _repoPost.Count();
             ViewBag.stt = 1;
             ViewBag.currentSize = size; // tạo biến kích thước trang hiện tại
             ViewBag.total = lstUser.Count;
             page = page ?? 1;
-            int pageSize = (size ?? 4);
+            int pageSize = (size ?? 8);
             int pageNumber = (page ?? 1);
             return View(lstUser.ToPagedList(pageNumber, pageSize));
         }
 
+        [ChildActionOnly]
+        public PartialViewResult MostViewedPost()
+        {
+            ViewBag.PartialName = "Most viewed posts!";
+            var mostMarkedPosts = _repoPost.FindAll(x => x.Published == true).OrderByDescending(x => x.Mark).Take(5);
+            //// Map from Post model to PostSummary view model
+
+            return PartialView("_ListPosts", mostMarkedPosts);
+        }
         [HttpGet]
         [Authorize]
         public ActionResult About()
