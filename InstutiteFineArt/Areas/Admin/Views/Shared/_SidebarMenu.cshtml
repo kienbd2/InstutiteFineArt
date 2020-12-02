@@ -26,13 +26,17 @@
                 <a href="/Home/Index"><i class="fa fa-home"></i> Home</a>
 
             </li>
-            <li>
-                <a><i class="fa fa-building-o"></i> Manager Competitions <span class="fa fa-chevron-down"></span></a>
-                <ul class="nav child_menu">
-                    <li>@Html.ActionLink("Created", "Index", "Competitions")</li>
-                    <li>@Html.ActionLink("Create", "Create", "Competitions")</li>
-                </ul>
-            </li>
+            @if (Request.IsAuthenticated && User.IsInRole("Staff"))
+            {
+                <li>
+                    <a><i class="fa fa-building-o"></i> Manager Competitions <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                        <li>@Html.ActionLink("Created", "Index", "Competitions")</li>
+                        <li>@Html.ActionLink("Create", "Create", "Competitions")</li>
+                    </ul>
+                </li>
+            }
+
             <li>
                 <a><i class="fa fa-building-o"></i> Manager Paintings <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">

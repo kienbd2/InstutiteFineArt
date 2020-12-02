@@ -135,7 +135,7 @@ namespace InstutiteOfFineArt.Core.Model
                 User = user,
                 Mark = 60,
                 Price = 1000,
-                Images = "https://res.cloudinary.com/dev2020/image/upload/v1605894758/u4wf6ekwp0m4hbosnuja.jpg",
+                Images = "https://res.cloudinary.com/dev2020/image/upload/v1606897422/p20a2y6jn2fmfvda3uth.jpg",
                 PriceCustomer = 800,
                 IsSold = true,
                 IsPaid = true
@@ -151,7 +151,7 @@ namespace InstutiteOfFineArt.Core.Model
                 User = user,
                 Mark = 60,
                 Price = 500,
-                Images = "https://res.cloudinary.com/dev2020/image/upload/v1605894758/u4wf6ekwp0m4hbosnuja.jpg",
+                Images = "https://res.cloudinary.com/dev2020/image/upload/v1606897421/r3roxbvkaj4qfeeical7.jpg",
                 PriceCustomer = 500,
                 IsSold = true,
                 IsPaid = true
@@ -167,7 +167,7 @@ namespace InstutiteOfFineArt.Core.Model
                 User = userStudent2,
                 Mark = 0,
                 Price = 500,
-                Images = "https://res.cloudinary.com/dev2020/image/upload/v1605894758/u4wf6ekwp0m4hbosnuja.jpg;https://res.cloudinary.com/dev2020/image/upload/v1606842430/om1cmt388cts8dvaonon.jpg",
+                Images = "https://res.cloudinary.com/dev2020/image/upload/v1606897342/jfh0ond1boqerouzkdpw.jpg;https://res.cloudinary.com/dev2020/image/upload/v1606897294/o9rg6fraph8hx9dsktwb.jpg",
                 PriceCustomer = 500,
                 IsSold = true,
                 IsPaid = true
@@ -183,7 +183,7 @@ namespace InstutiteOfFineArt.Core.Model
                 User = user,
                 Mark = 0,
                 Price = 500,
-                Images = "https://res.cloudinary.com/dev2020/image/upload/v1605894758/u4wf6ekwp0m4hbosnuja.jpg;https://res.cloudinary.com/dev2020/image/upload/v1606842430/om1cmt388cts8dvaonon.jpg",
+                Images = "https://res.cloudinary.com/dev2020/image/upload/v1606897276/lhphmtisupxzt92shsad.jpg;https://res.cloudinary.com/dev2020/image/upload/v1606897214/fsbmj9edsfq5luzkvseg.jpg",
                 PriceCustomer = 500,
                 IsSold = true,
                 IsPaid = true
@@ -199,7 +199,7 @@ namespace InstutiteOfFineArt.Core.Model
                 User = userStudent2,
                 Mark = 0,
                 Price = 500,
-                Images = "https://res.cloudinary.com/dev2020/image/upload/v1605894758/u4wf6ekwp0m4hbosnuja.jpg;https://res.cloudinary.com/dev2020/image/upload/v1606842430/om1cmt388cts8dvaonon.jpg",
+                Images = "https://res.cloudinary.com/dev2020/image/upload/v1606897213/kbneuqx7qecrwierboya.jpg;https://res.cloudinary.com/dev2020/image/upload/v1606897212/slhqjabmo4trzslzsuot.jpg",
                 PriceCustomer = 500,
                 IsSold = true,
                 IsPaid = true
@@ -215,7 +215,7 @@ namespace InstutiteOfFineArt.Core.Model
                 User = userStudent3,
                 Mark = 0,
                 Price = 500,
-                Images = "https://res.cloudinary.com/dev2020/image/upload/v1605894758/u4wf6ekwp0m4hbosnuja.jpg;https://res.cloudinary.com/dev2020/image/upload/v1606842430/om1cmt388cts8dvaonon.jpg",
+                Images = "https://res.cloudinary.com/dev2020/image/upload/v1606897294/o9rg6fraph8hx9dsktwb.jpg;https://res.cloudinary.com/dev2020/image/upload/v1606897276/lhphmtisupxzt92shsad.jpg",
                 PriceCustomer = 500,
                 IsSold = true,
                 IsPaid = true
@@ -231,7 +231,7 @@ namespace InstutiteOfFineArt.Core.Model
                 User = userStudent3,
                 Mark = 0,
                 Price = 500,
-                Images = "https://res.cloudinary.com/dev2020/image/upload/v1605894758/u4wf6ekwp0m4hbosnuja.jpg;https://res.cloudinary.com/dev2020/image/upload/v1606842430/om1cmt388cts8dvaonon.jpg",
+                Images = "https://res.cloudinary.com/dev2020/image/upload/v1606897214/fsbmj9edsfq5luzkvseg.jpg;https://res.cloudinary.com/dev2020/image/upload/v1606897213/kbneuqx7qecrwierboya.jpg",
                 PriceCustomer = 500,
                 IsSold = true,
                 IsPaid = true
@@ -247,7 +247,7 @@ namespace InstutiteOfFineArt.Core.Model
                 User = user,
                 Mark = 0,
                 Price = 500,
-                Images = "https://res.cloudinary.com/dev2020/image/upload/v1605894758/u4wf6ekwp0m4hbosnuja.jpg;https://res.cloudinary.com/dev2020/image/upload/v1606842430/om1cmt388cts8dvaonon.jpg",
+                Images = "https://res.cloudinary.com/dev2020/image/upload/v1606897294/o9rg6fraph8hx9dsktwb.jpg;https://res.cloudinary.com/dev2020/image/upload/v1606842430/om1cmt388cts8dvaonon.jpg",
                 PriceCustomer = 500,
                 IsSold = true,
                 IsPaid = true
@@ -261,7 +261,7 @@ namespace InstutiteOfFineArt.Core.Model
                 EndDate = new DateTime(2020, 12, 01),
                 Description = "Instutite Fine Art Description",
                 CreatedTime = DateTime.Now,
-                Logo = "https://res.cloudinary.com/dev2020/image/upload/v1605894758/u4wf6ekwp0m4hbosnuja.jpg",
+                Logo = "https://res.cloudinary.com/dev2020/image/upload/v1606897294/o9rg6fraph8hx9dsktwb.jpg",
                 Posts = new List<Post>
                 {
                    post1,post2,post3,post4,post5,post6
@@ -275,7 +275,7 @@ namespace InstutiteOfFineArt.Core.Model
                 EndDate = new DateTime(2020, 12, 05),
                 Description = " Instutite Fine Art 2 Description",
                 CreatedTime = DateTime.Now,
-                Logo = "https://res.cloudinary.com/dev2020/image/upload/v1605894758/u4wf6ekwp0m4hbosnuja.jpg",
+                Logo = "https://res.cloudinary.com/dev2020/image/upload/v1606897342/jfh0ond1boqerouzkdpw.jpg",
                 Posts = new List<Post>
                 {
                    post7,post8

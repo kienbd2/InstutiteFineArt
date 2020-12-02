@@ -18,7 +18,7 @@ function _getAllComment(id) {
             $.each(result, function (key, item) {
                 html += '<div class="media">';
                 html += '<a href="#" class="pull-left">'
-                html += '<img alt="Comments" style="width:67px !important;height:64px !important;" src="' + item.Avartar + '" class="media-object">'
+                html += '<img alt="Comments" style="width:67px !important;height:64px !important; border-radius: 60%;"  src="' + item.Avartar + '" class="media-object">'
                 html += '</a>'
                 html += '<div class="media-body">'
                 html += '<h3><a href="#">' + item.UserName + '</a></h3>'
