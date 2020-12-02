@@ -3,14 +3,14 @@
 @{
     ViewBag.Title = "Index";
 }
-
+<link href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" rel="stylesheet" />
 <div class="row">
 
     <div class="col-sm-12">
 
         @Html.ActionLink("Create User", "Create", null, new { @class = "btn btn-primary" })
 
-        <table class="table table-borderer">
+        <table class="table table-borderer display" id="example">
 
             <thead>
                 <tr>
@@ -65,3 +65,13 @@
     </div>
 
 </div>
+<script src="https://code.jquery.com/jquery-3.5.1.js" type="text/javascript"></script>
+
+@section Scripts {
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script>
+        $(document).ready(function () {
+            var table = $('#example').DataTable();
+        });
+    </script>
+}

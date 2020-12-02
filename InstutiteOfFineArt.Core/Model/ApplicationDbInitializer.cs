@@ -281,6 +281,7 @@ namespace InstutiteOfFineArt.Core.Model
                    post7,post8
                 }
             };
+            context.Competitions.Add(competition2);
             Competition competition3 = new Competition()
             {
                 Name = "Instutite Fine Art 3",
@@ -294,7 +295,7 @@ namespace InstutiteOfFineArt.Core.Model
                 }
             };
 
-            context.Competitions.Add(competition2);
+            context.Competitions.Add(competition3);
             Awards awards = new Awards
             {
                 Name = "Awards Instutite Fine Art ",

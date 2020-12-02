@@ -37,9 +37,8 @@
 
                     <td>
 
-                        @Html.ActionLink("Sửa thông tin", "Edit", new { Id = item.Id }, null) |
+                        @Html.ActionLink("Edit", "Edit", new { Id = item.ClassId }, new { @class = "btn btn-success" })
 
-                        @Html.ActionLink("Xóa", "Delete", new { Id = item.Id }, null)
 
                     </td>
 

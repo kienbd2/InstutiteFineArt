@@ -80,7 +80,7 @@ namespace InstutiteFineArt.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name")] UserClass userClass)
+        public ActionResult Edit([Bind(Include = "ClassId,Name")] UserClass userClass)
         {
             if (ModelState.IsValid)
             {

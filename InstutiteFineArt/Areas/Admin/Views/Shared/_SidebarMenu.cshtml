@@ -7,7 +7,7 @@
             <img src="~/App_Themes/CMS/production/images/img.jpg" alt="..." class="img-circle profile_img">
         </div>
         <div class="profile_info">
-            <span>Hello, @User.Identity.GetUserName()</span>
+            <span>Hello, @User.Identity.GetUserName().Split('@')[0]</span>
 
         </div>
     </div>
@@ -36,14 +36,20 @@
                     </ul>
                 </li>
             }
+            @if (Request.IsAuthenticated && (User.IsInRole("Staff")|| User.IsInRole("Student")))
+            {
+                <li>
+                    <a><i class="fa fa-building-o"></i> Manager Paintings <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                        <li>@Html.ActionLink("Paintings Created", "Index", "Post")</li>
+                        @if (User.IsInRole("Student"))
+                        {
+                            <li> @Html.ActionLink("Create Paintin", "Create", "Post")</li>
+                        }
+                    </ul>
+                </li>
+            }
 
-            <li>
-                <a><i class="fa fa-building-o"></i> Manager Paintings <span class="fa fa-chevron-down"></span></a>
-                <ul class="nav child_menu">
-                    <li>@Html.ActionLink("Paintings Created", "Index", "Post")</li>
-                    <li> @Html.ActionLink("Create Paintin", "Create", "Post")</li>
-                </ul>
-            </li>
             @if (Request.IsAuthenticated && User.IsInRole("Administrator"))
             {
 

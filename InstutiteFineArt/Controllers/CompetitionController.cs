@@ -31,7 +31,7 @@ namespace InstutiteFineArt.Controllers
             ViewBag.currentSize = size; // tạo biến kích thước trang hiện tại
             ViewBag.total = lst.ToList().Count;
             page = page ?? 1;
-            int pageSize = (size ?? 1);
+            int pageSize = (size ?? 2);
             int pageNumber = (page ?? 1);
             return View(lst.ToPagedList(pageNumber, pageSize));
         }

@@ -197,6 +197,8 @@
                 // Nếu thời gian kết thúc, hiển thị chuỗi thông báo
                 if (distance < 0) {
                     clearInterval(x);
+                    document.getElementById("demo" + id).classList.remove("btn-success");
+                    document.getElementById("demo" + id).classList.add("btn-secondary");
                     document.getElementById("demo" + id).innerHTML = "Contest time has ended";
                 }
             }, 1000);
