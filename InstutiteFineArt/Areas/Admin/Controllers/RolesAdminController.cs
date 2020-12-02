@@ -89,6 +89,7 @@ namespace InstutiteFineArt.Areas.Admin.Controllers
 
         //
         // GET: /Roles/Create
+        [Authorize(Roles = "Administrator")]
         [HttpGet]
         public ActionResult Create()
         {
@@ -97,6 +98,7 @@ namespace InstutiteFineArt.Areas.Admin.Controllers
 
         //
         // POST: /Roles/Create
+        [Authorize(Roles = "Administrator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(RoleViewModel roleViewModel)
@@ -117,6 +119,7 @@ namespace InstutiteFineArt.Areas.Admin.Controllers
 
         //
         // GET: /Roles/Edit/Admin
+        [Authorize(Roles = "Administrator")]
         [HttpGet]
         public async Task<ActionResult> Edit(string id)
         {
@@ -136,7 +139,7 @@ namespace InstutiteFineArt.Areas.Admin.Controllers
         //
         // POST: /Roles/Edit/5
         [HttpPost]
-
+        [Authorize(Roles = "Administrator")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "Name,Id")] RoleViewModel roleModel)
         {
@@ -149,7 +152,7 @@ namespace InstutiteFineArt.Areas.Admin.Controllers
             }
             return View();
         }
-
+        [Authorize(Roles = "Administrator")]
         //
         // GET: /Roles/Delete/5
         [HttpGet]
@@ -166,7 +169,7 @@ namespace InstutiteFineArt.Areas.Admin.Controllers
             }
             return View(role);
         }
-
+        [Authorize(Roles = "Administrator")]
         //
         // POST: /Roles/Delete/5
         [HttpPost]

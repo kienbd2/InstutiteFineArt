@@ -61,7 +61,7 @@ namespace InstutiteFineArt.Areas.Admin.Controllers
             {
                 var role = RoleManager.Roles.FirstOrDefault(x => x.Name == "Student");
                 var lstUserId = _userRepository.FindAll(x => x.RoleId == role.Id).Select(x => x.UserId).ToList();
-                var lstUser = UserManager.Users.Where(x => lstUserId.Any(p => p.Contains(x.Id))).Select(x=>x.Id);
+                var lstUser = UserManager.Users.Where(x => lstUserId.Any(p => p.Contains(x.Id))).Select(x => x.Id);
                 //var listPost = _postRepository.FindBy(x => lstUser.Any(p => p.Contains(x.User.Id))).ToList();
                 var listPost = new List<Post>();
                 foreach (var item in lstUser)
@@ -74,11 +74,13 @@ namespace InstutiteFineArt.Areas.Admin.Controllers
             var lstPost = _postRepository.FindAll(filter: x => x.User.Id == userID);
             return View(lstPost);
         }
+        [Authorize(Roles = "Student")]
         public ActionResult Create()
         {
             ViewBag.Competitions = _competitionRepository.FindAll(x => x.EndDate >= DateTime.Now).ToList();
             return View();
         }
+        [Authorize(Roles = "Student")]
         [HttpPost]
         [ValidateInput(false)]
         public ActionResult Create(Post post, int competition)
@@ -111,15 +113,15 @@ namespace InstutiteFineArt.Areas.Admin.Controllers
             var userID = User.Identity.GetUserId();
             post.Id = userID;
             post.CompetitionId = competition;
-            //var competitionObj = _competitionRepository.Find(x => x.CompetitionId == competition);
-            //if (competitionObj != null)
-            //{
-            //    post.Competition = competitionObj;
-            //}
+            var commpettion = _competitionRepository.Find(x => x.CompetitionId == post.CompetitionId);
+            if (commpettion == null || commpettion.EndDate < DateTime.Now) 
+            {
+                return Json(new { result = false, mess = "Competition has ended, No new additions allowed" });
+            }
             post.Images = string.Join(";", lstImage);
             post.CreatedTime = DateTime.Now;
             post.UpdatedTime = DateTime.Now;
-            post.Mark = 3;
+            post.Mark = 0;
             post.IsPaid = true;
             post.PriceCustomer = 800;
             post.IsSold = true;
@@ -134,6 +136,7 @@ namespace InstutiteFineArt.Areas.Admin.Controllers
             return Json(new { result = false, mess = "Create not Success", url = "/Admin/Post/Index" });
 
         }
+        [Authorize(Roles = "Student")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -148,6 +151,7 @@ namespace InstutiteFineArt.Areas.Admin.Controllers
             }
             return View(post);
         }
+        [Authorize(Roles = "Student")]
         [HttpPost]
         [ValidateInput(false)]
         public ActionResult Edit(Post post, int competition)
@@ -185,14 +189,13 @@ namespace InstutiteFineArt.Areas.Admin.Controllers
             var userID = User.Identity.GetUserId();
             post.Id = userID;
             post.CompetitionId = competition;
-            //var competitionObj = _competitionRepository.Find(x => x.CompetitionId == competition);
-            //if (competitionObj != null)
-            //{
-            //    post.Competition = competitionObj;
-            //}
+            var commpettion = _competitionRepository.Find(x => x.CompetitionId == post.CompetitionId);
+            if (commpettion == null || commpettion.EndDate < DateTime.Now)
+            {
+                return Json(new { result = false, mess = "Competition has ended, No edititions allowed" });
+            }
             post.Images = post.Images + ";" + string.Join(";", lstImage);
             post.UpdatedTime = DateTime.Now;
-            post.Mark = 3;
             post.IsPaid = true;
             post.PriceCustomer = 800;
             post.IsSold = true;
@@ -206,6 +209,7 @@ namespace InstutiteFineArt.Areas.Admin.Controllers
 
             return Json(new { result = false, mess = "Edit Post not Success", url = "/Admin/Post/Index" });
         }
+        [Authorize(Roles = "Staff")]
         public JsonResult ChangeStatus(int id, bool active)
         {
             var post = _postRepository.Find(x => x.PostId == id);

@@ -15,6 +15,7 @@ using InstutiteOfFineArt.DAL.Repository;
 
 namespace InstutiteFineArt.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Staff")]
     public class CompetitionsController : Controller
     {
         private readonly CompetitionRepository _competitionRepository;

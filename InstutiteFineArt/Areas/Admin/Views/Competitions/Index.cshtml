@@ -40,9 +40,8 @@
                                             <td>@item.EndDate.ToString("HH:mm dd/MM/yyyy")</td>
                                             <td>
 
-                                                @Html.ActionLink("Edit", "Edit", new { Id = @item.CompetitionId }, null) |
+                                                @Html.ActionLink("Edit", "Edit", new { Id = @item.CompetitionId }, new { @class = "btn btn-success" })
 
-                                                @Html.ActionLink("Xóa", "Delete", new { Id = @item.CompetitionId }, null)
 
                                             </td>
                                         </tr>

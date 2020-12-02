@@ -8,8 +8,10 @@
 <div class="row">
 
     <div class="col-sm-12">
-
-        @Html.ActionLink("Create User", "Create", null, new { @class = "btn btn-primary" })
+        @if (User.IsInRole("Staff"))
+        {
+            @Html.ActionLink("Create User", "Create", null, new { @class = "btn btn-primary" })
+        }
 
         <table class="table table-borderer display" id="example">
 
@@ -39,9 +41,8 @@
 
                         <td>
 
-                            @Html.ActionLink("Sửa thông tin", "Edit", new { Id = item.Id }, null) |
+                            @Html.ActionLink("Sửa thông tin", "Edit", new { Id = item.Id }, new { @class = "btn btn-success" }) |
 
-                            @Html.ActionLink("Xóa", "Delete", new { Id = item.Id }, null)
 
                         </td>
 

@@ -10,6 +10,8 @@ using InstutiteOfFineArt.Core.Model;
 
 namespace InstutiteFineArt.Areas.Admin.Controllers
 {
+
+    [Authorize(Roles = "Administrator")]
     public class UserClassesController : Controller
     {
         private InstutiteFineArtDbContext db = new InstutiteFineArtDbContext();

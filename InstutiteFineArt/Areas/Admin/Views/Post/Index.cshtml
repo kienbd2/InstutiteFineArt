@@ -31,36 +31,40 @@
 
                                         @foreach (var item in Model)
                                         {
-                                        <tr>
-                                            <td>@(stt++)</td>
-                                            <td>@item.Title</td>
-                                            <td>@item.Mark</td>
-                                            <td>@item.Price</td>
-                                            <td>@item.PriceCustomer</td>
-                                            <td>@item.IsPaid</td>
-                                            <td>@item.IsSold</td>
-                                            <td>@item.CreatedTime.ToString("HH:mm dd/MM/yyyy")</td>
-                                            <td>
-                                                @Html.ActionLink("Edit", "Edit", new { id = item.PostId }, new { @class = "btn btn-success" })
+                                            <tr>
+                                                <td>@(stt++)</td>
+                                                <td>@item.Title</td>
+                                                <td>@item.Mark</td>
+                                                <td>@item.Price</td>
+                                                <td>@item.PriceCustomer</td>
+                                                <td>@item.IsPaid</td>
+                                                <td>@item.IsSold</td>
+                                                <td>@item.CreatedTime.ToString("HH:mm dd/MM/yyyy")</td>
+                                                @if (User.IsInRole("Student"))
+                                                {
+                                                    <td>
+                                                        @Html.ActionLink("Edit", "Edit", new { id = item.PostId }, new { @class = "btn btn-success" })
 
-                                            </td>
-                                            @if (User.IsInRole("Staff"))
-                                            {
-                                                <td>
-                                                    @if (item.Published)
-                                                    {
-                                                        <button class="btn btn-success btn-active" data-id="@item.PostId" data-status="true">Public</button>
-                                                    }
-                                                    else
-                                                    {
-                                                        <button class="btn btn-danger btn-active" data-id="@item.PostId" data-status="false">Not Public</button>
+                                                    </td>
+                                                }
 
-                                                    }
-                                                </td>
-                                            }
+                                                @if (User.IsInRole("Staff"))
+                                                {
+                                                    <td>
+                                                        @if (item.Published)
+                                                        {
+                                                            <button class="btn btn-success btn-active" data-id="@item.PostId" data-status="true">Public</button>
+                                                        }
+                                                        else
+                                                        {
+                                                            <button class="btn btn-danger btn-active" data-id="@item.PostId" data-status="false">Not Public</button>
+
+                                                        }
+                                                    </td>
+                                                }
 
 
-                                        </tr>
+                                            </tr>
                                         }
 
                                     </tbody>

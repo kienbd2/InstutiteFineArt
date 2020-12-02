@@ -11,7 +11,7 @@ namespace InstutiteOfFineArt.Core.Model
         public int PostId { get; set; }
 
         [Required(ErrorMessage = "Title name is required.")]
-        [StringLength(255)]
+        [StringLength(255, MinimumLength = 60, ErrorMessage = "Quotations, Stories should be between 60 characters and 200 characters only")]
         [Display(Name = "Post title")]
         public string Title { get; set; }
 
