@@ -23,7 +23,6 @@ namespace InstutiteOfFineArt.Core.Model
         public string PassWord { get; set; }
         [StringLength(255)]
         [Required(ErrorMessage = "Comment header is required.")]
-
         [Display(Name = "Comment")]
         public string CommentText { get; set; }
 

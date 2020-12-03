@@ -12,7 +12,7 @@ using InstutiteOfFineArt.Core.Model;
 
 namespace InstutiteFineArt.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "Administrator")]
+    [Authorize(Roles = "Administrator,Manager")]
     public class RolesAdminController : Controller
     {
         public RolesAdminController()

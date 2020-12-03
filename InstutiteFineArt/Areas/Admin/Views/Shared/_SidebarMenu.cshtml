@@ -26,7 +26,7 @@
                 <a href="/Home/Index"><i class="fa fa-home"></i> Home</a>
 
             </li>
-            @if (Request.IsAuthenticated && User.IsInRole("Staff"))
+            @if (Request.IsAuthenticated && (User.IsInRole("Staff")|| User.IsInRole("Manager")))
             {
                 <li>
                     <a><i class="fa fa-building-o"></i> Manager Competitions <span class="fa fa-chevron-down"></span></a>
@@ -50,7 +50,7 @@
                 </li>
             }
 
-            @if (Request.IsAuthenticated && User.IsInRole("Administrator"))
+            @if (Request.IsAuthenticated && (User.IsInRole("Administrator") || User.IsInRole("Manager")))
             {
 
                 <li>

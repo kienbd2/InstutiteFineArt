@@ -16,7 +16,7 @@ using System.Web.Mvc;
 
 namespace InstutiteFineArt.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "Administrator")]
+    [Authorize(Roles = "Administrator,Manager")]
     public class UsersAdminController : Controller
     {
 

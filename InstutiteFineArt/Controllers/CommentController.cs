@@ -86,8 +86,8 @@ namespace InstutiteFineArt.Controllers
                 if (user != null)
                 {
                     var userRoles = await UserManager.GetRolesAsync(user.Id);
-                    //Only staff can comment
-                    if (userRoles.Contains("Staff"))
+                    // Staff or Manager can comment
+                    if (userRoles.Contains("Staff")||userRoles.Contains("Manager"))
                     {
                         var commentObj = _commentRepository.Find(x => x.Id == user.Id&&x.PostId==comment.PostId);
                         if (commentObj == null)
