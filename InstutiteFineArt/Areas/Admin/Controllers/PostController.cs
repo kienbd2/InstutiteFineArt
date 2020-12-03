@@ -66,12 +66,12 @@ namespace InstutiteFineArt.Areas.Admin.Controllers
                 var listPost = new List<Post>();
                 foreach (var item in lstUser)
                 {
-                    listPost.AddRange(_postRepository.FindAll(x => x.User.Id == item));
+                    listPost.AddRange(_postRepository.FindBy(x => x.User.Id == item));
                 }
                 return View(listPost);
             }
             var userID = User.Identity.GetUserId();
-            var lstPost = _postRepository.FindAll(filter: x => x.User.Id == userID);
+            var lstPost = _postRepository.FindBy(filter: x => x.User.Id == userID);
             return View(lstPost);
         }
         [Authorize(Roles = "Student")]

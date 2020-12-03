@@ -18,6 +18,13 @@ namespace InstutiteFineArt.Controllers
             _competitionRepository = new CompetitionRepository();
             _postRepository = new PostRepository();
         }
+        /// <summary>
+        /// get competition
+        /// </summary>
+        /// <param name="size"></param>
+        /// <param name="page"></param>
+        /// <param name="searchString"></param>
+        /// <returns></returns>
         // GET: Competition
         public ActionResult Index(int? size, int? page, string searchString)
         {
@@ -35,6 +42,14 @@ namespace InstutiteFineArt.Controllers
             int pageNumber = (page ?? 1);
             return View(lst.ToPagedList(pageNumber, pageSize));
         }
+        /// <summary>
+        /// detail competition
+        /// </summary>
+        /// <param name="competitionId"></param>
+        /// <param name="size"></param>
+        /// <param name="page"></param>
+        /// <param name="searchString"></param>
+        /// <returns></returns>
         public ActionResult Details(int? competitionId, int? size, int? page, string searchString)
         {
             //if (competitionId == null)

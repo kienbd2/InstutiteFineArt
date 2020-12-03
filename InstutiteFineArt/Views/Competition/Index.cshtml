@@ -65,7 +65,7 @@
                                                         <p> @Html.Raw(item.Description)</p>
                                                     </div>
                                                     <div class="row">
-                                                        @{ var lstPost = item.Posts.OrderByDescending(x => x.Mark).ThenBy(x => x.UpdatedTime).ToList(); }
+                                                        @{ var lstPost = item.Posts.Where(x=>x.Published==true).OrderByDescending(x => x.Mark).ThenBy(x => x.UpdatedTime).ToList(); }
                                                         @for (int i = 0; i < 3; i++)
                                                         {
                                                             if (i >= lstPost.Count || lstPost.Count == 0)

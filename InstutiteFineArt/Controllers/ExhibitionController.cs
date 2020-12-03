@@ -15,6 +15,13 @@ namespace InstutiteFineArt.Controllers
         {
             _postRepository = new PostRepository();
         }
+        /// <summary>
+        /// get Exhibition
+        /// </summary>
+        /// <param name="size"></param>
+        /// <param name="page"></param>
+        /// <param name="searchString"></param>
+        /// <returns></returns>
         // GET: Exhibition
         public ActionResult Index(int? size, int? page, string searchString)
         {
@@ -31,6 +38,11 @@ namespace InstutiteFineArt.Controllers
             int pageNumber = (page ?? 1);
             return View(lstPost.ToPagedList(pageNumber, pageSize));
         }
+        /// <summary>
+        /// Detail Exhibition
+        /// </summary>
+        /// <param name="postId"></param>
+        /// <returns></returns>
         public ActionResult Details(int postId)
         {
             var post = _postRepository.Find(x => x.PostId == postId);

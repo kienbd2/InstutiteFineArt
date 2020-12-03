@@ -52,6 +52,11 @@ namespace InstutiteFineArt.Controllers
                 _roleManager = value;
             }
         }
+        /// <summary>
+        /// Get list comment follow post id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<JsonResult> List(int? id)
         {
             _context.Configuration.ProxyCreationEnabled = false;
@@ -66,6 +71,12 @@ namespace InstutiteFineArt.Controllers
 
             return Json(listComment, JsonRequestBehavior.AllowGet);
         }
+
+        /// <summary>
+        /// Create new comment
+        /// </summary>
+        /// <param name="comment"></param>
+        /// <returns></returns>
         // GET: Comment
         public async Task<JsonResult> Create(Comment comment)
         {
@@ -75,6 +86,7 @@ namespace InstutiteFineArt.Controllers
                 if (user != null)
                 {
                     var userRoles = await UserManager.GetRolesAsync(user.Id);
+                    //Only staff can comment
                     if (userRoles.Contains("Staff"))
                     {
                         var commentObj = _commentRepository.Find(x => x.Id == user.Id&&x.PostId==comment.PostId);
@@ -87,7 +99,15 @@ namespace InstutiteFineArt.Controllers
                             var post = _repoPost.Find(x => x.PostId == comment.PostId);
                             if (post != null)
                             {
-                                post.Mark = (post.Mark + comment.Mark) / 2;
+                                //update mark - the decisive factor to the ranking
+                                if (post.Mark == 0)
+                                {
+                                    post.Mark = comment.Mark;
+                                }
+                                else
+                                {
+                                    post.Mark = (post.Mark + comment.Mark) / 2;
+                                }
                                 _repoPost.Update(post);
                             }
                             return Json(new { result = true }, JsonRequestBehavior.AllowGet);
@@ -104,6 +124,7 @@ namespace InstutiteFineArt.Controllers
 
             return Json(new { result = false, msg = "You have not entered comment information. Please try again!" }, JsonRequestBehavior.AllowGet);
         }
+        //get date
         private string GenerateRelativeString(DateTime dateTime)
         {
             TimeSpan span = (DateTime.Now - dateTime);

@@ -55,7 +55,7 @@ namespace InstutiteOfFineArt.Core.Model
             var user = userManager.FindByName("kienstudent@example.com");
             if (user == null)
             {
-                user = new User { UserName = "kienstudent@example.com", Email = "kienstudent@example.com", DateOfBirth = new DateTime(1990, 10, 10), Avartar = "https://res.cloudinary.com/dev2020/image/upload/v1605894758/u4wf6ekwp0m4hbosnuja.jpg", UserClass = userClass };
+                user = new User { UserName = "kienstudent@example.com", Email = "kienstudent@example.com", DateOfBirth = new DateTime(1990, 10, 10), Avartar = "https://res.cloudinary.com/dev2020/image/upload/v1606538778/ic5dqpjo0whn0kdwljxv.jpg", UserClass = userClass };
                 var result = userManager.Create(user, password);
                 result = userManager.SetLockoutEnabled(user.Id, false);
                 userManager.AddToRole(user.Id, roleStudent.Name);
@@ -63,7 +63,7 @@ namespace InstutiteOfFineArt.Core.Model
             var userStudent2 = userManager.FindByName("kienstudent2@example.com");
             if (userStudent2 == null)
             {
-                userStudent2 = new User { UserName = "kienstudent2@example.com", Email = "kienstudent2@example.com", DateOfBirth = new DateTime(1990, 10, 10), Avartar = "https://res.cloudinary.com/dev2020/image/upload/v1605894758/u4wf6ekwp0m4hbosnuja.jpg", UserClass = userClass };
+                userStudent2 = new User { UserName = "kienstudent2@example.com", Email = "kienstudent2@example.com", DateOfBirth = new DateTime(1990, 10, 10), Avartar = "https://res.cloudinary.com/dev2020/image/upload/v1606538374/vbcr1gyk5a1kwvgllljg.png", UserClass = userClass };
                 var result = userManager.Create(userStudent2, password);
                 result = userManager.SetLockoutEnabled(userStudent2.Id, false);
                 userManager.AddToRole(userStudent2.Id, roleStudent.Name);
@@ -71,7 +71,7 @@ namespace InstutiteOfFineArt.Core.Model
             var userStudent3 = userManager.FindByName("kienstudent3@example.com");
             if (userStudent3 == null)
             {
-                userStudent3 = new User { UserName = "kienstudent3@example.com", Email = "kienstudent3@example.com", DateOfBirth = new DateTime(1990, 10, 10), Avartar = "https://res.cloudinary.com/dev2020/image/upload/v1605894758/u4wf6ekwp0m4hbosnuja.jpg", UserClass = userClass };
+                userStudent3 = new User { UserName = "kienstudent3@example.com", Email = "kienstudent3@example.com", DateOfBirth = new DateTime(1990, 10, 10), Avartar = "https://res.cloudinary.com/dev2020/image/upload/v1606469595/p6hnlknqt7ojtbfkoxpy.jpg", UserClass = userClass };
                 var result = userManager.Create(userStudent3, password);
                 result = userManager.SetLockoutEnabled(userStudent3.Id, false);
                 userManager.AddToRole(userStudent3.Id, roleStudent.Name);
@@ -79,7 +79,7 @@ namespace InstutiteOfFineArt.Core.Model
             var user2 = userManager.FindByName("kienstaff@example.com");
             if (user2 == null)
             {
-                user2 = new User { UserName = "kienstaff@example.com", Email = "kienstaff@example.com", DateOfBirth = new DateTime(1980, 10, 20), Avartar = "https://res.cloudinary.com/dev2020/image/upload/v1605894758/u4wf6ekwp0m4hbosnuja.jpg", UserClass = userClass2 };
+                user2 = new User { UserName = "kienstaff@example.com", Email = "kienstaff@example.com", DateOfBirth = new DateTime(1980, 10, 20), Avartar = "https://res.cloudinary.com/dev2020/image/upload/v1606538778/ic5dqpjo0whn0kdwljxv.jpg", UserClass = userClass2 };
                 var result = userManager.Create(user2, password);
                 result = userManager.SetLockoutEnabled(user2.Id, false);
                 userManager.AddToRole(user2.Id, roleStaff.Name);
@@ -95,7 +95,7 @@ namespace InstutiteOfFineArt.Core.Model
             var userStaff3 = userManager.FindByName("kienstaff3@example.com");
             if (userStaff3 == null)
             {
-                userStaff3 = new User { UserName = "kienstaff3@example.com", Email = "kienstaff3@example.com", DateOfBirth = new DateTime(1980, 10, 20), Avartar = "https://res.cloudinary.com/dev2020/image/upload/v1605894758/u4wf6ekwp0m4hbosnuja.jpg", UserClass = userClass2 };
+                userStaff3 = new User { UserName = "kienstaff3@example.com", Email = "kienstaff3@example.com", DateOfBirth = new DateTime(1980, 10, 20), Avartar = "https://res.cloudinary.com/dev2020/image/upload/v1606528924/feeicn8f8wcyfc6qbeyb.png", UserClass = userClass2 };
                 var result = userManager.Create(userStaff3, password);
                 result = userManager.SetLockoutEnabled(userStaff3.Id, false);
                 userManager.AddToRole(userStaff3.Id, roleStaff.Name);
@@ -103,7 +103,7 @@ namespace InstutiteOfFineArt.Core.Model
             var userStaff4 = userManager.FindByName("kienstaff4@example.com");
             if (userStaff4 == null)
             {
-                userStaff4 = new User { UserName = "kienstaff4@example.com", Email = "kienstaff4@example.com", DateOfBirth = new DateTime(1980, 10, 20), Avartar = "https://res.cloudinary.com/dev2020/image/upload/v1605894758/u4wf6ekwp0m4hbosnuja.jpg", UserClass = userClass2 };
+                userStaff4 = new User { UserName = "kienstaff4@example.com", Email = "kienstaff4@example.com", DateOfBirth = new DateTime(1980, 10, 20), Avartar = "https://res.cloudinary.com/dev2020/image/upload/v1606467739/yed8vbv7k0dko7wjjxf6.jpg", UserClass = userClass2 };
                 var result = userManager.Create(userStaff4, password);
                 result = userManager.SetLockoutEnabled(userStaff4.Id, false);
                 userManager.AddToRole(userStaff4.Id, roleStaff.Name);

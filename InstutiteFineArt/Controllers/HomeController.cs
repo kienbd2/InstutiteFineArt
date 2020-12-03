@@ -51,6 +51,15 @@ namespace IdentitySample.Controllers
                 _roleManager = value;
             }
         }
+        /// <summary>
+        /// Home page 
+        /// Get all staff information
+        /// Count staff, count student, count competitions, count posts
+        /// </summary>
+        /// <param name="size"></param>
+        /// <param name="page"></param>
+        /// <param name="searchString"></param>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult Index(int? size, int? page, string searchString)
         {
@@ -77,7 +86,10 @@ namespace IdentitySample.Controllers
             int pageNumber = (page ?? 1);
             return View(lstUser.ToPagedList(pageNumber, pageSize));
         }
-
+        /// <summary>
+        /// Top 5 Post With The Highest Score
+        /// </summary>
+        /// <returns></returns>
         [ChildActionOnly]
         public PartialViewResult MostViewedPost()
         {
