@@ -1,12 +1,46 @@
 ﻿@{
     ViewBag.Title = "About";
 }
-<hgroup>
-    <h2>@ViewBag.Title.</h2>
-    <h3>@ViewBag.Message</h3>
-</hgroup>
-<div class="row-fluid">
-    <div class="span12">
-        <p>Use this area to provide additional information.</p>
-    </div>
-</div>
+<!DOCTYPE HTML>
+<html>
+<head>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script>
+
+window.onload = function () {
+
+var ar = [];
+$.each([55,50,65], function( index, value ) {
+
+		  		ar.push({ x: index, y: value });
+		});
+console.log(ar);
+var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+	exportEnabled: true,
+	theme: "light1", // "light1", "light2", "dark1", "dark2"
+	title:{
+		text: "Simple Column Chart with Index Labels"
+	},
+  	axisY: {
+      includeZero: true
+    },
+	data: [{
+		type: "column", //change type to bar, line, area, pie, etc
+		//indexLabel: "{y}", //Shows y value on all Data Points
+		indexLabelFontColor: "#5A5757",
+      	indexLabelFontSize: 16,
+		indexLabelPlacement: "outside",
+		dataPoints: ar
+	}]
+});
+chart.render();
+
+}
+    </script>
+</head>
+<body>
+    <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</body>
+</html>
